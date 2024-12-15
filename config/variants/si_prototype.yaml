@@ -1,0 +1,55 @@
+# Social-Identity Perspective (SI) - Group Prototype
+# Emphasizes group-level prototypes and collective identity
+
+model_name: "SI_Prototype"
+description: >
+  Tests leadership emergence through group prototype alignment
+  and strong social identity influence. Context changes encourage
+  collective identity development.
+theoretical_basis: "Social Identity Theory of Leadership (Hogg, 2001)"
+
+inherits:
+  - "../base.yaml::defaults"
+  - "../base.yaml::theoretical_bases.si"
+
+parameters:
+  agent_properties:
+    schemas:
+      social_identity_influence: 0.7  # Strong group influence
+      update_mechanism: "dynamic"
+
+  interaction_rules:
+    claim_decision_rule: "other_attributes > schema"  # Prototype alignment
+    grant_decision_rule: "group_prototypicality > threshold"
+    memory_length: 5
+
+  environment:
+    group_identity_strength: 0.8  # Strong group identity
+    context_adjustment: true  # Dynamic context
+
+  simulation_properties:
+    time_points: 200  # Longer for prototype development
+    replication_count: 20
+    outcome_metrics:
+      - "prototype_convergence"
+      - "group_alignment"
+      - "collective_identity_strength"
+
+validation:
+  expected_outcomes:
+    - "Strong group prototype emergence"
+    - "High within-group agreement"
+    - "Collective leadership patterns"
+  metrics_thresholds:
+    prototype_convergence: ">= 0.8"
+    group_alignment: ">= 0.7"
+    collective_identity_strength: ">= 0.6"
+
+analysis:
+  key_comparisons:
+    - metric: "prototype_convergence"
+      against: ["SIP_Hierarchical", "SCP_Dynamic"]
+      expected: "higher"
+    - metric: "group_alignment"
+      against: "baseline"
+      expected: ">= 2x" 

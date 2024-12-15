@@ -1,0 +1,3764 @@
+{
+  "parameters": {
+    "n_agents": 6,
+    "initial_li_equal": true,
+    "li_change_rate": 2.0,
+    "interaction_radius": 1.0,
+    "memory_length": 0
+  },
+  "history": [
+    {
+      "time": 1,
+      "leader_identities": [
+        50.0,
+        50.0,
+        50.0,
+        50.0,
+        50.0,
+        52.0
+      ],
+      "follower_identities": [
+        50.0,
+        50.0,
+        50.0,
+        52.0,
+        50.0,
+        50.0
+      ],
+      "centralization": 0.00888888888888889,
+      "density": 0.03333333333333333,
+      "timestep": 0
+    },
+    {
+      "time": 2,
+      "leader_identities": [
+        50.0,
+        50.0,
+        50.0,
+        50.0,
+        48.0,
+        52.0
+      ],
+      "follower_identities": [
+        50.0,
+        50.0,
+        50.0,
+        52.0,
+        50.0,
+        50.0
+      ],
+      "centralization": 0.008888888888888889,
+      "density": 0.06666666666666667,
+      "timestep": 1
+    },
+    {
+      "time": 3,
+      "leader_identities": [
+        50.0,
+        50.0,
+        50.0,
+        48.0,
+        48.0,
+        52.0
+      ],
+      "follower_identities": [
+        50.0,
+        50.0,
+        50.0,
+        52.0,
+        50.0,
+        50.0
+      ],
+      "centralization": 0.013333333333333336,
+      "density": 0.1,
+      "timestep": 2
+    },
+    {
+      "time": 4,
+      "leader_identities": [
+        50.0,
+        50.0,
+        50.0,
+        48.0,
+        48.0,
+        52.0
+      ],
+      "follower_identities": [
+        50.0,
+        50.0,
+        48.0,
+        52.0,
+        50.0,
+        50.0
+      ],
+      "centralization": 0.02222222222222223,
+      "density": 0.13333333333333333,
+      "timestep": 3
+    },
+    {
+      "time": 5,
+      "leader_identities": [
+        50.0,
+        50.0,
+        48.0,
+        48.0,
+        48.0,
+        52.0
+      ],
+      "follower_identities": [
+        50.0,
+        50.0,
+        48.0,
+        52.0,
+        50.0,
+        50.0
+      ],
+      "centralization": 0.02222222222222223,
+      "density": 0.16666666666666666,
+      "timestep": 4
+    },
+    {
+      "time": 6,
+      "leader_identities": [
+        50.0,
+        50.0,
+        48.0,
+        48.0,
+        48.0,
+        52.0
+      ],
+      "follower_identities": [
+        50.0,
+        50.0,
+        48.0,
+        52.0,
+        50.0,
+        48.0
+      ],
+      "centralization": 0.013333333333333341,
+      "density": 0.2,
+      "timestep": 5
+    },
+    {
+      "time": 7,
+      "leader_identities": [
+        50.0,
+        50.0,
+        50.0,
+        48.0,
+        48.0,
+        52.0
+      ],
+      "follower_identities": [
+        50.0,
+        50.0,
+        48.0,
+        52.0,
+        52.0,
+        48.0
+      ],
+      "centralization": 0.008888888888888896,
+      "density": 0.23333333333333334,
+      "timestep": 6
+    },
+    {
+      "time": 8,
+      "leader_identities": [
+        50.0,
+        50.0,
+        50.0,
+        48.0,
+        46.0,
+        52.0
+      ],
+      "follower_identities": [
+        50.0,
+        50.0,
+        48.0,
+        52.0,
+        52.0,
+        48.0
+      ],
+      "centralization": 0.02222222222222223,
+      "density": 0.26666666666666666,
+      "timestep": 7
+    },
+    {
+      "time": 9,
+      "leader_identities": [
+        50.0,
+        50.0,
+        50.0,
+        48.0,
+        46.0,
+        52.0
+      ],
+      "follower_identities": [
+        50.0,
+        50.0,
+        48.0,
+        52.0,
+        50.0,
+        48.0
+      ],
+      "centralization": 0.02222222222222223,
+      "density": 0.26666666666666666,
+      "timestep": 8
+    },
+    {
+      "time": 10,
+      "leader_identities": [
+        50.0,
+        50.0,
+        50.0,
+        48.0,
+        46.0,
+        52.0
+      ],
+      "follower_identities": [
+        50.0,
+        50.0,
+        48.0,
+        52.0,
+        50.0,
+        46.0
+      ],
+      "centralization": 0.026666666666666672,
+      "density": 0.3,
+      "timestep": 9
+    },
+    {
+      "time": 11,
+      "leader_identities": [
+        50.0,
+        52.0,
+        50.0,
+        48.0,
+        46.0,
+        52.0
+      ],
+      "follower_identities": [
+        50.0,
+        50.0,
+        48.0,
+        52.0,
+        52.0,
+        46.0
+      ],
+      "centralization": 0.03555555555555555,
+      "density": 0.3333333333333333,
+      "timestep": 10
+    },
+    {
+      "time": 12,
+      "leader_identities": [
+        50.0,
+        52.0,
+        50.0,
+        48.0,
+        46.0,
+        52.0
+      ],
+      "follower_identities": [
+        50.0,
+        50.0,
+        48.0,
+        52.0,
+        52.0,
+        46.0
+      ],
+      "centralization": 0.06222222222222224,
+      "density": 0.36666666666666664,
+      "timestep": 11
+    },
+    {
+      "time": 13,
+      "leader_identities": [
+        50.0,
+        52.0,
+        50.0,
+        48.0,
+        44.0,
+        52.0
+      ],
+      "follower_identities": [
+        50.0,
+        50.0,
+        48.0,
+        52.0,
+        52.0,
+        46.0
+      ],
+      "centralization": 0.06222222222222224,
+      "density": 0.36666666666666664,
+      "timestep": 12
+    },
+    {
+      "time": 14,
+      "leader_identities": [
+        52.0,
+        52.0,
+        50.0,
+        48.0,
+        44.0,
+        52.0
+      ],
+      "follower_identities": [
+        50.0,
+        50.0,
+        48.0,
+        54.0,
+        52.0,
+        46.0
+      ],
+      "centralization": 0.053333333333333344,
+      "density": 0.4,
+      "timestep": 13
+    },
+    {
+      "time": 15,
+      "leader_identities": [
+        52.0,
+        52.0,
+        50.0,
+        48.0,
+        44.0,
+        52.0
+      ],
+      "follower_identities": [
+        50.0,
+        50.0,
+        46.0,
+        54.0,
+        52.0,
+        46.0
+      ],
+      "centralization": 0.053333333333333344,
+      "density": 0.4,
+      "timestep": 14
+    },
+    {
+      "time": 16,
+      "leader_identities": [
+        52.0,
+        52.0,
+        50.0,
+        48.0,
+        44.0,
+        52.0
+      ],
+      "follower_identities": [
+        50.0,
+        50.0,
+        46.0,
+        52.0,
+        52.0,
+        46.0
+      ],
+      "centralization": 0.07555555555555558,
+      "density": 0.43333333333333335,
+      "timestep": 15
+    },
+    {
+      "time": 17,
+      "leader_identities": [
+        54.0,
+        52.0,
+        50.0,
+        48.0,
+        44.0,
+        52.0
+      ],
+      "follower_identities": [
+        50.0,
+        50.0,
+        46.0,
+        54.0,
+        52.0,
+        46.0
+      ],
+      "centralization": 0.07555555555555558,
+      "density": 0.43333333333333335,
+      "timestep": 16
+    },
+    {
+      "time": 18,
+      "leader_identities": [
+        54.0,
+        52.0,
+        52.0,
+        48.0,
+        44.0,
+        52.0
+      ],
+      "follower_identities": [
+        50.0,
+        50.0,
+        46.0,
+        54.0,
+        52.0,
+        48.0
+      ],
+      "centralization": 0.07555555555555557,
+      "density": 0.4666666666666667,
+      "timestep": 17
+    },
+    {
+      "time": 19,
+      "leader_identities": [
+        54.0,
+        52.0,
+        52.0,
+        48.0,
+        44.0,
+        52.0
+      ],
+      "follower_identities": [
+        50.0,
+        50.0,
+        46.0,
+        54.0,
+        52.0,
+        48.0
+      ],
+      "centralization": 0.08000000000000003,
+      "density": 0.5,
+      "timestep": 18
+    },
+    {
+      "time": 20,
+      "leader_identities": [
+        54.0,
+        54.0,
+        52.0,
+        48.0,
+        44.0,
+        52.0
+      ],
+      "follower_identities": [
+        50.0,
+        50.0,
+        46.0,
+        56.0,
+        52.0,
+        48.0
+      ],
+      "centralization": 0.0888888888888889,
+      "density": 0.5333333333333333,
+      "timestep": 19
+    },
+    {
+      "time": 21,
+      "leader_identities": [
+        54.0,
+        54.0,
+        52.0,
+        48.0,
+        46.0,
+        52.0
+      ],
+      "follower_identities": [
+        50.0,
+        50.0,
+        48.0,
+        56.0,
+        52.0,
+        48.0
+      ],
+      "centralization": 0.0888888888888889,
+      "density": 0.5333333333333333,
+      "timestep": 20
+    },
+    {
+      "time": 22,
+      "leader_identities": [
+        56.0,
+        54.0,
+        52.0,
+        48.0,
+        46.0,
+        52.0
+      ],
+      "follower_identities": [
+        50.0,
+        50.0,
+        48.0,
+        56.0,
+        54.0,
+        48.0
+      ],
+      "centralization": 0.0888888888888889,
+      "density": 0.5666666666666667,
+      "timestep": 21
+    },
+    {
+      "time": 23,
+      "leader_identities": [
+        56.0,
+        54.0,
+        52.0,
+        48.0,
+        46.0,
+        52.0
+      ],
+      "follower_identities": [
+        50.0,
+        50.0,
+        48.0,
+        54.0,
+        54.0,
+        48.0
+      ],
+      "centralization": 0.0888888888888889,
+      "density": 0.5666666666666667,
+      "timestep": 22
+    },
+    {
+      "time": 24,
+      "leader_identities": [
+        56.0,
+        54.0,
+        52.0,
+        48.0,
+        46.0,
+        54.0
+      ],
+      "follower_identities": [
+        52.0,
+        50.0,
+        48.0,
+        54.0,
+        54.0,
+        48.0
+      ],
+      "centralization": 0.05333333333333335,
+      "density": 0.6,
+      "timestep": 23
+    },
+    {
+      "time": 25,
+      "leader_identities": [
+        56.0,
+        54.0,
+        52.0,
+        46.0,
+        46.0,
+        54.0
+      ],
+      "follower_identities": [
+        52.0,
+        50.0,
+        48.0,
+        54.0,
+        54.0,
+        48.0
+      ],
+      "centralization": 0.05333333333333335,
+      "density": 0.6,
+      "timestep": 24
+    },
+    {
+      "time": 26,
+      "leader_identities": [
+        56.0,
+        54.0,
+        52.0,
+        46.0,
+        46.0,
+        54.0
+      ],
+      "follower_identities": [
+        52.0,
+        50.0,
+        46.0,
+        54.0,
+        54.0,
+        48.0
+      ],
+      "centralization": 0.048888888888888905,
+      "density": 0.6333333333333333,
+      "timestep": 25
+    },
+    {
+      "time": 27,
+      "leader_identities": [
+        56.0,
+        54.0,
+        52.0,
+        46.0,
+        46.0,
+        54.0
+      ],
+      "follower_identities": [
+        52.0,
+        50.0,
+        46.0,
+        52.0,
+        54.0,
+        48.0
+      ],
+      "centralization": 0.048888888888888905,
+      "density": 0.6333333333333333,
+      "timestep": 26
+    },
+    {
+      "time": 28,
+      "leader_identities": [
+        56.0,
+        54.0,
+        52.0,
+        46.0,
+        44.0,
+        54.0
+      ],
+      "follower_identities": [
+        52.0,
+        50.0,
+        46.0,
+        52.0,
+        54.0,
+        48.0
+      ],
+      "centralization": 0.048888888888888905,
+      "density": 0.6333333333333333,
+      "timestep": 27
+    },
+    {
+      "time": 29,
+      "leader_identities": [
+        58.0,
+        54.0,
+        52.0,
+        46.0,
+        44.0,
+        54.0
+      ],
+      "follower_identities": [
+        52.0,
+        50.0,
+        48.0,
+        52.0,
+        54.0,
+        48.0
+      ],
+      "centralization": 0.048888888888888905,
+      "density": 0.6333333333333333,
+      "timestep": 28
+    },
+    {
+      "time": 30,
+      "leader_identities": [
+        58.0,
+        54.0,
+        52.0,
+        46.0,
+        44.0,
+        54.0
+      ],
+      "follower_identities": [
+        52.0,
+        50.0,
+        48.0,
+        52.0,
+        54.0,
+        48.0
+      ],
+      "centralization": 0.048888888888888905,
+      "density": 0.6333333333333333,
+      "timestep": 29
+    },
+    {
+      "time": 31,
+      "leader_identities": [
+        58.0,
+        54.0,
+        52.0,
+        46.0,
+        44.0,
+        54.0
+      ],
+      "follower_identities": [
+        52.0,
+        50.0,
+        48.0,
+        52.0,
+        52.0,
+        48.0
+      ],
+      "centralization": 0.048888888888888905,
+      "density": 0.6333333333333333,
+      "timestep": 30
+    },
+    {
+      "time": 32,
+      "leader_identities": [
+        58.0,
+        54.0,
+        54.0,
+        46.0,
+        44.0,
+        54.0
+      ],
+      "follower_identities": [
+        54.0,
+        50.0,
+        48.0,
+        52.0,
+        52.0,
+        48.0
+      ],
+      "centralization": 0.06222222222222224,
+      "density": 0.6666666666666666,
+      "timestep": 31
+    },
+    {
+      "time": 33,
+      "leader_identities": [
+        60.0,
+        54.0,
+        54.0,
+        46.0,
+        44.0,
+        54.0
+      ],
+      "follower_identities": [
+        54.0,
+        50.0,
+        48.0,
+        54.0,
+        52.0,
+        48.0
+      ],
+      "centralization": 0.06222222222222224,
+      "density": 0.6666666666666666,
+      "timestep": 32
+    },
+    {
+      "time": 34,
+      "leader_identities": [
+        60.0,
+        54.0,
+        54.0,
+        46.0,
+        46.0,
+        54.0
+      ],
+      "follower_identities": [
+        54.0,
+        50.0,
+        50.0,
+        54.0,
+        52.0,
+        48.0
+      ],
+      "centralization": 0.06222222222222224,
+      "density": 0.6666666666666666,
+      "timestep": 33
+    },
+    {
+      "time": 35,
+      "leader_identities": [
+        60.0,
+        56.0,
+        54.0,
+        46.0,
+        46.0,
+        54.0
+      ],
+      "follower_identities": [
+        54.0,
+        50.0,
+        50.0,
+        54.0,
+        52.0,
+        50.0
+      ],
+      "centralization": 0.026666666666666655,
+      "density": 0.7,
+      "timestep": 34
+    },
+    {
+      "time": 36,
+      "leader_identities": [
+        60.0,
+        56.0,
+        54.0,
+        46.0,
+        46.0,
+        54.0
+      ],
+      "follower_identities": [
+        54.0,
+        50.0,
+        48.0,
+        54.0,
+        52.0,
+        50.0
+      ],
+      "centralization": 0.03555555555555554,
+      "density": 0.7333333333333333,
+      "timestep": 35
+    },
+    {
+      "time": 37,
+      "leader_identities": [
+        60.0,
+        56.0,
+        54.0,
+        46.0,
+        44.0,
+        54.0
+      ],
+      "follower_identities": [
+        54.0,
+        50.0,
+        48.0,
+        54.0,
+        52.0,
+        50.0
+      ],
+      "centralization": 0.03555555555555554,
+      "density": 0.7333333333333333,
+      "timestep": 36
+    },
+    {
+      "time": 38,
+      "leader_identities": [
+        62.0,
+        56.0,
+        54.0,
+        46.0,
+        44.0,
+        54.0
+      ],
+      "follower_identities": [
+        54.0,
+        50.0,
+        50.0,
+        54.0,
+        52.0,
+        50.0
+      ],
+      "centralization": 0.03555555555555554,
+      "density": 0.7333333333333333,
+      "timestep": 37
+    },
+    {
+      "time": 39,
+      "leader_identities": [
+        62.0,
+        56.0,
+        54.0,
+        46.0,
+        46.0,
+        54.0
+      ],
+      "follower_identities": [
+        54.0,
+        52.0,
+        50.0,
+        54.0,
+        52.0,
+        50.0
+      ],
+      "centralization": 0.03555555555555554,
+      "density": 0.7333333333333333,
+      "timestep": 38
+    },
+    {
+      "time": 40,
+      "leader_identities": [
+        62.0,
+        56.0,
+        54.0,
+        46.0,
+        46.0,
+        54.0
+      ],
+      "follower_identities": [
+        54.0,
+        52.0,
+        50.0,
+        54.0,
+        52.0,
+        50.0
+      ],
+      "centralization": 0.022222222222222213,
+      "density": 0.7666666666666667,
+      "timestep": 39
+    },
+    {
+      "time": 41,
+      "leader_identities": [
+        60.0,
+        56.0,
+        54.0,
+        46.0,
+        46.0,
+        54.0
+      ],
+      "follower_identities": [
+        54.0,
+        52.0,
+        50.0,
+        54.0,
+        52.0,
+        50.0
+      ],
+      "centralization": 0.022222222222222213,
+      "density": 0.7666666666666667,
+      "timestep": 40
+    },
+    {
+      "time": 42,
+      "leader_identities": [
+        58.0,
+        56.0,
+        54.0,
+        46.0,
+        46.0,
+        54.0
+      ],
+      "follower_identities": [
+        54.0,
+        52.0,
+        50.0,
+        54.0,
+        52.0,
+        50.0
+      ],
+      "centralization": 0.022222222222222213,
+      "density": 0.7666666666666667,
+      "timestep": 41
+    },
+    {
+      "time": 43,
+      "leader_identities": [
+        58.0,
+        56.0,
+        54.0,
+        46.0,
+        46.0,
+        54.0
+      ],
+      "follower_identities": [
+        54.0,
+        52.0,
+        50.0,
+        54.0,
+        50.0,
+        50.0
+      ],
+      "centralization": 0.026666666666666655,
+      "density": 0.8,
+      "timestep": 42
+    },
+    {
+      "time": 44,
+      "leader_identities": [
+        58.0,
+        58.0,
+        54.0,
+        46.0,
+        46.0,
+        54.0
+      ],
+      "follower_identities": [
+        56.0,
+        52.0,
+        50.0,
+        54.0,
+        50.0,
+        50.0
+      ],
+      "centralization": 0.022222222222222213,
+      "density": 0.8333333333333334,
+      "timestep": 43
+    },
+    {
+      "time": 45,
+      "leader_identities": [
+        58.0,
+        58.0,
+        54.0,
+        46.0,
+        44.0,
+        54.0
+      ],
+      "follower_identities": [
+        56.0,
+        52.0,
+        50.0,
+        54.0,
+        50.0,
+        50.0
+      ],
+      "centralization": 0.022222222222222213,
+      "density": 0.8333333333333334,
+      "timestep": 44
+    },
+    {
+      "time": 46,
+      "leader_identities": [
+        58.0,
+        58.0,
+        54.0,
+        48.0,
+        44.0,
+        54.0
+      ],
+      "follower_identities": [
+        56.0,
+        52.0,
+        50.0,
+        54.0,
+        52.0,
+        50.0
+      ],
+      "centralization": 0.022222222222222213,
+      "density": 0.8666666666666667,
+      "timestep": 45
+    },
+    {
+      "time": 47,
+      "leader_identities": [
+        58.0,
+        58.0,
+        54.0,
+        48.0,
+        44.0,
+        56.0
+      ],
+      "follower_identities": [
+        56.0,
+        52.0,
+        50.0,
+        54.0,
+        54.0,
+        50.0
+      ],
+      "centralization": 0.022222222222222213,
+      "density": 0.8666666666666667,
+      "timestep": 46
+    },
+    {
+      "time": 48,
+      "leader_identities": [
+        58.0,
+        58.0,
+        54.0,
+        48.0,
+        44.0,
+        56.0
+      ],
+      "follower_identities": [
+        56.0,
+        52.0,
+        50.0,
+        54.0,
+        54.0,
+        50.0
+      ],
+      "centralization": 0.022222222222222213,
+      "density": 0.8666666666666667,
+      "timestep": 47
+    },
+    {
+      "time": 49,
+      "leader_identities": [
+        58.0,
+        58.0,
+        54.0,
+        48.0,
+        44.0,
+        58.0
+      ],
+      "follower_identities": [
+        56.0,
+        52.0,
+        50.0,
+        54.0,
+        56.0,
+        50.0
+      ],
+      "centralization": 0.022222222222222213,
+      "density": 0.8666666666666667,
+      "timestep": 48
+    },
+    {
+      "time": 50,
+      "leader_identities": [
+        58.0,
+        58.0,
+        54.0,
+        48.0,
+        44.0,
+        58.0
+      ],
+      "follower_identities": [
+        54.0,
+        52.0,
+        50.0,
+        54.0,
+        56.0,
+        50.0
+      ],
+      "centralization": 0.022222222222222213,
+      "density": 0.8666666666666667,
+      "timestep": 49
+    },
+    {
+      "time": 51,
+      "leader_identities": [
+        58.0,
+        58.0,
+        54.0,
+        48.0,
+        42.0,
+        58.0
+      ],
+      "follower_identities": [
+        54.0,
+        52.0,
+        50.0,
+        54.0,
+        56.0,
+        50.0
+      ],
+      "centralization": 0.022222222222222213,
+      "density": 0.8666666666666667,
+      "timestep": 50
+    },
+    {
+      "time": 52,
+      "leader_identities": [
+        58.0,
+        58.0,
+        54.0,
+        48.0,
+        42.0,
+        56.0
+      ],
+      "follower_identities": [
+        54.0,
+        52.0,
+        50.0,
+        54.0,
+        56.0,
+        50.0
+      ],
+      "centralization": 0.022222222222222213,
+      "density": 0.8666666666666667,
+      "timestep": 51
+    },
+    {
+      "time": 53,
+      "leader_identities": [
+        58.0,
+        58.0,
+        54.0,
+        48.0,
+        42.0,
+        56.0
+      ],
+      "follower_identities": [
+        54.0,
+        52.0,
+        50.0,
+        54.0,
+        56.0,
+        50.0
+      ],
+      "centralization": 0.022222222222222213,
+      "density": 0.8666666666666667,
+      "timestep": 52
+    },
+    {
+      "time": 54,
+      "leader_identities": [
+        58.0,
+        58.0,
+        54.0,
+        48.0,
+        42.0,
+        54.0
+      ],
+      "follower_identities": [
+        54.0,
+        52.0,
+        50.0,
+        54.0,
+        56.0,
+        50.0
+      ],
+      "centralization": 0.022222222222222213,
+      "density": 0.8666666666666667,
+      "timestep": 53
+    },
+    {
+      "time": 55,
+      "leader_identities": [
+        58.0,
+        58.0,
+        54.0,
+        48.0,
+        42.0,
+        56.0
+      ],
+      "follower_identities": [
+        54.0,
+        54.0,
+        50.0,
+        54.0,
+        56.0,
+        50.0
+      ],
+      "centralization": 0.022222222222222213,
+      "density": 0.8666666666666667,
+      "timestep": 54
+    },
+    {
+      "time": 56,
+      "leader_identities": [
+        58.0,
+        60.0,
+        54.0,
+        48.0,
+        42.0,
+        56.0
+      ],
+      "follower_identities": [
+        54.0,
+        54.0,
+        52.0,
+        54.0,
+        56.0,
+        50.0
+      ],
+      "centralization": 0.022222222222222213,
+      "density": 0.8666666666666667,
+      "timestep": 55
+    },
+    {
+      "time": 57,
+      "leader_identities": [
+        58.0,
+        60.0,
+        54.0,
+        48.0,
+        42.0,
+        56.0
+      ],
+      "follower_identities": [
+        54.0,
+        54.0,
+        52.0,
+        54.0,
+        54.0,
+        50.0
+      ],
+      "centralization": 0.022222222222222213,
+      "density": 0.8666666666666667,
+      "timestep": 56
+    },
+    {
+      "time": 58,
+      "leader_identities": [
+        58.0,
+        60.0,
+        54.0,
+        48.0,
+        42.0,
+        56.0
+      ],
+      "follower_identities": [
+        54.0,
+        54.0,
+        52.0,
+        54.0,
+        54.0,
+        50.0
+      ],
+      "centralization": 0.026666666666666655,
+      "density": 0.9,
+      "timestep": 57
+    },
+    {
+      "time": 59,
+      "leader_identities": [
+        56.0,
+        60.0,
+        54.0,
+        48.0,
+        42.0,
+        56.0
+      ],
+      "follower_identities": [
+        54.0,
+        54.0,
+        52.0,
+        54.0,
+        54.0,
+        50.0
+      ],
+      "centralization": 0.026666666666666655,
+      "density": 0.9,
+      "timestep": 58
+    },
+    {
+      "time": 60,
+      "leader_identities": [
+        56.0,
+        60.0,
+        54.0,
+        48.0,
+        42.0,
+        58.0
+      ],
+      "follower_identities": [
+        56.0,
+        54.0,
+        52.0,
+        54.0,
+        54.0,
+        50.0
+      ],
+      "centralization": 0.026666666666666655,
+      "density": 0.9,
+      "timestep": 59
+    },
+    {
+      "time": 61,
+      "leader_identities": [
+        56.0,
+        60.0,
+        54.0,
+        46.0,
+        42.0,
+        58.0
+      ],
+      "follower_identities": [
+        56.0,
+        54.0,
+        52.0,
+        54.0,
+        54.0,
+        50.0
+      ],
+      "centralization": 0.026666666666666655,
+      "density": 0.9,
+      "timestep": 60
+    },
+    {
+      "time": 62,
+      "leader_identities": [
+        56.0,
+        60.0,
+        54.0,
+        46.0,
+        42.0,
+        58.0
+      ],
+      "follower_identities": [
+        56.0,
+        54.0,
+        52.0,
+        54.0,
+        54.0,
+        50.0
+      ],
+      "centralization": 0.026666666666666655,
+      "density": 0.9,
+      "timestep": 61
+    },
+    {
+      "time": 63,
+      "leader_identities": [
+        56.0,
+        60.0,
+        54.0,
+        46.0,
+        40.0,
+        58.0
+      ],
+      "follower_identities": [
+        56.0,
+        54.0,
+        52.0,
+        54.0,
+        54.0,
+        50.0
+      ],
+      "centralization": 0.026666666666666655,
+      "density": 0.9,
+      "timestep": 62
+    },
+    {
+      "time": 64,
+      "leader_identities": [
+        56.0,
+        60.0,
+        54.0,
+        46.0,
+        40.0,
+        58.0
+      ],
+      "follower_identities": [
+        56.0,
+        54.0,
+        52.0,
+        54.0,
+        54.0,
+        50.0
+      ],
+      "centralization": 0.026666666666666655,
+      "density": 0.9,
+      "timestep": 63
+    },
+    {
+      "time": 65,
+      "leader_identities": [
+        56.0,
+        60.0,
+        56.0,
+        46.0,
+        40.0,
+        58.0
+      ],
+      "follower_identities": [
+        56.0,
+        54.0,
+        52.0,
+        54.0,
+        54.0,
+        52.0
+      ],
+      "centralization": 0.026666666666666655,
+      "density": 0.9,
+      "timestep": 64
+    },
+    {
+      "time": 66,
+      "leader_identities": [
+        56.0,
+        60.0,
+        56.0,
+        46.0,
+        40.0,
+        58.0
+      ],
+      "follower_identities": [
+        56.0,
+        52.0,
+        52.0,
+        54.0,
+        54.0,
+        52.0
+      ],
+      "centralization": 0.026666666666666655,
+      "density": 0.9,
+      "timestep": 65
+    },
+    {
+      "time": 67,
+      "leader_identities": [
+        56.0,
+        60.0,
+        56.0,
+        46.0,
+        40.0,
+        58.0
+      ],
+      "follower_identities": [
+        56.0,
+        52.0,
+        52.0,
+        52.0,
+        54.0,
+        52.0
+      ],
+      "centralization": 0.026666666666666655,
+      "density": 0.9,
+      "timestep": 66
+    },
+    {
+      "time": 68,
+      "leader_identities": [
+        56.0,
+        62.0,
+        56.0,
+        46.0,
+        40.0,
+        58.0
+      ],
+      "follower_identities": [
+        56.0,
+        52.0,
+        52.0,
+        54.0,
+        54.0,
+        52.0
+      ],
+      "centralization": 0.026666666666666655,
+      "density": 0.9,
+      "timestep": 67
+    },
+    {
+      "time": 69,
+      "leader_identities": [
+        58.0,
+        62.0,
+        56.0,
+        46.0,
+        40.0,
+        58.0
+      ],
+      "follower_identities": [
+        56.0,
+        52.0,
+        52.0,
+        56.0,
+        54.0,
+        52.0
+      ],
+      "centralization": 0.026666666666666655,
+      "density": 0.9,
+      "timestep": 68
+    },
+    {
+      "time": 70,
+      "leader_identities": [
+        58.0,
+        62.0,
+        56.0,
+        46.0,
+        40.0,
+        58.0
+      ],
+      "follower_identities": [
+        56.0,
+        52.0,
+        52.0,
+        56.0,
+        54.0,
+        52.0
+      ],
+      "centralization": 0.026666666666666655,
+      "density": 0.9,
+      "timestep": 69
+    },
+    {
+      "time": 71,
+      "leader_identities": [
+        58.0,
+        62.0,
+        56.0,
+        46.0,
+        40.0,
+        58.0
+      ],
+      "follower_identities": [
+        54.0,
+        52.0,
+        52.0,
+        56.0,
+        54.0,
+        52.0
+      ],
+      "centralization": 0.026666666666666655,
+      "density": 0.9,
+      "timestep": 70
+    },
+    {
+      "time": 72,
+      "leader_identities": [
+        60.0,
+        62.0,
+        56.0,
+        46.0,
+        40.0,
+        58.0
+      ],
+      "follower_identities": [
+        54.0,
+        54.0,
+        52.0,
+        56.0,
+        54.0,
+        52.0
+      ],
+      "centralization": 0.022222222222222213,
+      "density": 0.9333333333333333,
+      "timestep": 71
+    },
+    {
+      "time": 73,
+      "leader_identities": [
+        60.0,
+        62.0,
+        56.0,
+        46.0,
+        42.0,
+        58.0
+      ],
+      "follower_identities": [
+        54.0,
+        54.0,
+        52.0,
+        56.0,
+        54.0,
+        54.0
+      ],
+      "centralization": 0.022222222222222213,
+      "density": 0.9333333333333333,
+      "timestep": 72
+    },
+    {
+      "time": 74,
+      "leader_identities": [
+        60.0,
+        62.0,
+        58.0,
+        46.0,
+        42.0,
+        58.0
+      ],
+      "follower_identities": [
+        56.0,
+        54.0,
+        52.0,
+        56.0,
+        54.0,
+        54.0
+      ],
+      "centralization": 0.022222222222222213,
+      "density": 0.9333333333333333,
+      "timestep": 73
+    },
+    {
+      "time": 75,
+      "leader_identities": [
+        62.0,
+        62.0,
+        58.0,
+        46.0,
+        42.0,
+        58.0
+      ],
+      "follower_identities": [
+        56.0,
+        56.0,
+        52.0,
+        56.0,
+        54.0,
+        54.0
+      ],
+      "centralization": 0.022222222222222213,
+      "density": 0.9333333333333333,
+      "timestep": 74
+    },
+    {
+      "time": 76,
+      "leader_identities": [
+        62.0,
+        62.0,
+        58.0,
+        46.0,
+        44.0,
+        58.0
+      ],
+      "follower_identities": [
+        58.0,
+        56.0,
+        52.0,
+        56.0,
+        54.0,
+        54.0
+      ],
+      "centralization": 0.022222222222222213,
+      "density": 0.9333333333333333,
+      "timestep": 75
+    },
+    {
+      "time": 77,
+      "leader_identities": [
+        62.0,
+        62.0,
+        58.0,
+        48.0,
+        44.0,
+        58.0
+      ],
+      "follower_identities": [
+        58.0,
+        56.0,
+        52.0,
+        56.0,
+        54.0,
+        56.0
+      ],
+      "centralization": 0.008888888888888885,
+      "density": 0.9666666666666667,
+      "timestep": 76
+    },
+    {
+      "time": 78,
+      "leader_identities": [
+        62.0,
+        62.0,
+        58.0,
+        48.0,
+        44.0,
+        60.0
+      ],
+      "follower_identities": [
+        58.0,
+        56.0,
+        52.0,
+        56.0,
+        56.0,
+        56.0
+      ],
+      "centralization": 0.008888888888888885,
+      "density": 0.9666666666666667,
+      "timestep": 77
+    },
+    {
+      "time": 79,
+      "leader_identities": [
+        62.0,
+        62.0,
+        60.0,
+        48.0,
+        44.0,
+        60.0
+      ],
+      "follower_identities": [
+        58.0,
+        56.0,
+        52.0,
+        56.0,
+        58.0,
+        56.0
+      ],
+      "centralization": 0.008888888888888885,
+      "density": 0.9666666666666667,
+      "timestep": 78
+    },
+    {
+      "time": 80,
+      "leader_identities": [
+        62.0,
+        62.0,
+        60.0,
+        48.0,
+        44.0,
+        60.0
+      ],
+      "follower_identities": [
+        56.0,
+        56.0,
+        52.0,
+        56.0,
+        58.0,
+        56.0
+      ],
+      "centralization": 0.008888888888888885,
+      "density": 0.9666666666666667,
+      "timestep": 79
+    },
+    {
+      "time": 81,
+      "leader_identities": [
+        62.0,
+        62.0,
+        60.0,
+        48.0,
+        44.0,
+        60.0
+      ],
+      "follower_identities": [
+        56.0,
+        56.0,
+        52.0,
+        56.0,
+        58.0,
+        56.0
+      ],
+      "centralization": 0.008888888888888885,
+      "density": 0.9666666666666667,
+      "timestep": 80
+    },
+    {
+      "time": 82,
+      "leader_identities": [
+        62.0,
+        62.0,
+        60.0,
+        48.0,
+        44.0,
+        60.0
+      ],
+      "follower_identities": [
+        56.0,
+        56.0,
+        52.0,
+        56.0,
+        58.0,
+        56.0
+      ],
+      "centralization": 0.008888888888888885,
+      "density": 0.9666666666666667,
+      "timestep": 81
+    },
+    {
+      "time": 83,
+      "leader_identities": [
+        62.0,
+        62.0,
+        60.0,
+        50.0,
+        44.0,
+        60.0
+      ],
+      "follower_identities": [
+        56.0,
+        56.0,
+        52.0,
+        56.0,
+        58.0,
+        58.0
+      ],
+      "centralization": 0.008888888888888885,
+      "density": 0.9666666666666667,
+      "timestep": 82
+    },
+    {
+      "time": 84,
+      "leader_identities": [
+        62.0,
+        62.0,
+        60.0,
+        50.0,
+        44.0,
+        60.0
+      ],
+      "follower_identities": [
+        56.0,
+        54.0,
+        52.0,
+        56.0,
+        58.0,
+        58.0
+      ],
+      "centralization": 0.008888888888888885,
+      "density": 0.9666666666666667,
+      "timestep": 83
+    },
+    {
+      "time": 85,
+      "leader_identities": [
+        62.0,
+        62.0,
+        60.0,
+        52.0,
+        44.0,
+        60.0
+      ],
+      "follower_identities": [
+        56.0,
+        54.0,
+        54.0,
+        56.0,
+        58.0,
+        58.0
+      ],
+      "centralization": 0.008888888888888885,
+      "density": 0.9666666666666667,
+      "timestep": 84
+    },
+    {
+      "time": 86,
+      "leader_identities": [
+        62.0,
+        62.0,
+        62.0,
+        52.0,
+        44.0,
+        60.0
+      ],
+      "follower_identities": [
+        56.0,
+        54.0,
+        54.0,
+        58.0,
+        58.0,
+        58.0
+      ],
+      "centralization": 0.008888888888888885,
+      "density": 0.9666666666666667,
+      "timestep": 85
+    },
+    {
+      "time": 87,
+      "leader_identities": [
+        62.0,
+        64.0,
+        62.0,
+        52.0,
+        44.0,
+        60.0
+      ],
+      "follower_identities": [
+        56.0,
+        54.0,
+        56.0,
+        58.0,
+        58.0,
+        58.0
+      ],
+      "centralization": 0.008888888888888885,
+      "density": 0.9666666666666667,
+      "timestep": 86
+    },
+    {
+      "time": 88,
+      "leader_identities": [
+        62.0,
+        62.0,
+        62.0,
+        52.0,
+        44.0,
+        60.0
+      ],
+      "follower_identities": [
+        56.0,
+        54.0,
+        56.0,
+        58.0,
+        58.0,
+        58.0
+      ],
+      "centralization": 0.008888888888888885,
+      "density": 0.9666666666666667,
+      "timestep": 87
+    },
+    {
+      "time": 89,
+      "leader_identities": [
+        62.0,
+        62.0,
+        62.0,
+        54.0,
+        44.0,
+        60.0
+      ],
+      "follower_identities": [
+        56.0,
+        54.0,
+        56.0,
+        58.0,
+        58.0,
+        60.0
+      ],
+      "centralization": 0.008888888888888885,
+      "density": 0.9666666666666667,
+      "timestep": 88
+    },
+    {
+      "time": 90,
+      "leader_identities": [
+        62.0,
+        62.0,
+        62.0,
+        54.0,
+        44.0,
+        60.0
+      ],
+      "follower_identities": [
+        56.0,
+        54.0,
+        56.0,
+        58.0,
+        58.0,
+        60.0
+      ],
+      "centralization": 0.008888888888888885,
+      "density": 0.9666666666666667,
+      "timestep": 89
+    },
+    {
+      "time": 91,
+      "leader_identities": [
+        62.0,
+        62.0,
+        60.0,
+        54.0,
+        44.0,
+        60.0
+      ],
+      "follower_identities": [
+        56.0,
+        54.0,
+        56.0,
+        58.0,
+        58.0,
+        60.0
+      ],
+      "centralization": 0.008888888888888885,
+      "density": 0.9666666666666667,
+      "timestep": 90
+    },
+    {
+      "time": 92,
+      "leader_identities": [
+        62.0,
+        62.0,
+        60.0,
+        54.0,
+        44.0,
+        60.0
+      ],
+      "follower_identities": [
+        56.0,
+        54.0,
+        56.0,
+        58.0,
+        58.0,
+        60.0
+      ],
+      "centralization": 0.008888888888888885,
+      "density": 0.9666666666666667,
+      "timestep": 91
+    },
+    {
+      "time": 93,
+      "leader_identities": [
+        62.0,
+        62.0,
+        60.0,
+        54.0,
+        42.0,
+        60.0
+      ],
+      "follower_identities": [
+        56.0,
+        54.0,
+        56.0,
+        58.0,
+        58.0,
+        60.0
+      ],
+      "centralization": 0.008888888888888885,
+      "density": 0.9666666666666667,
+      "timestep": 92
+    },
+    {
+      "time": 94,
+      "leader_identities": [
+        62.0,
+        62.0,
+        60.0,
+        54.0,
+        42.0,
+        60.0
+      ],
+      "follower_identities": [
+        56.0,
+        54.0,
+        56.0,
+        56.0,
+        58.0,
+        60.0
+      ],
+      "centralization": 0.008888888888888885,
+      "density": 0.9666666666666667,
+      "timestep": 93
+    },
+    {
+      "time": 95,
+      "leader_identities": [
+        62.0,
+        62.0,
+        60.0,
+        54.0,
+        42.0,
+        60.0
+      ],
+      "follower_identities": [
+        56.0,
+        54.0,
+        56.0,
+        56.0,
+        58.0,
+        60.0
+      ],
+      "centralization": 0.008888888888888885,
+      "density": 0.9666666666666667,
+      "timestep": 94
+    },
+    {
+      "time": 96,
+      "leader_identities": [
+        62.0,
+        62.0,
+        60.0,
+        54.0,
+        42.0,
+        60.0
+      ],
+      "follower_identities": [
+        56.0,
+        54.0,
+        56.0,
+        56.0,
+        58.0,
+        58.0
+      ],
+      "centralization": 0.008888888888888885,
+      "density": 0.9666666666666667,
+      "timestep": 95
+    },
+    {
+      "time": 97,
+      "leader_identities": [
+        62.0,
+        62.0,
+        60.0,
+        54.0,
+        42.0,
+        60.0
+      ],
+      "follower_identities": [
+        56.0,
+        54.0,
+        56.0,
+        54.0,
+        58.0,
+        58.0
+      ],
+      "centralization": 0.008888888888888885,
+      "density": 0.9666666666666667,
+      "timestep": 96
+    },
+    {
+      "time": 98,
+      "leader_identities": [
+        64.0,
+        62.0,
+        60.0,
+        54.0,
+        42.0,
+        60.0
+      ],
+      "follower_identities": [
+        56.0,
+        54.0,
+        56.0,
+        54.0,
+        58.0,
+        60.0
+      ],
+      "centralization": 0.008888888888888885,
+      "density": 0.9666666666666667,
+      "timestep": 97
+    },
+    {
+      "time": 99,
+      "leader_identities": [
+        64.0,
+        62.0,
+        60.0,
+        54.0,
+        42.0,
+        60.0
+      ],
+      "follower_identities": [
+        56.0,
+        54.0,
+        56.0,
+        54.0,
+        58.0,
+        58.0
+      ],
+      "centralization": 0.008888888888888885,
+      "density": 0.9666666666666667,
+      "timestep": 98
+    },
+    {
+      "time": 100,
+      "leader_identities": [
+        64.0,
+        62.0,
+        60.0,
+        54.0,
+        42.0,
+        60.0
+      ],
+      "follower_identities": [
+        56.0,
+        52.0,
+        56.0,
+        54.0,
+        58.0,
+        58.0
+      ],
+      "centralization": 0.008888888888888885,
+      "density": 0.9666666666666667,
+      "timestep": 99
+    }
+  ],
+  "final_state": {
+    "time": 100,
+    "leader_identities": [
+      64.0,
+      62.0,
+      60.0,
+      54.0,
+      42.0,
+      60.0
+    ],
+    "follower_identities": [
+      56.0,
+      52.0,
+      56.0,
+      54.0,
+      58.0,
+      58.0
+    ],
+    "centralization": 0.008888888888888885,
+    "density": 0.9666666666666667,
+    "timestep": 99
+  },
+  "leader_identities": [
+    64.0,
+    62.0,
+    60.0,
+    54.0,
+    42.0,
+    60.0
+  ],
+  "follower_identities": [
+    56.0,
+    52.0,
+    56.0,
+    54.0,
+    58.0,
+    58.0
+  ],
+  "schemas": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "model_state": {
+    "class": "SchemaModel",
+    "time": 100,
+    "n_agents": 6,
+    "interaction_network": {
+      "nodes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "edges": [
+        [
+          0,
+          5,
+          {
+            "weight": 0.7000000000000001
+          }
+        ],
+        [
+          0,
+          3,
+          {
+            "weight": 1.3000000000000003
+          }
+        ],
+        [
+          0,
+          4,
+          {
+            "weight": 0.7
+          }
+        ],
+        [
+          0,
+          2,
+          {
+            "weight": 1.2
+          }
+        ],
+        [
+          0,
+          1,
+          {
+            "weight": 0.7000000000000001
+          }
+        ],
+        [
+          1,
+          4,
+          {
+            "weight": 0.4
+          }
+        ],
+        [
+          1,
+          3,
+          {
+            "weight": 0.8
+          }
+        ],
+        [
+          1,
+          5,
+          {
+            "weight": 0.5
+          }
+        ],
+        [
+          1,
+          2,
+          {
+            "weight": 0.8
+          }
+        ],
+        [
+          1,
+          0,
+          {
+            "weight": 0.30000000000000004
+          }
+        ],
+        [
+          2,
+          1,
+          {
+            "weight": 0.2
+          }
+        ],
+        [
+          2,
+          4,
+          {
+            "weight": 1.1
+          }
+        ],
+        [
+          2,
+          3,
+          {
+            "weight": 0.7
+          }
+        ],
+        [
+          2,
+          5,
+          {
+            "weight": 0.8
+          }
+        ],
+        [
+          2,
+          0,
+          {
+            "weight": 0.6000000000000001
+          }
+        ],
+        [
+          3,
+          1,
+          {
+            "weight": 0.8999999999999999
+          }
+        ],
+        [
+          3,
+          2,
+          {
+            "weight": 1.1
+          }
+        ],
+        [
+          3,
+          4,
+          {
+            "weight": 0.30000000000000004
+          }
+        ],
+        [
+          3,
+          5,
+          {
+            "weight": 1.1
+          }
+        ],
+        [
+          4,
+          0,
+          {
+            "weight": 1.6
+          }
+        ],
+        [
+          4,
+          2,
+          {
+            "weight": 1.2
+          }
+        ],
+        [
+          4,
+          5,
+          {
+            "weight": 0.7
+          }
+        ],
+        [
+          4,
+          3,
+          {
+            "weight": 0.5
+          }
+        ],
+        [
+          4,
+          1,
+          {
+            "weight": 0.6000000000000001
+          }
+        ],
+        [
+          5,
+          3,
+          {
+            "weight": 1.0999999999999999
+          }
+        ],
+        [
+          5,
+          0,
+          {
+            "weight": 1.0
+          }
+        ],
+        [
+          5,
+          1,
+          {
+            "weight": 0.4
+          }
+        ],
+        [
+          5,
+          4,
+          {
+            "weight": 1.2000000000000002
+          }
+        ],
+        [
+          5,
+          2,
+          {
+            "weight": 0.1
+          }
+        ]
+      ]
+    },
+    "agent_states": [
+      {
+        "id": 0,
+        "leader_identity": 64.0,
+        "follower_identity": 56.0,
+        "characteristics": 71.91648388447706,
+        "ilt": 45.11027518016419,
+        "leader_identity_history": [
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          52.0,
+          52.0,
+          52.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          62.0,
+          62.0,
+          62.0,
+          60.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          58.0,
+          58.0,
+          58.0,
+          60.0,
+          60.0,
+          60.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          64.0,
+          64.0,
+          64.0
+        ],
+        "follower_identity_history": [
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          54.0,
+          54.0,
+          54.0,
+          56.0,
+          56.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0
+        ]
+      },
+      {
+        "id": 1,
+        "leader_identity": 62.0,
+        "follower_identity": 52.0,
+        "characteristics": 78.6878335929106,
+        "ilt": 65.7894423247491,
+        "leader_identity_history": [
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          64.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0
+        ],
+        "follower_identity_history": [
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          54.0,
+          54.0,
+          54.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          52.0
+        ]
+      },
+      {
+        "id": 2,
+        "leader_identity": 60.0,
+        "follower_identity": 56.0,
+        "characteristics": 17.534187831011963,
+        "ilt": 88.04978813094047,
+        "leader_identity_history": [
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          48.0,
+          48.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          62.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0
+        ],
+        "follower_identity_history": [
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          46.0,
+          46.0,
+          46.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          50.0,
+          50.0,
+          48.0,
+          48.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          54.0,
+          54.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0
+        ]
+      },
+      {
+        "id": 3,
+        "leader_identity": 54.0,
+        "follower_identity": 54.0,
+        "characteristics": 70.89117615922824,
+        "ilt": 72.8851444221563,
+        "leader_identity_history": [
+          50.0,
+          50.0,
+          50.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          50.0,
+          50.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0
+        ],
+        "follower_identity_history": [
+          50.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          54.0,
+          54.0,
+          52.0,
+          54.0,
+          54.0,
+          54.0,
+          56.0,
+          56.0,
+          56.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          52.0,
+          54.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          56.0,
+          56.0,
+          56.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0
+        ]
+      },
+      {
+        "id": 4,
+        "leader_identity": 42.0,
+        "follower_identity": 58.0,
+        "characteristics": 20.24909061404367,
+        "ilt": 46.03087503164537,
+        "leader_identity_history": [
+          50.0,
+          50.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          46.0,
+          46.0,
+          46.0,
+          44.0,
+          44.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          42.0,
+          42.0,
+          42.0,
+          42.0,
+          42.0,
+          42.0,
+          42.0,
+          42.0,
+          42.0,
+          42.0,
+          42.0,
+          42.0,
+          40.0,
+          40.0,
+          40.0,
+          40.0,
+          40.0,
+          40.0,
+          40.0,
+          40.0,
+          40.0,
+          40.0,
+          42.0,
+          42.0,
+          42.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          42.0,
+          42.0,
+          42.0,
+          42.0,
+          42.0,
+          42.0,
+          42.0,
+          42.0
+        ],
+        "follower_identity_history": [
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          52.0,
+          52.0,
+          50.0,
+          50.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          50.0,
+          50.0,
+          50.0,
+          52.0,
+          54.0,
+          54.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          56.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0
+        ]
+      },
+      {
+        "id": 5,
+        "leader_identity": 60.0,
+        "follower_identity": 58.0,
+        "characteristics": 39.663841938606495,
+        "ilt": 84.14119910788814,
+        "leader_identity_history": [
+          50.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          56.0,
+          56.0,
+          58.0,
+          58.0,
+          58.0,
+          56.0,
+          56.0,
+          54.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0
+        ],
+        "follower_identity_history": [
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          46.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          48.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          50.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          52.0,
+          54.0,
+          54.0,
+          54.0,
+          54.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          56.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          58.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          60.0,
+          58.0,
+          58.0,
+          60.0,
+          58.0,
+          58.0
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "run_id": "validation_sip_hierarchical",
+    "timestamp": "2024-12-13T15:52:36.414803",
+    "model_class": "SchemaModel",
+    "n_steps": 100,
+    "random_seed": 42
+  }
+}

@@ -1,0 +1,3780 @@
+{
+  "parameters": {
+    "n_agents": 6,
+    "initial_li_equal": false,
+    "li_change_rate": 0.3,
+    "schema_weight": 0.7,
+    "claim_threshold": 0.6,
+    "grant_threshold": 0.4
+  },
+  "history": [
+    {
+      "timestep": 0,
+      "leader_identities": [
+        1.0,
+        0.9213518054464185,
+        1.0,
+        0.22318613488021855,
+        0.9053546858867727,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        0.6315113903603923,
+        0.7112510391749784,
+        1.0,
+        0.12226805705296173,
+        0.39232813657090587,
+        0.14596074790659463
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 1,
+      "leader_identities": [
+        1.0,
+        0.7,
+        1.0,
+        0.22318613488021855,
+        0.9053546858867727,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        0.6315113903603923,
+        1.0,
+        1.0,
+        0.0,
+        0.6923281365709059,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 2,
+      "leader_identities": [
+        0.7,
+        1.0,
+        1.0,
+        0.22318613488021855,
+        0.6053546858867727,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        0.6315113903603923,
+        1.0,
+        1.0,
+        0.0,
+        0.6923281365709059,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 3,
+      "leader_identities": [
+        0.7,
+        1.0,
+        0.7,
+        0.22318613488021855,
+        0.9053546858867727,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        0.6315113903603923,
+        1.0,
+        1.0,
+        0.0,
+        0.9923281365709058,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 4,
+      "leader_identities": [
+        0.39999999999999997,
+        1.0,
+        0.7,
+        0.22318613488021855,
+        0.9053546858867727,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        0.6315113903603923,
+        1.0,
+        1.0,
+        0.0,
+        0.9923281365709058,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 5,
+      "leader_identities": [
+        0.39999999999999997,
+        1.0,
+        1.0,
+        0.22318613488021855,
+        1.0,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        0.6315113903603923,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 6,
+      "leader_identities": [
+        0.39999999999999997,
+        0.7,
+        1.0,
+        0.22318613488021855,
+        1.0,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 7,
+      "leader_identities": [
+        0.39999999999999997,
+        1.0,
+        1.0,
+        0.22318613488021855,
+        1.0,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 8,
+      "leader_identities": [
+        0.39999999999999997,
+        0.7,
+        0.7,
+        0.22318613488021855,
+        1.0,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 9,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        1.0,
+        0.22318613488021855,
+        1.0,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 10,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        1.0,
+        0.22318613488021855,
+        1.0,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 11,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        1.0,
+        0.22318613488021855,
+        0.7,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 12,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        1.0,
+        0.22318613488021855,
+        0.7,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 13,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        1.0,
+        0.22318613488021855,
+        1.0,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 14,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        1.0,
+        0.22318613488021855,
+        0.7,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 15,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        1.0,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 16,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.7,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 17,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.7,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 18,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.7,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 19,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.7,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 20,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 21,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 22,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 23,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 24,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 25,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 26,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 27,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 28,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 29,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 30,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 31,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 32,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 33,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 34,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 35,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 36,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 37,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 38,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 39,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 40,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 41,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 42,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 43,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 44,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 45,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 46,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 47,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 48,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 49,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 50,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 51,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 52,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 53,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 54,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 55,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 56,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 57,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 58,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 59,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 60,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 61,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 62,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 63,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 64,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 65,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 66,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 67,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 68,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 69,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 70,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 71,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 72,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 73,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 74,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 75,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 76,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 77,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 78,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 79,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 80,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 81,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 82,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 83,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 84,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 85,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 86,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 87,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 88,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 89,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 90,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 91,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 92,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 93,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 94,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 95,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 96,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 97,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 98,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    },
+    {
+      "timestep": 99,
+      "leader_identities": [
+        0.39999999999999997,
+        0.39999999999999997,
+        0.39999999999999997,
+        0.22318613488021855,
+        0.39999999999999997,
+        0.5587261161763294
+      ],
+      "parameters": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "interaction_radius": 1.0,
+        "memory_length": 0,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "follower_identities": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "schemas": [
+        0.46870072086304193,
+        0.219116686322408,
+        0.1681700419569686,
+        0.9798857405992486,
+        0.10069486040562203,
+        0.7094186822589911
+      ]
+    }
+  ],
+  "final_state": {
+    "timestep": 99,
+    "leader_identities": [
+      0.39999999999999997,
+      0.39999999999999997,
+      0.39999999999999997,
+      0.22318613488021855,
+      0.39999999999999997,
+      0.5587261161763294
+    ],
+    "parameters": {
+      "n_agents": 6,
+      "initial_li_equal": false,
+      "li_change_rate": 0.3,
+      "interaction_radius": 1.0,
+      "memory_length": 0,
+      "schema_weight": 0.7,
+      "claim_threshold": 0.6,
+      "grant_threshold": 0.4
+    },
+    "follower_identities": [
+      1.0,
+      1.0,
+      1.0,
+      0.0,
+      1.0,
+      0.0
+    ],
+    "schemas": [
+      0.46870072086304193,
+      0.219116686322408,
+      0.1681700419569686,
+      0.9798857405992486,
+      0.10069486040562203,
+      0.7094186822589911
+    ]
+  },
+  "leader_identities": [
+    0.39999999999999997,
+    0.39999999999999997,
+    0.39999999999999997,
+    0.22318613488021855,
+    0.39999999999999997,
+    0.5587261161763294
+  ],
+  "follower_identities": [
+    1.0,
+    1.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0
+  ],
+  "schemas": [
+    0.46870072086304193,
+    0.219116686322408,
+    0.1681700419569686,
+    0.9798857405992486,
+    0.10069486040562203,
+    0.7094186822589911
+  ],
+  "metadata": {
+    "run_id": "experiment_20241211_144311_run_0098",
+    "timestamp": "2024-12-11T14:43:13.569215",
+    "model_class": "SchemaModel",
+    "n_steps": 100,
+    "random_seed": 140
+  }
+}

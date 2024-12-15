@@ -6,8 +6,12 @@ import os
 import sys
 from pathlib import Path
 import json
+import yaml
 import pandas as pd
 import io
+import numpy as np
+import networkx as nx
+from scipy import stats
 
 # Ensure proper path handling
 root_dir = Path(__file__).parent.parent.parent
@@ -16,18 +20,16 @@ if str(root_dir) not in sys.path:
 
 from shiny import App, render, ui, reactive
 import matplotlib.pyplot as plt
-import seaborn as sns
-import numpy as np
-import networkx as nx
 from matplotlib.patches import Circle
+import seaborn as sns
 
-from src.models.base_model import (
+from src.models import (
     BaseLeadershipModel,
     SchemaModel,
     NetworkModel,
     SchemaNetworkModel
 )
-
+from src.simulation.runner import SimulationConfig, BatchRunner
 from src.models.metrics import (
     calculate_identity_variance,
     calculate_perception_agreement,
@@ -37,67 +39,74 @@ from src.models.metrics import (
     calculate_identity_behavior_consistency
 )
 
+# Create output directory if it doesn't exist
+output_dir = root_dir / "outputs" / "validation_runs"
+output_dir.mkdir(parents=True, exist_ok=True)
+
+# Load configurations
+CONFIG_DIR = root_dir / "config"
+with open(CONFIG_DIR / "base.yaml", "r") as f:
+    base_config = yaml.safe_load(f)
+
+variant_configs = {}
+variants_dir = CONFIG_DIR / "variants"
+if variants_dir.exists():
+    for variant_file in variants_dir.glob("*.yaml"):
+        with open(variant_file, "r") as f:
+            variant_configs[variant_file.stem] = yaml.safe_load(f)
+
 app_ui = ui.page_fluid(
     ui.panel_title("Leadership Emergence Simulation"),
     
+    # Add JavaScript handler for visibility toggling
     ui.tags.head(
         ui.tags.script("""
-        window.Shiny.addCustomMessageHandler('toggleVisibility', function(message) {
-            document.getElementById(message.id).style.display = message.display;
-        });
+            $(document).ready(function() {
+                Shiny.addCustomMessageHandler('toggleVisibility', function(message) {
+                    $('#' + message.id).css('display', message.display);
+                });
+            });
         """)
     ),
     
     # Model Selection Landing Page
     ui.div(
         {"id": "model_selection_page"},
-        ui.h2("Select Model Type"),
+        ui.h2("Select Model Variant"),
         ui.row(
             ui.column(
                 3,
                 ui.card(
-                    ui.card_header("Base Model"),
+                    ui.card_header("SIP Hierarchical"),
                     ui.card_body(
-                        "Simple leadership emergence through dyadic interactions",
+                        variant_configs["sip_hierarchical"]["description"],
                         ui.br(),
                         ui.br(),
-                        ui.input_action_button("select_base", "Select Base Model", class_="btn-primary btn-block")
+                        ui.input_action_button("select_sip", "Select SIP Model", class_="btn-primary btn-block")
                     )
                 )
             ),
             ui.column(
                 3,
                 ui.card(
-                    ui.card_header("Schema Model"),
+                    ui.card_header("SCP Dynamic"),
                     ui.card_body(
-                        "Leadership emergence with cognitive schemas",
+                        variant_configs["scp_dynamic"]["description"],
                         ui.br(),
                         ui.br(),
-                        ui.input_action_button("select_schema", "Select Schema Model", class_="btn-primary btn-block")
+                        ui.input_action_button("select_scp", "Select SCP Model", class_="btn-primary btn-block")
                     )
                 )
             ),
             ui.column(
                 3,
                 ui.card(
-                    ui.card_header("Network Model"),
+                    ui.card_header("SI Prototype"),
                     ui.card_body(
-                        "Leadership emergence in social networks",
+                        variant_configs["si_prototype"]["description"],
                         ui.br(),
                         ui.br(),
-                        ui.input_action_button("select_network", "Select Network Model", class_="btn-primary btn-block")
-                    )
-                )
-            ),
-            ui.column(
-                3,
-                ui.card(
-                    ui.card_header("Combined Model"),
-                    ui.card_body(
-                        "Leadership emergence with schemas and networks",
-                        ui.br(),
-                        ui.br(),
-                        ui.input_action_button("select_combined", "Select Combined Model", class_="btn-primary btn-block")
+                        ui.input_action_button("select_si", "Select SI Model", class_="btn-primary btn-block")
                     )
                 )
             )
@@ -113,6 +122,9 @@ app_ui = ui.page_fluid(
                 ui.card(
                     ui.card_header("Simulation Parameters"),
                     ui.card_body(
+                        ui.h4("Model Configuration"),
+                        ui.output_text("selected_config_info"),
+                        ui.br(),
                         ui.h4("Simulation Mode"),
                         ui.input_radio_buttons(
                             "sim_mode",
@@ -123,26 +135,53 @@ app_ui = ui.page_fluid(
                             },
                             selected="analysis"
                         ),
-                        ui.input_slider("n_agents", "Number of Agents", 2, 10, 4),
-                        ui.input_checkbox("initial_li_equal", "Equal Initial Leader Identity", True),
-                        ui.input_slider("li_change_rate", "Identity Change Rate", 0.5, 5, 2),
                         
-                        # Analysis Mode Controls
+                        # Core Parameters
+                        ui.input_slider(
+                            "n_agents", 
+                            "Number of Agents", 
+                            min=2, 
+                            max=10, 
+                            value=6
+                        ),
+                        ui.input_slider(
+                            "n_steps", 
+                            "Number of Steps", 
+                            min=10, 
+                            max=200, 
+                            value=100
+                        ),
+                        
+                        # Validation Thresholds
+                        ui.h4("Validation Thresholds"),
+                        ui.output_ui("validation_thresholds"),
+                        
+                        # Controls - Analysis Mode
                         ui.panel_conditional(
                             "input.sim_mode === 'analysis'",
                             ui.div(
-                                ui.input_slider("n_steps", "Number of Steps", 10, 200, 100),
-                                ui.input_action_button(
-                                    "run_sim", 
-                                    "Run Full Simulation", 
-                                    class_="btn-success btn-block"
-                                ),
-                                ui.br(),
-                                ui.br()
+                                ui.card(
+                                    ui.card_header("Analysis Controls"),
+                                    ui.card_body(
+                                        ui.p("Run a complete simulation and analyze results."),
+                                        ui.input_action_button(
+                                            "run_sim", 
+                                            "Run Full Simulation", 
+                                            class_="btn-success btn-lg btn-block"
+                                        ),
+                                        ui.br(),
+                                        ui.br(),
+                                        ui.download_button(
+                                            "download_results",
+                                            "Download Results",
+                                            class_="btn-info btn-block"
+                                        )
+                                    )
+                                )
                             )
                         ),
                         
-                        # Step Mode Controls
+                        # Controls - Step Mode
                         ui.panel_conditional(
                             "input.sim_mode === 'step'",
                             ui.div(
@@ -157,14 +196,6 @@ app_ui = ui.page_fluid(
                                     "step_sim", 
                                     "Step Forward", 
                                     class_="btn-info btn-block"
-                                ),
-                                ui.br(),
-                                ui.br(),
-                                ui.card(
-                                    ui.card_header("Current Interaction"),
-                                    ui.card_body(
-                                        ui.output_text("interaction_details")
-                                    )
                                 )
                             )
                         ),
@@ -182,7 +213,48 @@ app_ui = ui.page_fluid(
             ),
             ui.column(
                 9,
-                # Analysis Mode View
+                ui.panel_conditional(
+                    "input.sim_mode === 'step'",
+                    ui.navset_tab(
+                        ui.nav_panel(
+                            "ABM Visualization",
+                            ui.row(
+                                ui.column(
+                                    12,
+                                    ui.card(
+                                        ui.card_header("Agent Interaction Network"),
+                                        ui.card_body(ui.output_plot("step_network_plot"))
+                                    )
+                                )
+                            ),
+                            ui.row(
+                                ui.column(
+                                    6,
+                                    ui.card(
+                                        ui.card_header("Recent Identity Changes"),
+                                        ui.card_body(ui.output_plot("step_history_plot"))
+                                    )
+                                ),
+                                ui.column(
+                                    6,
+                                    ui.card(
+                                        ui.card_header("Agent Details"),
+                                        ui.card_body(ui.output_ui("agent_details"))
+                                    )
+                                )
+                            ),
+                            ui.row(
+                                ui.column(
+                                    12,
+                                    ui.card(
+                                        ui.card_header("Interaction Details"),
+                                        ui.card_body(ui.output_text("interaction_details"))
+                                    )
+                                )
+                            )
+                        )
+                    )
+                ),
                 ui.panel_conditional(
                     "input.sim_mode === 'analysis'",
                     ui.navset_tab(
@@ -205,103 +277,33 @@ app_ui = ui.page_fluid(
                             )
                         ),
                         ui.nav_panel(
-                            "Role Stabilization",
-                            ui.row(
-                                ui.column(12, ui.output_plot("variance_plot"))
-                            ),
-                            ui.row(
-                                ui.column(6, ui.value_box(
-                                    "Emergence Lag",
-                                    ui.output_text("emergence_lag"),
-                                    theme="warning"
-                                )),
-                                ui.column(6, ui.value_box(
-                                    "Within-Group Agreement",
-                                    ui.output_text("perception_agreement"),
-                                    theme="success"
-                                ))
-                            )
-                        ),
-                        ui.nav_panel(
-                            "Network Metrics",
+                            "Network Analysis",
                             ui.row(
                                 ui.column(12, ui.output_plot("network_plot"))
                             ),
                             ui.row(
-                                ui.column(4, ui.value_box(
+                                ui.column(6, ui.value_box(
                                     "Network Density",
                                     ui.output_text("density"),
                                     theme="primary"
                                 )),
-                                ui.column(4, ui.value_box(
+                                ui.column(6, ui.value_box(
                                     "Centralization",
                                     ui.output_text("centralization"),
                                     theme="info"
-                                )),
-                                ui.column(4, ui.value_box(
-                                    "Modularity",
-                                    ui.output_text("modularity"),
-                                    theme="success"
                                 ))
                             )
                         ),
                         ui.nav_panel(
-                            "Claiming-Granting",
+                            "Validation Results",
                             ui.row(
-                                ui.column(12, ui.output_plot("claim_grant_plot"))
+                                ui.column(12, ui.output_ui("validation_results"))
                             ),
                             ui.row(
-                                ui.column(6, ui.value_box(
-                                    "Claim-Grant Correlation",
-                                    ui.output_text("claim_grant_corr"),
-                                    theme="primary"
-                                )),
-                                ui.column(6, ui.value_box(
-                                    "Identity-Behavior Consistency",
-                                    ui.output_text("identity_behavior_consistency"),
-                                    theme="info"
-                                ))
+                                ui.column(12, ui.output_plot("variance_plot"))
                             )
                         ),
-                        id="viz_tabs"
-                    )
-                ),
-                
-                # Step Mode View
-                ui.panel_conditional(
-                    "input.sim_mode === 'step'",
-                    ui.div(
-                        ui.row(
-                            ui.column(
-                                12,
-                                ui.card(
-                                    ui.card_header("Network State"),
-                                    ui.card_body(
-                                        ui.output_plot("step_network_plot", height="500px")
-                                    )
-                                )
-                            )
-                        ),
-                        ui.row(
-                            ui.column(
-                                6,
-                                ui.card(
-                                    ui.card_header("Agent Details"),
-                                    ui.card_body(
-                                        ui.output_ui("agent_details")
-                                    )
-                                )
-                            ),
-                            ui.column(
-                                6,
-                                ui.card(
-                                    ui.card_header("Recent History"),
-                                    ui.card_body(
-                                        ui.output_plot("step_history_plot", height="300px")
-                                    )
-                                )
-                            )
-                        )
+                        id="analysis_tabs"
                     )
                 )
             )
@@ -309,14 +311,51 @@ app_ui = ui.page_fluid(
     )
 )
 
+def _map_config_to_model_params(config):
+    """Map YAML configuration to model parameters."""
+    sim_props = config.get('parameters', {}).get('simulation_properties', {})
+    agent_props = config.get('parameters', {}).get('agent_properties', {})
+    identity_props = agent_props.get('identity_representation', {})
+    
+    return {
+        'n_agents': sim_props.get('group_size', 6),
+        'initial_li_equal': identity_props.get('leader_identity', {}).get('initial_value', 50) == 50,
+        'li_change_rate': 2.0,  # Default value
+        'interaction_radius': 1.0,
+        'memory_length': config.get('parameters', {}).get('interaction_rules', {}).get('memory_length', 0)
+    }
+
 def server(input, output, session):
+    MODEL_CLASSES = {
+        'sip_hierarchical': SchemaModel,
+        'scp_dynamic': NetworkModel,
+        'si_prototype': SchemaNetworkModel
+    }
+    
     rv = reactive.Value({
         'model': None,
         'current_step': 0,
         'network_pos': None,
         'agents': None,
-        'selected_model': None
+        'selected_variant': None,
+        'config': None,
+        'validation_results': None
     })
+    
+    def get_current_state():
+        """Safely get current state with defaults."""
+        try:
+            return rv.get()
+        except:
+            return {
+                'model': None,
+                'current_step': 0,
+                'network_pos': None,
+                'agents': None,
+                'selected_variant': None,
+                'config': None,
+                'validation_results': None
+            }
     
     async def toggle_visibility(element_id, show=True):
         """Helper function to show/hide elements"""
@@ -327,165 +366,220 @@ def server(input, output, session):
     
     # Model Selection Handlers
     @reactive.Effect
-    @reactive.event(input.select_base)
-    async def select_base_model():
+    @reactive.event(input.select_sip)
+    async def select_sip_model():
         rv.set({
-            'selected_model': 'Base Model',
+            'selected_variant': 'sip_hierarchical',
+            'config': variant_configs['sip_hierarchical'],
             'model': None,
             'current_step': 0,
             'network_pos': None,
-            'agents': None
+            'agents': None,
+            'validation_results': None
         })
-        ui.update_radio_buttons("sim_mode", selected="analysis")
         await toggle_visibility("simulation_interface", True)
         await toggle_visibility("model_selection_page", False)
-    
+
     @reactive.Effect
-    @reactive.event(input.select_schema)
-    async def select_schema_model():
+    @reactive.event(input.select_scp)
+    async def select_scp_model():
         rv.set({
-            'selected_model': 'Schema Model',
+            'selected_variant': 'scp_dynamic',
+            'config': variant_configs['scp_dynamic'],
             'model': None,
             'current_step': 0,
             'network_pos': None,
-            'agents': None
+            'agents': None,
+            'validation_results': None
         })
-        ui.update_radio_buttons("sim_mode", selected="analysis")
         await toggle_visibility("simulation_interface", True)
         await toggle_visibility("model_selection_page", False)
-    
+
     @reactive.Effect
-    @reactive.event(input.select_network)
-    async def select_network_model():
+    @reactive.event(input.select_si)
+    async def select_si_model():
         rv.set({
-            'selected_model': 'Network Model',
+            'selected_variant': 'si_prototype',
+            'config': variant_configs['si_prototype'],
             'model': None,
             'current_step': 0,
             'network_pos': None,
-            'agents': None
+            'agents': None,
+            'validation_results': None
         })
-        ui.update_radio_buttons("sim_mode", selected="analysis")
         await toggle_visibility("simulation_interface", True)
         await toggle_visibility("model_selection_page", False)
-    
-    @reactive.Effect
-    @reactive.event(input.select_combined)
-    async def select_combined_model():
-        rv.set({
-            'selected_model': 'Combined Model',
-            'model': None,
-            'current_step': 0,
-            'network_pos': None,
-            'agents': None
-        })
-        ui.update_radio_buttons("sim_mode", selected="analysis")
-        await toggle_visibility("simulation_interface", True)
-        await toggle_visibility("model_selection_page", False)
-    
+
     @reactive.Effect
     @reactive.event(input.reset_sim)
     async def reset_simulation():
         # Return to model selection page
         await toggle_visibility("simulation_interface", False)
         await toggle_visibility("model_selection_page", True)
-        current = rv.get()
         rv.set({
             'model': None,
             'current_step': 0,
             'network_pos': None,
             'agents': None,
-            'selected_model': None
+            'selected_variant': None,
+            'config': None,
+            'validation_results': None
         })
-    
-    # Rest of your existing server functions...
-    # (Keep all the existing simulation functions unchanged)
     
     @reactive.Effect
     @reactive.event(input.init_sim)
     def initialize_simulation():
-        model_type = rv.get().get('selected_model', 'Base Model')
-        model_class = {
-            'Base Model': BaseLeadershipModel,
-            'Schema Model': SchemaModel,
-            'Network Model': NetworkModel,
-            'Combined Model': SchemaNetworkModel
-        }.get(model_type, BaseLeadershipModel)
+        current = get_current_state()
+        variant = current.get('selected_variant')
+        if variant is None:
+            return
+            
+        model_class = MODEL_CLASSES.get(variant, BaseLeadershipModel)
+        config = current.get('config')
+        if config is None:
+            return
+            
+        model_params = _map_config_to_model_params(config)
         
-        m = model_class(
-            n_agents=input.n_agents(),
-            initial_li_equal=input.initial_li_equal(),
-            li_change_rate=input.li_change_rate()
-        )
-        rv.set({
+        m = model_class(config=model_params)
+        new_state = current.copy()
+        new_state.update({
             'model': m,
             'current_step': 0,
             'network_pos': None,
-            'agents': m.agents,
-            'selected_model': model_type
+            'agents': m.agents
         })
+        rv.set(new_state)
     
     @reactive.Effect
     @reactive.event(input.step_sim)
     def step_simulation():
-        current = rv.get()
-        if current['model'] is not None:
-            m = current['model']
-            agent1, agent2 = m._select_interaction_pair()
-            m.last_interaction = (agent1.id, agent2.id)
-            m.step()
-            rv.set({
-                'model': m,
-                'current_step': current['current_step'] + 1,
-                'network_pos': current['network_pos'],
-                'agents': m.agents,
-                'selected_model': current.get('selected_model')
-            })
+        current = get_current_state()
+        model = current.get('model')
+        if model is None:
+            return
+            
+        agent1, agent2 = model._select_interaction_pair()
+        model.last_interaction = (agent1.id, agent2.id)
+        model.step()
+        
+        new_state = current.copy()
+        new_state.update({
+            'model': model,
+            'current_step': current.get('current_step', 0) + 1,
+            'agents': model.agents
+        })
+        rv.set(new_state)
     
     @reactive.Effect
     @reactive.event(input.run_sim)
     async def run_simulation():
-        current = rv.get()
-        model_type = current.get('selected_model', 'Base Model')
+        current = get_current_state()
+        config = current.get('config')
+        if config is None:
+            return
         
-        model_class = {
-            'Base Model': BaseLeadershipModel,
-            'Schema Model': SchemaModel,
-            'Network Model': NetworkModel,
-            'Combined Model': SchemaNetworkModel
-        }.get(model_type, BaseLeadershipModel)
+        variant = current.get('selected_variant')
+        if variant is None:
+            return
+            
+        model_class = MODEL_CLASSES.get(variant, BaseLeadershipModel)
         
-        # Initialize model
-        m = model_class(
-            n_agents=input.n_agents(),
-            initial_li_equal=input.initial_li_equal(),
-            li_change_rate=input.li_change_rate()
+        # Map configuration to model parameters
+        model_params = _map_config_to_model_params(config)
+        model_params['n_agents'] = input.n_agents()  # Use slider value
+        
+        # Create simulation configuration
+        sim_config = SimulationConfig(
+            model_params=model_params,
+            n_steps=input.n_steps(),
+            random_seed=42
         )
         
-        # Run simulation with progress updates
-        n_steps = input.n_steps()
-        with ui.Progress(min=0, max=n_steps) as p:
-            for step in range(n_steps):
-                p.set(value=step, message=f"Running step {step + 1}")
-                m.step()
-                # Update state periodically
-                if step % 10 == 0:  # Update every 10 steps
-                    rv.set({
-                        'model': m,
-                        'current_step': step,
-                        'network_pos': None,
-                        'agents': m.agents,
-                        'selected_model': model_type
-                    })
+        # Run simulation
+        runner = BatchRunner(model_class, Path("outputs/validation_runs"))
+        result_file = runner.run_single_simulation(
+            sim_config,
+            f"validation_{variant}",
+            Path("outputs/validation_runs")
+        )
         
-        # Final update
-        rv.set({
-            'model': m,
-            'current_step': n_steps,
-            'network_pos': None,
-            'agents': m.agents,
-            'selected_model': model_type
+        # Load results and calculate validation metrics
+        with open(result_file) as f:
+            results = json.load(f)
+        
+        # Create and store model for visualization
+        model = model_class(config=model_params)
+        
+        # Extract history arrays
+        history = results['history']
+        li_history = np.array([state['leader_identities'] for state in history])
+        fi_history = np.array([state['follower_identities'] for state in history])
+        
+        # Update model with history
+        for t, (li_state, fi_state) in enumerate(zip(li_history, fi_history)):
+            for agent, li, fi in zip(model.agents, li_state, fi_state):
+                agent.leader_identity = li
+                agent.follower_identity = fi
+                agent.leader_identity_history.append(li)
+                agent.follower_identity_history.append(fi)
+        
+        # Calculate metrics
+        li_var, fi_var = calculate_identity_variance(li_history, fi_history)
+        emergence_lag = calculate_emergence_lag(li_history, fi_history)
+        
+        # Create a temporary network from the final state
+        final_network = nx.DiGraph()
+        model_state = results['model_state']
+        if 'interaction_network' in model_state:
+            network_data = model_state['interaction_network']
+            final_network.add_nodes_from(network_data['nodes'])
+            for u, v, d in network_data['edges']:
+                final_network.add_edge(u, v, **d)
+        
+        # Update model's network
+        model.interaction_network = final_network
+        
+        # Calculate network metrics
+        network_metrics = calculate_network_metrics(final_network)
+        
+        # Calculate identity-behavior consistency using final state
+        claiming = np.sum(nx.to_numpy_array(final_network), axis=1)
+        granting = np.sum(nx.to_numpy_array(final_network), axis=0)
+        
+        li_final = li_history[-1]
+        fi_final = fi_history[-1]
+        
+        li_corr = stats.pearsonr(li_final, claiming)[0] if len(claiming) > 1 else 0
+        fi_corr = stats.pearsonr(fi_final, granting)[0] if len(granting) > 1 else 0
+        
+        validation_results = {
+            'identity_stabilization': float(np.mean(li_var)),
+            'variance_reduction': float(np.mean(fi_var)),
+            'emergence_lag': float(emergence_lag),
+            'network_density': float(network_metrics['density']),
+            'centralization': float(network_metrics['centralization']),
+            'li_behavior_consistency': float(li_corr),
+            'fi_behavior_consistency': float(fi_corr)
+        }
+        
+        # Update state with results and model
+        new_state = current.copy()
+        new_state.update({
+            'model': model,
+            'validation_results': validation_results,
+            'current_step': input.n_steps(),
+            'network_pos': nx.spring_layout(final_network),
+            'agents': model.agents
         })
-    
+        rv.set(new_state)
+        
+        # Force plot updates
+        await session.send_custom_message(
+            'toggleVisibility',
+            {'id': 'analysis_tabs', 'display': 'block'}
+        )
+
     @output
     @render.text
     def sim_status():
@@ -512,8 +606,9 @@ def server(input, output, session):
     
     @output
     @render.plot
+    @reactive.event(input.run_sim)
     def identity_plot():
-        current = rv.get()
+        current = get_current_state()
         if current['model'] is None:
             return plt.figure()
         
@@ -527,13 +622,15 @@ def server(input, output, session):
         ax.set_xlabel("Time Step")
         ax.set_ylabel("Identity Strength")
         ax.set_title("Identity Evolution Over Time")
-        ax.legend()
+        ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+        plt.tight_layout()
         return fig
     
     @output
     @render.plot
+    @reactive.event(input.run_sim)
     def variance_plot():
-        current = rv.get()
+        current = get_current_state()
         if current['model'] is None:
             return plt.figure()
         
@@ -555,12 +652,14 @@ def server(input, output, session):
         ax.set_ylabel('Variance')
         ax.set_title('Role Stabilization Over Time')
         ax.legend()
+        plt.tight_layout()
         return fig
     
     @output
     @render.plot
+    @reactive.event(input.run_sim)
     def network_plot():
-        current = rv.get()
+        current = get_current_state()
         if current['model'] is None or not hasattr(current['model'], 'interaction_network'):
             return plt.figure()
         
@@ -576,28 +675,23 @@ def server(input, output, session):
             pos = current['network_pos']
         
         # Draw the network
-        nx.draw_networkx_edges(m.interaction_network, pos, alpha=0.2)
+        nx.draw_networkx_edges(m.interaction_network, pos, alpha=0.2, width=2)
         
         # Draw nodes with size based on leader identity
         node_colors = [agent.leader_identity for agent in m.agents]
-        nx.draw_networkx_nodes(m.interaction_network, pos, 
-                             node_color=node_colors, 
-                             node_size=1000,
-                             cmap=plt.cm.viridis)
+        nodes = nx.draw_networkx_nodes(m.interaction_network, pos, 
+                                     node_color=node_colors, 
+                                     node_size=2000,
+                                     cmap=plt.cm.viridis)
         
-        # Add labels
-        labels = {i: f"Agent {i}\nLI: {agent.leader_identity:.2f}" 
+        # Add labels with more information
+        labels = {i: f"Agent {i}\nLI: {agent.leader_identity:.2f}\nFI: {agent.follower_identity:.2f}" 
                  for i, agent in enumerate(m.agents)}
-        nx.draw_networkx_labels(m.interaction_network, pos, labels)
+        nx.draw_networkx_labels(m.interaction_network, pos, labels, font_size=10)
         
-        # Highlight last interaction if available
-        if hasattr(m, 'last_interaction'):
-            ax.add_patch(Circle(pos[m.last_interaction[0]], 0.15, 
-                              fill=False, color='red'))
-            ax.add_patch(Circle(pos[m.last_interaction[1]], 0.15, 
-                              fill=False, color='blue'))
-        
-        ax.set_title("Interaction Network")
+        ax.set_title("Final Interaction Network")
+        plt.colorbar(nodes, label="Leader Identity")
+        plt.tight_layout()
         return fig
     
     @output
@@ -909,5 +1003,133 @@ def server(input, output, session):
         ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
         plt.tight_layout()
         return fig
+
+    @output
+    @render.text
+    def selected_config_info():
+        """Display information about selected configuration."""
+        current = get_current_state()
+        config = current.get('config')
+        if config is None:
+            return "No configuration selected"
+        
+        return (
+            f"Model: {config.get('model_name', 'Unknown')}\n"
+            f"Theory: {config.get('theoretical_basis', 'Unknown')}\n"
+        )
+
+    @output
+    @render.ui
+    def validation_thresholds():
+        """Display validation thresholds from config."""
+        current = get_current_state()
+        config = current.get('config')
+        if config is None:
+            return ui.div()
+        
+        thresholds = config.get('validation', {}).get('metrics_thresholds', {})
+        
+        return ui.div([
+            ui.p(f"{metric}: {threshold}")
+            for metric, threshold in thresholds.items()
+        ])
+
+    @output
+    @render.ui
+    def validation_results():
+        """Display validation results compared to thresholds."""
+        current = get_current_state()
+        results = current.get('validation_results')
+        if results is None:
+            return ui.p("Run simulation to see validation results")
+        
+        config = current.get('config')
+        if config is None:
+            return ui.p("No configuration selected")
+            
+        thresholds = config.get('validation', {}).get('metrics_thresholds', {})
+        
+        cards = []
+        for metric, value in results.items():
+            threshold = thresholds.get(metric, "N/A")
+            passed = "✓" if _check_threshold(value, threshold) else "✗"
+            
+            cards.append(
+                ui.card(
+                    ui.card_header(metric),
+                    ui.card_body(
+                        ui.p(f"Value: {value:.2f}"),
+                        ui.p(f"Threshold: {threshold}"),
+                        ui.p(f"Status: {passed}")
+                    )
+                )
+            )
+        
+        return ui.div(
+            ui.row([ui.column(4, card) for card in cards])
+        )
+
+    def _check_threshold(value, threshold):
+        """Check if value meets threshold condition."""
+        if threshold == "N/A":
+            return True
+        
+        if ">=" in threshold:
+            return value >= float(threshold.replace(">=", "").strip())
+        elif "<=" in threshold:
+            return value <= float(threshold.replace("<=", "").strip())
+        elif "between" in threshold:
+            low, high = map(float, threshold.replace("between", "").strip().split("and"))
+            return low <= value <= high
+        
+        return True
+
+    @output
+    @render.download
+    def download_results():
+        """Create downloadable results file."""
+        def download():
+            current = rv.get()
+            if current['model'] is None:
+                return None
+            
+            # Prepare results dictionary
+            results = {
+                'model_variant': current['selected_variant'],
+                'parameters': current['config']['parameters'],
+                'metrics': current['validation_results'],
+                'history': {
+                    'leader_identities': [
+                        agent.leader_identity_history 
+                        for agent in current['model'].agents
+                    ],
+                    'follower_identities': [
+                        agent.follower_identity_history
+                        for agent in current['model'].agents
+                    ]
+                }
+            }
+            
+            # Convert to JSON
+            return json.dumps(results, indent=2)
+        
+        return download
+
+    # Add mode selection handler
+    @reactive.Effect
+    @reactive.event(input.sim_mode)
+    def handle_mode_change():
+        current = get_current_state()
+        new_state = current.copy()
+        
+        # Reset simulation state when changing modes
+        new_state.update({
+            'model': None,
+            'current_step': 0,
+            'network_pos': None,
+            'agents': None,
+            'validation_results': None
+        })
+        rv.set(new_state)
 
 app = App(app_ui, server)

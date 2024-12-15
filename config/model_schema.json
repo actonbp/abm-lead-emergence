@@ -1,0 +1,40 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "required": [
+        "n_agents",
+        "initial_li_equal",
+        "li_change_rate"
+    ],
+    "properties": {
+        "n_agents": {
+            "type": "integer",
+            "minimum": 2,
+            "maximum": 100,
+            "description": "Number of agents in the simulation"
+        },
+        "initial_li_equal": {
+            "type": "boolean",
+            "description": "Whether agents start with equal leadership identities"
+        },
+        "li_change_rate": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 5.0,
+            "description": "Rate of leadership identity change"
+        },
+        "interaction_radius": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1.0,
+            "default": 1.0,
+            "description": "Radius for agent interactions"
+        },
+        "memory_length": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0,
+            "description": "Number of past interactions to remember"
+        }
+    }
+} 

@@ -1,0 +1,1952 @@
+{
+  "timestamp": "2024-12-11T14:43:11.759125",
+  "model_class": "SchemaModel",
+  "n_configurations": 162,
+  "n_jobs": 5,
+  "configurations": [
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": true,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 42
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": true,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 43
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": true,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 44
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": true,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 45
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": true,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 46
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": true,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 47
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": true,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 48
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": true,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 49
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": true,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 50
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": true,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 51
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": true,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 52
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": true,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 53
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": true,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 54
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": true,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 55
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": true,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 56
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": true,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 57
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": true,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 58
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": true,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 59
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": true,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 60
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": true,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 61
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": true,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 62
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": true,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 63
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": true,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 64
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": true,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 65
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": true,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 66
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": true,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 67
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": true,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 68
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": false,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 69
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": false,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 70
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": false,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 71
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": false,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 72
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": false,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 73
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": false,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 74
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": false,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 75
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": false,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 76
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": false,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 77
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 78
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 79
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 80
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 81
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 82
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 83
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 84
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 85
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 86
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": false,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 87
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": false,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 88
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": false,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 89
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": false,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 90
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": false,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 91
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": false,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 92
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": false,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 93
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": false,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 94
+    },
+    {
+      "model_params": {
+        "n_agents": 4,
+        "initial_li_equal": false,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 95
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": true,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 96
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": true,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 97
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": true,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 98
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": true,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 99
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": true,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 100
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": true,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 101
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": true,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 102
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": true,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 103
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": true,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 104
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": true,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 105
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": true,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 106
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": true,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 107
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": true,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 108
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": true,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 109
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": true,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 110
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": true,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 111
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": true,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 112
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": true,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 113
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": true,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 114
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": true,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 115
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": true,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 116
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": true,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 117
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": true,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 118
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": true,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 119
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": true,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 120
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": true,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 121
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": true,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 122
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 123
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 124
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 125
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 126
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 127
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 128
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 129
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 130
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 131
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 132
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 133
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 134
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 135
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 136
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 137
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 138
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 139
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 140
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 141
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 142
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 143
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 144
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 145
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 146
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 147
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 148
+    },
+    {
+      "model_params": {
+        "n_agents": 6,
+        "initial_li_equal": false,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 149
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": true,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 150
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": true,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 151
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": true,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 152
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": true,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 153
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": true,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 154
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": true,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 155
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": true,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 156
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": true,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 157
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": true,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 158
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": true,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 159
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": true,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 160
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": true,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 161
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": true,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 162
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": true,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 163
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": true,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 164
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": true,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 165
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": true,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 166
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": true,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 167
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": true,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 168
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": true,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 169
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": true,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 170
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": true,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 171
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": true,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 172
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": true,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 173
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": true,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 174
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": true,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 175
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": true,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 176
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": false,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 177
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": false,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 178
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": false,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 179
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": false,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 180
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": false,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 181
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": false,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 182
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": false,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 183
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": false,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 184
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": false,
+        "li_change_rate": 0.1,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 185
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 186
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 187
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 188
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 189
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 190
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 191
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 192
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 193
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": false,
+        "li_change_rate": 0.3,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 194
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": false,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 195
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": false,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 196
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": false,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.3,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 197
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": false,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 198
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": false,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 199
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": false,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.5,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 200
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": false,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 201
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": false,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 202
+    },
+    {
+      "model_params": {
+        "n_agents": 8,
+        "initial_li_equal": false,
+        "li_change_rate": 0.5,
+        "schema_weight": 0.7,
+        "claim_threshold": 0.6,
+        "grant_threshold": 0.4
+      },
+      "n_steps": 100,
+      "random_seed": 203
+    }
+  ]
+}

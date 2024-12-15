@@ -1,7 +1,40 @@
+"""
+Base model class for leadership emergence simulations.
+"""
+
 import numpy as np
 import networkx as nx
 from dataclasses import dataclass
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Any, Optional
+from pydantic import BaseModel, Field
+import yaml
+
+
+class ModelParameters(BaseModel):
+    """Parameter validation schema for leadership models."""
+    
+    # Agent Properties
+    n_agents: int = Field(ge=2, le=100, description="Number of agents")
+    initial_li_equal: bool = Field(
+        description="Whether agents start with equal leadership identities"
+    )
+    li_change_rate: float = Field(
+        gt=0.0, le=5.0,
+        description="Rate of leadership identity change"
+    )
+    
+    # Optional parameters with defaults
+    interaction_radius: Optional[float] = Field(
+        default=1.0,
+        ge=0.0, le=1.0,
+        description="Radius for agent interactions"
+    )
+    memory_length: Optional[int] = Field(
+        default=0,
+        ge=0,
+        description="Number of past interactions to remember"
+    )
+
 
 @dataclass
 class Agent:
@@ -26,20 +59,46 @@ class Agent:
         self.leader_identity_history.append(self.leader_identity)
         self.follower_identity_history.append(self.follower_identity)
 
+
 class BaseLeadershipModel:
     """Base class for all leadership emergence models."""
     
     def __init__(
         self,
-        n_agents: int = 4,
-        initial_li_equal: bool = True,
-        li_change_rate: float = 2.0,
-        random_seed: int = None
+        config: Dict[str, Any] = None,
+        config_path: Optional[str] = None,
+        random_seed: Optional[int] = None
     ):
-        self.n_agents = n_agents
-        self.time = 0
+        """Initialize model with configuration.
+        
+        Args:
+            config: Dictionary of model parameters
+            config_path: Path to YAML/JSON configuration file
+            random_seed: Random seed for reproducibility
+        """
+        # Load and validate configuration
+        if config_path:
+            with open(config_path) as f:
+                if config_path.endswith('.yaml'):
+                    config = yaml.safe_load(f)
+                else:
+                    config = json.load(f)
+        
+        if config is None:
+            config = {
+                'n_agents': 4,
+                'initial_li_equal': True,
+                'li_change_rate': 2.0
+            }
+            
+        self.params = ModelParameters(**config)
+        
+        # Initialize random state
         self.rng = np.random.default_rng(random_seed)
-        self.li_change_rate = li_change_rate
+        
+        # Initialize model state
+        self.time = 0
+        self.li_change_rate = self.params.li_change_rate
         
         # Initialize network for tracking interactions
         self.interaction_network = nx.DiGraph()
@@ -57,12 +116,17 @@ class BaseLeadershipModel:
         self.agents = [
             Agent(
                 id=i,
-                leader_identity=50.0 if initial_li_equal else self.rng.uniform(60, 80)
+                leader_identity=50.0 if self.params.initial_li_equal 
+                else self.rng.uniform(60, 80),
+                characteristics=self.rng.uniform(40, 60),  # Random initial characteristics
+                ilt=self.rng.uniform(40, 60)  # Random initial ILT
             )
-            for i in range(n_agents)
+            for i in range(self.params.n_agents)
         ]
-        for agent in self.agents:
-            self.interaction_network.add_node(agent.id)
+        
+        # Add nodes to interaction network
+        for i in range(self.params.n_agents):
+            self.interaction_network.add_node(i)
     
     def step(self) -> Dict:
         """Execute one step of the model."""
@@ -86,6 +150,24 @@ class BaseLeadershipModel:
         self.time += 1
         return self._get_current_state()
     
+    def run(self, n_steps: int) -> Dict[str, Any]:
+        """Run model for specified number of steps.
+        
+        Args:
+            n_steps: Number of timesteps to run
+            
+        Returns:
+            Dict containing simulation history
+        """
+        for _ in range(n_steps):
+            state = self.step()
+            self.history.append(state)
+            
+        return {
+            'history': self.history,
+            'parameters': self.params.model_dump()
+        }
+    
     def _select_interaction_pair(self) -> Tuple[Agent, Agent]:
         """Base method for selecting interaction pairs (random)."""
         agents = self.rng.choice(self.agents, size=2, replace=False)
@@ -104,12 +186,12 @@ class BaseLeadershipModel:
     def _update_identities(self, agent1: Agent, agent2: Agent, claiming: bool, granting: bool):
         """Base method for updating identities."""
         if claiming and granting:
-            agent1.leader_identity = min(100, agent1.leader_identity + self.li_change_rate)
-            agent2.follower_identity = min(100, agent2.follower_identity + self.li_change_rate)
+            agent1.leader_identity = min(100, agent1.leader_identity + self.params.li_change_rate)
+            agent2.follower_identity = min(100, agent2.follower_identity + self.params.li_change_rate)
         elif claiming and not granting:
-            agent1.leader_identity = max(0, agent1.leader_identity - self.li_change_rate)
+            agent1.leader_identity = max(0, agent1.leader_identity - self.params.li_change_rate)
         elif granting and not claiming:
-            agent2.follower_identity = max(0, agent2.follower_identity - self.li_change_rate)
+            agent2.follower_identity = max(0, agent2.follower_identity - self.params.li_change_rate)
     
     def _update_network(self, agent1: Agent, agent2: Agent, claiming: bool, granting: bool):
         """Base method for updating network."""
@@ -153,102 +235,6 @@ class BaseLeadershipModel:
             'time': self.time,
             'leader_identities': [agent.leader_identity for agent in self.agents],
             'follower_identities': [agent.follower_identity for agent in self.agents],
-            'centralization': self.history['centralization'][-1],
-            'density': self.history['density'][-1]
+            'centralization': self.history['centralization'][-1] if self.history['centralization'] else 0.0,
+            'density': self.history['density'][-1] if self.history['density'] else 0.0
         }
-
-class SchemaModel(BaseLeadershipModel):
-    """Model that adds schema-based decision making."""
-    
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        # Add schema-related attributes to agents
-        for agent in self.agents:
-            agent.characteristics = self.rng.uniform(10, 90)
-            agent.ilt = self.rng.uniform(10, 90)
-    
-    def _process_interaction(self, agent1: Agent, agent2: Agent) -> Tuple[bool, bool]:
-        """Override to add schema-based decisions."""
-        # Calculate schema-characteristic fit
-        claim_similarity = 1 - abs(agent1.characteristics - agent1.ilt) / 100
-        grant_similarity = 1 - abs(agent1.characteristics - agent2.ilt) / 100
-        
-        # Combine with base identity probabilities
-        base_claim_prob = agent1.leader_identity / 100
-        base_grant_prob = agent2.follower_identity / 100
-        
-        claim_prob = 0.5 * (base_claim_prob + claim_similarity)
-        grant_prob = 0.5 * (base_grant_prob + grant_similarity)
-        
-        claiming = self.rng.random() < claim_prob
-        granting = self.rng.random() < grant_prob
-        
-        return claiming, granting
-
-class NetworkModel(BaseLeadershipModel):
-    """Model that adds network-based interaction selection."""
-    
-    def __init__(self, network_weight: float = 0.3, **kwargs):
-        super().__init__(**kwargs)
-        self.network_weight = network_weight
-    
-    def _select_interaction_pair(self) -> Tuple[Agent, Agent]:
-        """Override to add network-based selection."""
-        if self.time == 0 or self.rng.random() < 0.3:  # Sometimes select random pair
-            return super()._select_interaction_pair()
-        
-        # Prefer interactions with connected agents
-        agent1 = self.rng.choice(self.agents)
-        neighbors = list(self.interaction_network.neighbors(agent1.id))
-        if neighbors:
-            agent2_id = self.rng.choice(neighbors)
-            agent2 = next(a for a in self.agents if a.id == agent2_id)
-        else:
-            agent2 = self.rng.choice([a for a in self.agents if a != agent1])
-        return agent1, agent2
-    
-    def _process_interaction(self, agent1: Agent, agent2: Agent) -> Tuple[bool, bool]:
-        """Override to add network position influence."""
-        # Get base probabilities
-        base_claim_prob = agent1.leader_identity / 100
-        base_grant_prob = agent2.follower_identity / 100
-        
-        # Add network centrality influence
-        centrality = nx.degree_centrality(self.interaction_network)
-        agent1_centrality = centrality.get(agent1.id, 0)
-        agent2_centrality = centrality.get(agent2.id, 0)
-        
-        claim_prob = (1 - self.network_weight) * base_claim_prob + self.network_weight * agent1_centrality
-        grant_prob = (1 - self.network_weight) * base_grant_prob + self.network_weight * agent2_centrality
-        
-        claiming = self.rng.random() < claim_prob
-        granting = self.rng.random() < grant_prob
-        
-        return claiming, granting
-
-class SchemaNetworkModel(NetworkModel, SchemaModel):
-    """Model combining both schema and network effects."""
-    
-    def _process_interaction(self, agent1: Agent, agent2: Agent) -> Tuple[bool, bool]:
-        """Combine schema and network influences."""
-        # Get schema-based probabilities
-        claim_similarity = 1 - abs(agent1.characteristics - agent1.ilt) / 100
-        grant_similarity = 1 - abs(agent1.characteristics - agent2.ilt) / 100
-        
-        # Get network-based probabilities
-        centrality = nx.degree_centrality(self.interaction_network)
-        agent1_centrality = centrality.get(agent1.id, 0)
-        agent2_centrality = centrality.get(agent2.id, 0)
-        
-        # Base identity probabilities
-        base_claim_prob = agent1.leader_identity / 100
-        base_grant_prob = agent2.follower_identity / 100
-        
-        # Combine all influences equally
-        claim_prob = (base_claim_prob + claim_similarity + agent1_centrality) / 3
-        grant_prob = (base_grant_prob + grant_similarity + agent2_centrality) / 3
-        
-        claiming = self.rng.random() < claim_prob
-        granting = self.rng.random() < grant_prob
-        
-        return claiming, granting 

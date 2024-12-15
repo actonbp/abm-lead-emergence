@@ -1,0 +1,63 @@
+# Base configuration for leadership emergence model
+# All variants inherit from this base configuration
+
+defaults: &defaults
+  simulation_properties: &sim_defaults
+    group_size: 6
+    time_points: 100
+    replication_count: 30
+    data_collection_frequency: "every_timestep"
+    outcome_metrics: &default_metrics
+      - "identity_stabilization"
+      - "variance_reduction"
+
+  agent_properties: &agent_defaults
+    attributes:
+      dimensions: 1
+      distribution: "uniform"
+    self_schema:
+      separate: false
+    identity_representation:
+      leader_identity: &identity_defaults
+        initial_value: 50
+        update_rule: "feedback"
+      follower_identity:
+        <<: *identity_defaults
+
+  interaction_rules: &interaction_defaults
+    interaction_type: "dyadic_random"
+    claim_grant_sequence: "claim_then_grant"
+    feedback_dynamics: true
+    observational_updates: false
+    memory_length: 0
+
+  environment: &env_defaults
+    task_inclusion: "none"
+    context_adjustment: false
+    group_identity_strength: 0.0
+    environment_dynamics: false
+
+# Theoretical base configurations
+theoretical_bases:
+  sip: &sip_base
+    schemas:
+      type: "ILT"
+      update_mechanism: "static"
+      idiosyncrasy_credits_enabled: false
+
+  scp: &scp_base
+    schemas:
+      type: "ILT"
+      update_mechanism: "observational"
+      idiosyncrasy_credits_enabled: false
+    interaction_rules:
+      observational_updates: true
+      memory_length: 10
+
+  si: &si_base
+    schemas:
+      type: "group_proto"
+      update_mechanism: "dynamic"
+      idiosyncrasy_credits_enabled: false
+    environment:
+      context_adjustment: true 

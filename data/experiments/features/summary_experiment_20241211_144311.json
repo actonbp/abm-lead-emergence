@@ -1,0 +1,527 @@
+{
+  "parameter_effects": {
+    "n_agents": {
+      "mean_final_li": {
+        "4": {
+          "mean": 0.51,
+          "std": 0.125
+        },
+        "6": {
+          "mean": 0.49,
+          "std": 0.136
+        },
+        "8": {
+          "mean": 0.493,
+          "std": 0.104
+        }
+      },
+      "mean_final_fi": {
+        "4": {
+          "mean": 0.632,
+          "std": 0.206
+        },
+        "6": {
+          "mean": 0.612,
+          "std": 0.218
+        },
+        "8": {
+          "mean": 0.654,
+          "std": 0.213
+        }
+      },
+      "time_to_li_stability": {
+        "4": {
+          "mean": 23.667,
+          "std": 42.092
+        },
+        "6": {
+          "mean": 23.185,
+          "std": 40.125
+        },
+        "8": {
+          "mean": 26.685,
+          "std": 42.566
+        }
+      },
+      "time_to_fi_stability": {
+        "4": {
+          "mean": 63.407,
+          "std": 48.183
+        },
+        "6": {
+          "mean": 66.556,
+          "std": 46.402
+        },
+        "8": {
+          "mean": 68.704,
+          "std": 45.166
+        }
+      },
+      "mean_role_diff": {
+        "4": {
+          "mean": -0.122,
+          "std": 0.177
+        },
+        "6": {
+          "mean": -0.122,
+          "std": 0.191
+        },
+        "8": {
+          "mean": -0.161,
+          "std": 0.201
+        }
+      },
+      "role_polarization": {
+        "4": {
+          "mean": 0.932,
+          "std": 0.178
+        },
+        "6": {
+          "mean": 0.824,
+          "std": 0.165
+        },
+        "8": {
+          "mean": 0.811,
+          "std": 0.125
+        }
+      },
+      "emergence_speed": {
+        "4": {
+          "mean": 0.454,
+          "std": 0.498
+        },
+        "6": {
+          "mean": 0.463,
+          "std": 0.503
+        },
+        "8": {
+          "mean": 0.481,
+          "std": 0.504
+        }
+      },
+      "leader_consistency": {
+        "4": {
+          "mean": 0.999,
+          "std": 0.003
+        },
+        "6": {
+          "mean": 0.999,
+          "std": 0.003
+        },
+        "8": {
+          "mean": 0.999,
+          "std": 0.002
+        }
+      }
+    },
+    "initial_li_equal": {
+      "mean_final_li": {
+        "false": {
+          "mean": 0.495,
+          "std": 0.173
+        },
+        "true": {
+          "mean": 0.5,
+          "std": 0.0
+        }
+      },
+      "mean_final_fi": {
+        "false": {
+          "mean": 0.749,
+          "std": 0.211
+        },
+        "true": {
+          "mean": 0.515,
+          "std": 0.135
+        }
+      },
+      "time_to_li_stability": {
+        "false": {
+          "mean": 49.025,
+          "std": 47.211
+        },
+        "true": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      "time_to_fi_stability": {
+        "false": {
+          "mean": 60.84,
+          "std": 46.992
+        },
+        "true": {
+          "mean": 71.605,
+          "std": 45.372
+        }
+      },
+      "mean_role_diff": {
+        "false": {
+          "mean": -0.255,
+          "std": 0.158
+        },
+        "true": {
+          "mean": -0.015,
+          "std": 0.135
+        }
+      },
+      "role_polarization": {
+        "false": {
+          "mean": 0.883,
+          "std": 0.186
+        },
+        "true": {
+          "mean": 0.828,
+          "std": 0.139
+        }
+      },
+      "emergence_speed": {
+        "false": {
+          "mean": 0.932,
+          "std": 0.247
+        },
+        "true": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      "leader_consistency": {
+        "false": {
+          "mean": 0.998,
+          "std": 0.003
+        },
+        "true": {
+          "mean": 1.0,
+          "std": 0.0
+        }
+      }
+    },
+    "li_change_rate": {
+      "mean_final_li": {
+        "0.1": {
+          "mean": 0.526,
+          "std": 0.129
+        },
+        "0.3": {
+          "mean": 0.488,
+          "std": 0.126
+        },
+        "0.5": {
+          "mean": 0.478,
+          "std": 0.107
+        }
+      },
+      "mean_final_fi": {
+        "0.1": {
+          "mean": 0.644,
+          "std": 0.202
+        },
+        "0.3": {
+          "mean": 0.625,
+          "std": 0.222
+        },
+        "0.5": {
+          "mean": 0.628,
+          "std": 0.215
+        }
+      },
+      "time_to_li_stability": {
+        "0.1": {
+          "mean": 23.148,
+          "std": 40.81
+        },
+        "0.3": {
+          "mean": 25.426,
+          "std": 41.328
+        },
+        "0.5": {
+          "mean": 24.963,
+          "std": 42.714
+        }
+      },
+      "time_to_fi_stability": {
+        "0.1": {
+          "mean": 64.5,
+          "std": 45.887
+        },
+        "0.3": {
+          "mean": 57.926,
+          "std": 49.33
+        },
+        "0.5": {
+          "mean": 76.241,
+          "std": 42.598
+        }
+      },
+      "mean_role_diff": {
+        "0.1": {
+          "mean": -0.118,
+          "std": 0.169
+        },
+        "0.3": {
+          "mean": -0.137,
+          "std": 0.208
+        },
+        "0.5": {
+          "mean": -0.15,
+          "std": 0.191
+        }
+      },
+      "role_polarization": {
+        "0.1": {
+          "mean": 0.838,
+          "std": 0.178
+        },
+        "0.3": {
+          "mean": 0.896,
+          "std": 0.164
+        },
+        "0.5": {
+          "mean": 0.832,
+          "std": 0.15
+        }
+      },
+      "emergence_speed": {
+        "0.1": {
+          "mean": 0.463,
+          "std": 0.503
+        },
+        "0.3": {
+          "mean": 0.463,
+          "std": 0.503
+        },
+        "0.5": {
+          "mean": 0.472,
+          "std": 0.499
+        }
+      },
+      "leader_consistency": {
+        "0.1": {
+          "mean": 0.999,
+          "std": 0.003
+        },
+        "0.3": {
+          "mean": 0.999,
+          "std": 0.002
+        },
+        "0.5": {
+          "mean": 0.999,
+          "std": 0.002
+        }
+      }
+    },
+    "schema_weight": {
+      "mean_final_li": {
+        "0.3": {
+          "mean": 0.491,
+          "std": 0.129
+        },
+        "0.5": {
+          "mean": 0.476,
+          "std": 0.109
+        },
+        "0.7": {
+          "mean": 0.526,
+          "std": 0.123
+        }
+      },
+      "mean_final_fi": {
+        "0.3": {
+          "mean": 0.596,
+          "std": 0.199
+        },
+        "0.5": {
+          "mean": 0.628,
+          "std": 0.203
+        },
+        "0.7": {
+          "mean": 0.673,
+          "std": 0.229
+        }
+      },
+      "time_to_li_stability": {
+        "0.3": {
+          "mean": 22.407,
+          "std": 38.943
+        },
+        "0.5": {
+          "mean": 22.889,
+          "std": 40.5
+        },
+        "0.7": {
+          "mean": 28.241,
+          "std": 44.976
+        }
+      },
+      "time_to_fi_stability": {
+        "0.3": {
+          "mean": 68.63,
+          "std": 46.718
+        },
+        "0.5": {
+          "mean": 71.796,
+          "std": 44.236
+        },
+        "0.7": {
+          "mean": 58.241,
+          "std": 47.825
+        }
+      },
+      "mean_role_diff": {
+        "0.3": {
+          "mean": -0.105,
+          "std": 0.191
+        },
+        "0.5": {
+          "mean": -0.152,
+          "std": 0.191
+        },
+        "0.7": {
+          "mean": -0.147,
+          "std": 0.186
+        }
+      },
+      "role_polarization": {
+        "0.3": {
+          "mean": 0.851,
+          "std": 0.171
+        },
+        "0.5": {
+          "mean": 0.835,
+          "std": 0.15
+        },
+        "0.7": {
+          "mean": 0.88,
+          "std": 0.176
+        }
+      },
+      "emergence_speed": {
+        "0.3": {
+          "mean": 0.5,
+          "std": 0.505
+        },
+        "0.5": {
+          "mean": 0.454,
+          "std": 0.498
+        },
+        "0.7": {
+          "mean": 0.444,
+          "std": 0.502
+        }
+      },
+      "leader_consistency": {
+        "0.3": {
+          "mean": 0.998,
+          "std": 0.003
+        },
+        "0.5": {
+          "mean": 0.999,
+          "std": 0.002
+        },
+        "0.7": {
+          "mean": 0.999,
+          "std": 0.002
+        }
+      }
+    }
+  },
+  "correlations": {
+    "mean_final_li_vs_time_to_fi_stability": -0.398,
+    "mean_final_li_vs_role_polarization": 0.509,
+    "mean_final_fi_vs_mean_final_li": 0.463,
+    "mean_final_fi_vs_time_to_li_stability": 0.65,
+    "mean_final_fi_vs_time_to_fi_stability": -0.377,
+    "mean_final_fi_vs_mean_role_diff": -0.821,
+    "mean_final_fi_vs_role_polarization": 0.368,
+    "mean_role_diff_vs_time_to_li_stability": -0.643,
+    "role_polarization_vs_time_to_fi_stability": -0.502,
+    "emergence_speed_vs_mean_final_fi": 0.618,
+    "emergence_speed_vs_time_to_li_stability": 0.638,
+    "emergence_speed_vs_mean_role_diff": -0.649,
+    "emergence_speed_vs_leader_consistency": -0.515
+  },
+  "overall_stats": {
+    "mean_final_li": {
+      "mean": 0.497,
+      "std": 0.122,
+      "min": 0.22,
+      "max": 1.0,
+      "q1": 0.47,
+      "median": 0.5,
+      "q3": 0.5
+    },
+    "mean_final_fi": {
+      "mean": 0.632,
+      "std": 0.212,
+      "min": 0.198,
+      "max": 1.0,
+      "q1": 0.484,
+      "median": 0.601,
+      "q3": 0.751
+    },
+    "time_to_li_stability": {
+      "mean": 24.512,
+      "std": 41.378,
+      "min": 0.0,
+      "max": 100.0,
+      "q1": 0.0,
+      "median": 0.0,
+      "q3": 22.25
+    },
+    "time_to_fi_stability": {
+      "mean": 66.222,
+      "std": 46.361,
+      "min": 0.0,
+      "max": 100.0,
+      "q1": 2.0,
+      "median": 100.0,
+      "q3": 100.0
+    },
+    "mean_role_diff": {
+      "mean": -0.135,
+      "std": 0.189,
+      "min": -0.598,
+      "max": 0.302,
+      "q1": -0.267,
+      "median": -0.127,
+      "q3": -0.0
+    },
+    "role_polarization": {
+      "mean": 0.855,
+      "std": 0.166,
+      "min": 0.548,
+      "max": 1.552,
+      "q1": 0.731,
+      "median": 0.831,
+      "q3": 0.921
+    },
+    "emergence_speed": {
+      "mean": 0.466,
+      "std": 0.499,
+      "min": 0.0,
+      "max": 1.0,
+      "q1": 0.0,
+      "median": 0.0,
+      "q3": 1.0
+    },
+    "leader_consistency": {
+      "mean": 0.999,
+      "std": 0.002,
+      "min": 0.985,
+      "max": 1.0,
+      "q1": 0.998,
+      "median": 1.0,
+      "q3": 1.0
+    }
+  },
+  "feature_importance": {
+    "mean_final_li": 0.0,
+    "mean_final_fi": 0.0,
+    "time_to_li_stability": 0.443,
+    "time_to_fi_stability": 0.557,
+    "mean_role_diff": 0.0,
+    "role_polarization": 0.0,
+    "emergence_speed": 0.0,
+    "leader_consistency": 0.0
+  }
+}
