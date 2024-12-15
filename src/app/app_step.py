@@ -17,11 +17,16 @@ if str(root_dir) not in sys.path:
     sys.path.insert(0, str(root_dir))
 
 from shiny import App, render, ui, reactive
+from shiny.ui import span  # Add span import
 import matplotlib.pyplot as plt
 from matplotlib.patches import Circle
 
+try:
+    from src.models.base import BaseLeadershipModel
+except ImportError:
+    from src.models.base_model import BaseLeadershipModel
+
 from src.models import (
-    BaseLeadershipModel,
     SchemaModel,
     NetworkModel,
     SchemaNetworkModel
@@ -380,12 +385,37 @@ app_ui = ui.page_fluid(
                 right: 0;
                 transform: translateX(0);
             }
+            .documentation-button {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                padding: 10px 20px;
+                background: #f8f9fa;
+                border: 2px solid #007bff;
+                border-radius: 8px;
+                color: #007bff;
+                text-decoration: none;
+                transition: all 0.2s ease;
+            }
+            .documentation-button:hover {
+                background: #007bff;
+                color: white;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .documentation-icon {
+                margin-right: 8px;
+            }
         """)
     ),
     ui.panel_title(
         ui.h1(
             "Leadership Emergence Step-by-Step Simulation",
-            class_="text-center mb-4"
+            class_="text-center mb-4 main-title"
+        ),
+        ui.download_button(
+            "download_docs",
+            "📚 Download Documentation",
+            class_="documentation-button"
         )
     ),
     
@@ -393,7 +423,167 @@ app_ui = ui.page_fluid(
         {"class": "app-container"},
         ui.output_ui("model_selection_page"),
         ui.output_ui("simulation_interface")
-    )
+    ),
+    
+    ui.tags.style("""
+        body {
+            background-color: #f5f7fa;
+        }
+        
+        .main-title {
+            color: #2c3e50;
+            font-weight: 600;
+            margin: 30px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .app-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .simulation-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            border: none;
+        }
+        
+        .simulation-card .card-header {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border-radius: 12px 12px 0 0;
+            padding: 20px;
+            font-size: 1.2em;
+            border: none;
+        }
+        
+        .simulation-card .card-body {
+            padding: 25px;
+        }
+        
+        .model-info {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .simulation-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .control-button {
+            border-radius: 8px;
+            padding: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .control-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .btn-primary.control-button {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+        }
+        
+        .btn-info.control-button {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+        }
+        
+        .btn-warning.control-button {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+        
+        .plot-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .nav-tabs {
+            border: none;
+            margin-bottom: 20px;
+        }
+        
+        .nav-tabs .nav-link {
+            border: none;
+            color: #7f8c8d;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-tabs .nav-link:hover {
+            background: #f8f9fa;
+            color: #2c3e50;
+        }
+        
+        .nav-tabs .nav-link.active {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            font-weight: 500;
+        }
+        
+        .step-count {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.3em;
+            color: #2c3e50;
+            margin-top: 20px;
+            border-left: 4px solid #3498db;
+        }
+        
+        /* Card layouts */
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border-radius: 12px 12px 0 0 !important;
+            padding: 15px 20px;
+            font-weight: 500;
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .app-container {
+                padding: 10px;
+            }
+            
+            .simulation-card .card-header {
+                padding: 15px;
+            }
+            
+            .control-button {
+                padding: 10px;
+            }
+        }
+    """)
 )
 
 def _map_config_to_model_params(config):
@@ -469,9 +659,10 @@ def calculate_entropy_metrics(model):
     # Calculate structural stability from interaction network
     if hasattr(model, 'interaction_network'):
         degrees = [d for n, d in model.interaction_network.degree()]
-        structural_stability = 1 - (np.std(degrees) / np.mean(degrees) if np.mean(degrees) > 0 else 0)
+        mean_degree = np.mean(degrees)
+        structural_stability = 1.0 - (np.std(degrees) / mean_degree if mean_degree > 0 else 0.0)
     else:
-        structural_stability = 0
+        structural_stability = 0.0
     
     return {
         'system_entropy': system_entropy,
@@ -701,21 +892,7 @@ def server(input, output, session):
                                 
                                 ui.div(
                                     {"class": "simulation-controls mt-4"},
-                                    ui.input_action_button(
-                                        "init_sim", 
-                                        "Initialize Simulation", 
-                                        class_="btn-primary control-button"
-                                    ),
-                                    ui.input_action_button(
-                                        "step_sim", 
-                                        "Step Forward", 
-                                        class_="btn-info control-button mt-2"
-                                    ),
-                                    ui.input_action_button(
-                                        "reset_sim", 
-                                        "Reset", 
-                                        class_="btn-warning control-button mt-2"
-                                    )
+                                    ui.output_ui("control_buttons")
                                 ),
                                 
                                 ui.div(
@@ -811,10 +988,580 @@ def server(input, output, session):
                             )
                         ),
                         ui.nav_panel(
-                            "Step Logic",
+                            "Identity Change Rules",
                             ui.div(
                                 {"class": "plot-container"},
-                                ui.output_ui("step_logic_content")
+                                ui.div(
+                                    {"class": "identity-rules-container"},
+                                    ui.h4("Identity Change Rules", class_="section-title"),
+                                    ui.p("Configure how different interaction paths affect agent identities:", class_="section-description"),
+                                    
+                                    # Flow diagram container
+                                    ui.div(
+                                        {"class": "flow-diagram"},
+                                        
+                                        # Agent Making Decision Section
+                                        ui.div(
+                                            {"class": "flow-section"},
+                                            ui.h5("Agent Making Decision", class_="flow-title"),
+                                            
+                                            # Start node
+                                            ui.div(
+                                                {"class": "flow-node start-node"},
+                                                ui.div({"class": "node-content"},
+                                                    ui.h6("Agent"),
+                                                    ui.p("Initial State", class_="node-description")
+                                                )
+                                            ),
+                                            
+                                            # Decision paths
+                                            ui.div(
+                                                {"class": "decision-paths"},
+                                                # Claim path
+                                                ui.div(
+                                                    {"class": "path-branch"},
+                                                    ui.div({"class": "path-arrow"}),
+                                                    ui.div(
+                                                        {"class": "path-label"},
+                                                        "Claims Leadership"
+                                                    ),
+                                                    ui.div(
+                                                        {"class": "outcomes-container"},
+                                                        # Granted outcome
+                                                        ui.div(
+                                                            {"class": "outcome-node success"},
+                                                            ui.h6("Claim Granted"),
+                                                            ui.div(
+                                                                {"class": "identity-changes"},
+                                                                ui.div(
+                                                                    {"class": "change-input"},
+                                                                    ui.tags.label(
+                                                                        ui.span("Leader Identity ", class_="label-text"),
+                                                                        ui.span("+", class_="change-direction positive")
+                                                                    ),
+                                                                    ui.input_numeric(
+                                                                        "claim_granted_li",
+                                                                        None,
+                                                                        value=2.0,
+                                                                        min=-5.0,
+                                                                        max=5.0,
+                                                                        step=0.1
+                                                                    )
+                                                                ),
+                                                                ui.div(
+                                                                    {"class": "change-input"},
+                                                                    ui.tags.label(
+                                                                        ui.span("Follower Identity ", class_="label-text"),
+                                                                        ui.span("-", class_="change-direction negative")
+                                                                    ),
+                                                                    ui.input_numeric(
+                                                                        "claim_granted_fi",
+                                                                        None,
+                                                                        value=-1.0,
+                                                                        min=-5.0,
+                                                                        max=5.0,
+                                                                        step=0.1
+                                                                    )
+                                                                )
+                                                            )
+                                                        ),
+                                                        # Rejected outcome
+                                                        ui.div(
+                                                            {"class": "outcome-node failure"},
+                                                            ui.h6("Claim Rejected"),
+                                                            ui.div(
+                                                                {"class": "identity-changes"},
+                                                                ui.div(
+                                                                    {"class": "change-input"},
+                                                                    ui.tags.label(
+                                                                        ui.span("Leader Identity ", class_="label-text"),
+                                                                        ui.span("-", class_="change-direction negative")
+                                                                    ),
+                                                                    ui.input_numeric(
+                                                                        "claim_rejected_li",
+                                                                        None,
+                                                                        value=-1.0,
+                                                                        min=-5.0,
+                                                                        max=5.0,
+                                                                        step=0.1
+                                                                    )
+                                                                ),
+                                                                ui.div(
+                                                                    {"class": "change-input"},
+                                                                    ui.tags.label(
+                                                                        ui.span("Follower Identity ", class_="label-text"),
+                                                                        ui.span("-", class_="change-direction negative")
+                                                                    ),
+                                                                    ui.input_numeric(
+                                                                        "claim_rejected_fi",
+                                                                        None,
+                                                                        value=-0.5,
+                                                                        min=-5.0,
+                                                                        max=5.0,
+                                                                        step=0.1
+                                                                    )
+                                                                )
+                                                            )
+                                                        )
+                                                    )
+                                                ),
+                                                # No claim path
+                                                ui.div(
+                                                    {"class": "path-branch"},
+                                                    ui.div({"class": "path-arrow"}),
+                                                    ui.div(
+                                                        {"class": "path-label"},
+                                                        "No Claim"
+                                                    ),
+                                                    ui.div(
+                                                        {"class": "outcome-node neutral"},
+                                                        ui.h6("Passive Behavior"),
+                                                        ui.div(
+                                                            {"class": "identity-changes"},
+                                                            ui.div(
+                                                                {"class": "change-input"},
+                                                                ui.tags.label(
+                                                                    ui.span("Leader Identity ", class_="label-text"),
+                                                                    ui.span("-", class_="change-direction negative")
+                                                                ),
+                                                                ui.input_numeric(
+                                                                    "no_claim_li",
+                                                                    None,
+                                                                    value=-0.5,
+                                                                    min=-5.0,
+                                                                    max=5.0,
+                                                                    step=0.1
+                                                                )
+                                                            ),
+                                                            ui.div(
+                                                                {"class": "change-input"},
+                                                                ui.tags.label(
+                                                                    ui.span("Follower Identity ", class_="label-text"),
+                                                                    ui.span("+", class_="change-direction positive")
+                                                                ),
+                                                                ui.input_numeric(
+                                                                    "no_claim_fi",
+                                                                    None,
+                                                                    value=0.5,
+                                                                    min=-5.0,
+                                                                    max=5.0,
+                                                                    step=0.1
+                                                                )
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        ),
+                                        
+                                        # Agent Receiving Claim Section
+                                        ui.div(
+                                            {"class": "flow-section"},
+                                            ui.h5("Agent Receiving Claim", class_="flow-title"),
+                                            
+                                            # Start node
+                                            ui.div(
+                                                {"class": "flow-node start-node"},
+                                                ui.div({"class": "node-content"},
+                                                    ui.h6("Other Agent"),
+                                                    ui.p("Receives Claim", class_="node-description")
+                                                )
+                                            ),
+                                            
+                                            # Decision paths
+                                            ui.div(
+                                                {"class": "decision-paths"},
+                                                # Grant path
+                                                ui.div(
+                                                    {"class": "path-branch"},
+                                                    ui.div({"class": "path-arrow"}),
+                                                    ui.div(
+                                                        {"class": "path-label"},
+                                                        "Evaluates Claim"
+                                                    ),
+                                                    ui.div(
+                                                        {"class": "outcomes-container"},
+                                                        # Grants leadership
+                                                        ui.div(
+                                                            {"class": "outcome-node success"},
+                                                            ui.h6("Grants Leadership"),
+                                                            ui.div(
+                                                                {"class": "identity-changes"},
+                                                                ui.div(
+                                                                    {"class": "change-input"},
+                                                                    ui.tags.label(
+                                                                        ui.span("Leader Identity ", class_="label-text"),
+                                                                        ui.span("-", class_="change-direction negative")
+                                                                    ),
+                                                                    ui.input_numeric(
+                                                                        "grant_given_li",
+                                                                        None,
+                                                                        value=-1.0,
+                                                                        min=-5.0,
+                                                                        max=5.0,
+                                                                        step=0.1
+                                                                    )
+                                                                ),
+                                                                ui.div(
+                                                                    {"class": "change-input"},
+                                                                    ui.tags.label(
+                                                                        ui.span("Follower Identity ", class_="label-text"),
+                                                                        ui.span("+", class_="change-direction positive")
+                                                                    ),
+                                                                    ui.input_numeric(
+                                                                        "grant_given_fi",
+                                                                        None,
+                                                                        value=2.0,
+                                                                        min=-5.0,
+                                                                        max=5.0,
+                                                                        step=0.1
+                                                                    )
+                                                                )
+                                                            )
+                                                        ),
+                                                        # Withholds grant
+                                                        ui.div(
+                                                            {"class": "outcome-node failure"},
+                                                            ui.h6("Withholds Grant"),
+                                                            ui.div(
+                                                                {"class": "identity-changes"},
+                                                                ui.div(
+                                                                    {"class": "change-input"},
+                                                                    ui.tags.label(
+                                                                        ui.span("Leader Identity ", class_="label-text"),
+                                                                        ui.span("±", class_="change-direction neutral")
+                                                                    ),
+                                                                    ui.input_numeric(
+                                                                        "grant_withheld_li",
+                                                                        None,
+                                                                        value=0.0,
+                                                                        min=-5.0,
+                                                                        max=5.0,
+                                                                        step=0.1
+                                                                    )
+                                                                ),
+                                                                ui.div(
+                                                                    {"class": "change-input"},
+                                                                    ui.tags.label(
+                                                                        ui.span("Follower Identity ", class_="label-text"),
+                                                                        ui.span("-", class_="change-direction negative")
+                                                                    ),
+                                                                    ui.input_numeric(
+                                                                        "grant_withheld_fi",
+                                                                        None,
+                                                                        value=-0.5,
+                                                                        min=-5.0,
+                                                                        max=5.0,
+                                                                        step=0.1
+                                                                    )
+                                                                )
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                ),
+                                
+                                ui.tags.style("""
+                                    .identity-rules-container {
+                                        background: white;
+                                        padding: 30px;
+                                        border-radius: 12px;
+                                        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                                        max-width: 1200px;
+                                        margin: 0 auto;
+                                    }
+                                    
+                                    .section-title {
+                                        color: #2c3e50;
+                                        font-size: 1.5em;
+                                        margin-bottom: 10px;
+                                        position: relative;
+                                        display: inline-block;
+                                    }
+                                    
+                                    .section-title::after {
+                                        content: '';
+                                        position: absolute;
+                                        bottom: -5px;
+                                        left: 0;
+                                        width: 100%;
+                                        height: 2px;
+                                        background: linear-gradient(to right, #3498db, transparent);
+                                    }
+                                    
+                                    .flow-diagram {
+                                        display: flex;
+                                        flex-direction: column;
+                                        gap: 40px;
+                                        transition: all 0.3s ease;
+                                    }
+                                    
+                                    @media (max-width: 768px) {
+                                        .flow-diagram {
+                                            gap: 20px;
+                                        }
+                                    }
+                                    
+                                    .flow-section {
+                                        background: #f8f9fa;
+                                        padding: 25px;
+                                        border-radius: 8px;
+                                        position: relative;
+                                        transition: transform 0.2s ease, box-shadow 0.2s ease;
+                                    }
+                                    
+                                    .flow-section:hover {
+                                        transform: translateY(-2px);
+                                        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                                    }
+                                    
+                                    .flow-title {
+                                        color: #34495e;
+                                        font-size: 1.2em;
+                                        margin-bottom: 20px;
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 8px;
+                                    }
+                                    
+                                    .flow-title::before {
+                                        content: '👤';
+                                        font-size: 1.1em;
+                                    }
+                                    
+                                    .flow-node {
+                                        background: white;
+                                        border-radius: 8px;
+                                        padding: 15px;
+                                        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                                        margin-bottom: 20px;
+                                        border-left: 4px solid #3498db;
+                                        transition: all 0.2s ease;
+                                    }
+                                    
+                                    .flow-node:hover {
+                                        border-left-width: 6px;
+                                        transform: translateX(2px);
+                                    }
+                                    
+                                    .path-branch {
+                                        flex: 1;
+                                        display: flex;
+                                        flex-direction: column;
+                                        align-items: center;
+                                        position: relative;
+                                        transition: transform 0.2s ease;
+                                    }
+                                    
+                                    .path-branch:hover {
+                                        transform: translateY(-2px);
+                                    }
+                                    
+                                    .path-arrow {
+                                        width: 2px;
+                                        height: 30px;
+                                        background: #bdc3c7;
+                                        margin-bottom: 10px;
+                                        position: relative;
+                                        transition: height 0.2s ease;
+                                    }
+                                    
+                                    .path-branch:hover .path-arrow {
+                                        height: 35px;
+                                    }
+                                    
+                                    .path-label {
+                                        background: #e9ecef;
+                                        padding: 8px 15px;
+                                        border-radius: 20px;
+                                        font-weight: 500;
+                                        color: #2c3e50;
+                                        margin-bottom: 15px;
+                                        transition: all 0.2s ease;
+                                        cursor: help;
+                                    }
+                                    
+                                    .path-label:hover {
+                                        background: #dee2e6;
+                                        transform: scale(1.05);
+                                    }
+                                    
+                                    .outcome-node {
+                                        padding: 15px;
+                                        border-radius: 8px;
+                                        background: white;
+                                        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                                        transition: all 0.2s ease;
+                                        position: relative;
+                                    }
+                                    
+                                    .outcome-node:hover {
+                                        transform: translateY(-2px);
+                                        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+                                    }
+                                    
+                                    .outcome-node.success {
+                                        border-left: 4px solid #2ecc71;
+                                    }
+                                    
+                                    .outcome-node.success:hover {
+                                        border-left-width: 6px;
+                                    }
+                                    
+                                    .outcome-node.failure {
+                                        border-left: 4px solid #e74c3c;
+                                    }
+                                    
+                                    .outcome-node.failure:hover {
+                                        border-left-width: 6px;
+                                    }
+                                    
+                                    .outcome-node.neutral {
+                                        border-left: 4px solid #95a5a6;
+                                    }
+                                    
+                                    .outcome-node.neutral:hover {
+                                        border-left-width: 6px;
+                                    }
+                                    
+                                    .change-input {
+                                        display: flex;
+                                        flex-direction: column;
+                                        gap: 5px;
+                                        position: relative;
+                                    }
+                                    
+                                    .change-input label {
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 5px;
+                                        font-size: 0.9em;
+                                        color: #495057;
+                                        cursor: help;
+                                    }
+                                    
+                                    .change-direction {
+                                        font-weight: bold;
+                                        width: 24px;
+                                        height: 24px;
+                                        display: inline-flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        border-radius: 50%;
+                                        transition: all 0.2s ease;
+                                    }
+                                    
+                                    .change-direction:hover {
+                                        transform: scale(1.1);
+                                    }
+                                    
+                                    .change-input input {
+                                        width: 100%;
+                                        padding: 8px;
+                                        border: 1px solid #ced4da;
+                                        border-radius: 4px;
+                                        transition: all 0.2s ease;
+                                        font-size: 0.95em;
+                                    }
+                                    
+                                    .change-input input:hover {
+                                        border-color: #adb5bd;
+                                    }
+                                    
+                                    .change-input input:focus {
+                                        border-color: #80bdff;
+                                        outline: none;
+                                        box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+                                    }
+                                    
+                                    /* Tooltip styles */
+                                    .tooltip-wrapper {
+                                        position: relative;
+                                        display: inline-block;
+                                    }
+                                    
+                                    .tooltip-content {
+                                        visibility: hidden;
+                                        position: absolute;
+                                        bottom: 125%;
+                                        left: 50%;
+                                        transform: translateX(-50%);
+                                        background: #2c3e50;
+                                        color: white;
+                                        padding: 8px 12px;
+                                        border-radius: 4px;
+                                        font-size: 0.85em;
+                                        white-space: nowrap;
+                                        z-index: 1000;
+                                        opacity: 0;
+                                        transition: opacity 0.2s ease;
+                                    }
+                                    
+                                    .tooltip-wrapper:hover .tooltip-content {
+                                        visibility: visible;
+                                        opacity: 1;
+                                    }
+                                    
+                                    /* Reset button styles */
+                                    .reset-button {
+                                        position: absolute;
+                                        top: 10px;
+                                        right: 10px;
+                                        background: none;
+                                        border: none;
+                                        color: #6c757d;
+                                        cursor: pointer;
+                                        padding: 5px;
+                                        transition: all 0.2s ease;
+                                    }
+                                    
+                                    .reset-button:hover {
+                                        color: #343a40;
+                                        transform: rotate(90deg);
+                                    }
+                                    
+                                    /* Preview styles */
+                                    .preview-container {
+                                        background: #f8f9fa;
+                                        padding: 10px;
+                                        border-radius: 4px;
+                                        margin-top: 10px;
+                                        font-size: 0.9em;
+                                        color: #666;
+                                        transition: all 0.2s ease;
+                                    }
+                                    
+                                    .preview-container:hover {
+                                        background: #e9ecef;
+                                    }
+                                    
+                                    .preview-value {
+                                        font-weight: bold;
+                                        color: #2c3e50;
+                                    }
+                                    
+                                    /* Responsive adjustments */
+                                    @media (max-width: 768px) {
+                                        .identity-rules-container {
+                                            padding: 15px;
+                                        }
+                                        
+                                        .flow-section {
+                                            padding: 15px;
+                                        }
+                                        
+                                        .decision-paths {
+                                            flex-direction: column;
+                                        }
+                                        
+                                        .path-branch {
+                                            width: 100%;
+                                        }
+                                    }
+                                """)
                             )
                         )
                     )
@@ -870,9 +1617,49 @@ def server(input, output, session):
         model_state.set(current)
         page_state.set('simulation')
 
+    @output
+    @render.ui
+    def control_buttons():
+        current = get_current_state()
+        model = current.get('model')
+        
+        if model is None:
+            # Show Initialize button when no simulation is running
+            return ui.div(
+                ui.input_action_button(
+                    "init_sim", 
+                    "Start Simulation", 
+                    class_="btn-primary control-button"
+                ),
+                ui.input_action_button(
+                    "back_to_models", 
+                    "← Back to Model Selection", 
+                    class_="btn-secondary control-button mt-2"
+                )
+            )
+        else:
+            # Show simulation control buttons when simulation is running
+            return ui.div(
+                ui.input_action_button(
+                    "step_sim", 
+                    span("Step Forward ", ui.tags.i({"class": "fas fa-step-forward"})), 
+                    class_="btn-success control-button"
+                ),
+                ui.input_action_button(
+                    "reset_sim", 
+                    span("Reset Simulation ", ui.tags.i({"class": "fas fa-redo"})), 
+                    class_="btn-warning control-button mt-2"
+                ),
+                ui.input_action_button(
+                    "back_to_models", 
+                    span("← Change Model", ui.tags.i({"class": "fas fa-exchange-alt"})), 
+                    class_="btn-secondary control-button mt-2"
+                )
+            )
+
     @reactive.Effect
-    @reactive.event(input.reset_sim)
-    def reset_simulation():
+    @reactive.event(input.back_to_models)
+    def handle_back_to_models():
         current = get_current_state()
         current.update({
             'model': None,
@@ -884,52 +1671,84 @@ def server(input, output, session):
         })
         model_state.set(current)
         page_state.set('selection')
-    
+
     @reactive.Effect
-    @reactive.event(input.init_sim)
-    def initialize_model():
-        # First reset the current state
-        current = {
+    @reactive.event(input.reset_sim)
+    def reset_simulation():
+        # Keep the current model variant but reset the simulation
+        current = get_current_state()
+        variant = current.get('selected_variant')
+        config = current.get('config')
+        
+        current.update({
             'model': None,
             'current_step': 0,
             'network_pos': None,
             'agents': None,
-            'selected_variant': None,
-            'config': None,
-        }
-        
-        # Get current parameter values
-        config = {
-            'n_agents': input.n_agents(),
-            'initial_li_equal': input.initial_li_equal(),
-            'li_change_rate': input.identity_change_rate(),
-            'identity_change_rate': input.identity_change_rate(),
-            'ilt_match_algorithm': input.ilt_match_algorithm(),
-            'ilt_match_params': {
-                'sigma': input.gaussian_sigma(),
-                'k': input.sigmoid_k(),
-                'threshold': input.threshold_value()
-            },
-            'characteristics_range': input.characteristics_range(),
-            'ilt_range': input.ilt_range(),
-            'initial_identity': input.initial_identity(),
-            'claim_multiplier': input.claim_multiplier(),
-            'grant_multiplier': input.grant_multiplier()
-        }
-        
-        # Initialize model with config
-        model = BaseLeadershipModel(config)
-        
-        # Update state with new model and config
-        current.update({
-            'config': config,
-            'model': model,
-            'current_step': 0,
-            'network_pos': None,
-            'agents': model.agents  # Initialize agents from the new model
+            'selected_variant': variant,  # Preserve the selected variant
+            'config': config,  # Preserve the configuration
         })
-        
         model_state.set(current)
+    
+    @reactive.Effect
+    @reactive.event(input.init_sim)
+    def initialize_model():
+        print("Starting model initialization...")  # Debug print
+        
+        # Use default configuration
+        config = {
+            'n_agents': 4,
+            'initial_li_equal': True,
+            'li_change_rate': 2.0,
+            'identity_change_rate': 2.0,
+            'ilt_match_algorithm': 'euclidean',
+            'ilt_match_params': {
+                'sigma': 20.0,
+                'k': 10.0,
+                'threshold': 15.0
+            },
+            'characteristics_range': [40, 60],
+            'ilt_range': [40, 60],
+            'initial_identity': 50,
+            'claim_multiplier': 0.7,
+            'grant_multiplier': 0.6
+        }
+        
+        try:
+            # Initialize model with config
+            print("Creating BaseLeadershipModel...")  # Debug print
+            model = BaseLeadershipModel(config)
+            print("Model created successfully")  # Debug print
+            
+            # Initialize interaction network
+            print("Initializing interaction network...")  # Debug print
+            model.interaction_network = nx.DiGraph()
+            for i in range(config['n_agents']):
+                model.interaction_network.add_node(i)
+            print("Network initialized successfully")  # Debug print
+            
+            # Update state with new model and config
+            current = {
+                'config': config,
+                'model': model,
+                'current_step': 0,
+                'network_pos': None,
+                'agents': model.agents,
+                'selected_variant': 'base_derue'
+            }
+            
+            print("Updating model state...")  # Debug print
+            model_state.set(current)
+            print("Setting page state to simulation...")  # Debug print
+            page_state.set('simulation')
+            print("Initialization complete")  # Debug print
+            
+        except Exception as e:
+            import traceback
+            print(f"Error initializing model: {str(e)}")  # Debug print
+            print("Full traceback:")  # Debug print
+            print(traceback.format_exc())  # Print full traceback
+            raise
     
     @reactive.Effect
     @reactive.event(input.step_sim)
@@ -944,28 +1763,22 @@ def server(input, output, session):
         model.last_interaction = (agent1.id, agent2.id)
         
         # Calculate match between characteristics and ILTs
-        # For claims: match against own ILT
-        agent1_self_match = 1 - abs(agent1.characteristics - agent1.ilt) / 100  # Match against own ILT
-        agent2_self_match = 1 - abs(agent2.characteristics - agent2.ilt) / 100  # Match against own ILT
+        agent1_self_match = 1 - abs(agent1.characteristics - agent1.ilt) / 100
+        agent2_self_match = 1 - abs(agent2.characteristics - agent2.ilt) / 100
         
-        # For grants: match against other's ILT
-        agent1_other_match = 1 - abs(agent1.characteristics - agent2.ilt) / 100  # Match against other's ILT
-        agent2_other_match = 1 - abs(agent2.characteristics - agent1.ilt) / 100  # Match against other's ILT
+        agent1_other_match = 1 - abs(agent1.characteristics - agent2.ilt) / 100
+        agent2_other_match = 1 - abs(agent2.characteristics - agent1.ilt) / 100
         
-        # Store match values for display
-        model.last_agent1_match = agent1_other_match  # Show match that matters for granting
-        model.last_agent2_match = agent2_other_match  # Show match that matters for granting
+        model.last_agent1_match = agent1_other_match
+        model.last_agent2_match = agent2_other_match
         
         # Probabilistic claiming based on self-match
-        # Higher self-match = higher chance to claim
         agent1_claim_prob = agent1_self_match
         agent2_claim_prob = agent2_self_match
         
-        # Make claim decisions probabilistically
         agent1_claims = model.rng.random() < agent1_claim_prob
         agent2_claims = model.rng.random() < agent2_claim_prob
         
-        # Store claim decisions and probabilities for display
         model.last_agent1_claimed = agent1_claims
         model.last_agent2_claimed = agent2_claims
         model.last_agent1_claim_prob = agent1_claim_prob
@@ -975,9 +1788,9 @@ def server(input, output, session):
         agent1_grant_prob = 0
         agent2_grant_prob = 0
         if agent1_claims:
-            agent2_grant_prob = agent1_other_match  # How well agent1 matches agent2's ILT
+            agent2_grant_prob = agent1_other_match
         if agent2_claims:
-            agent1_grant_prob = agent2_other_match  # How well agent2 matches agent1's ILT
+            agent1_grant_prob = agent2_other_match
             
         # Make grant decisions probabilistically
         agent1_grants = False
@@ -987,7 +1800,6 @@ def server(input, output, session):
         if agent1_claims:
             agent2_grants = model.rng.random() < agent2_grant_prob
             
-        # Store grant decisions and probabilities
         model.last_agent1_granted = agent1_grants
         model.last_agent2_granted = agent2_grants
         model.last_agent1_grant_prob = agent1_grant_prob
@@ -997,38 +1809,53 @@ def server(input, output, session):
         grant_given = (agent1_claims and agent2_grants) or (agent2_claims and agent1_grants)
         model.last_grant_given = grant_given
         
-        # Update identities and perceptions based on interaction outcome
-        if grant_given:
-            # Initialize interaction network if it doesn't exist
-            if not hasattr(model, 'interaction_network'):
-                model.interaction_network = nx.DiGraph()
-                for i in range(len(model.agents)):
-                    model.interaction_network.add_node(i)
-            
-            if agent1_claims and agent2_grants:
-                # Update identities
-                agent1.leader_identity = min(100, agent1.leader_identity + model.li_change_rate)
-                agent2.follower_identity = min(100, agent2.follower_identity + model.li_change_rate)
-                # Update leadership perceptions - agent2 perceives agent1 as leader
+        # Update identities based on interaction outcomes using UI values
+        if agent1_claims:
+            if agent2_grants:
+                # Claim was granted - use claim_granted values
+                agent1.leader_identity = min(100, agent1.leader_identity + input.claim_granted_li())
+                agent1.follower_identity = max(0, agent1.follower_identity + input.claim_granted_fi())
+                # Update network
                 if not model.interaction_network.has_edge(agent2.id, agent1.id):
                     model.interaction_network.add_edge(agent2.id, agent1.id, weight=1)
                 else:
                     model.interaction_network[agent2.id][agent1.id]['weight'] += 1
-                    
-            if agent2_claims and agent1_grants:
-                # Update identities
-                agent2.leader_identity = min(100, agent2.leader_identity + model.li_change_rate)
-                agent1.follower_identity = min(100, agent1.follower_identity + model.li_change_rate)
-                # Update leadership perceptions - agent1 perceives agent2 as leader
+            else:
+                # Claim was rejected - use claim_rejected values
+                agent1.leader_identity = max(0, agent1.leader_identity + input.claim_rejected_li())
+                agent1.follower_identity = max(0, agent1.follower_identity + input.claim_rejected_fi())
+        
+        if agent2_claims:
+            if agent1_grants:
+                # Claim was granted - use claim_granted values
+                agent2.leader_identity = min(100, agent2.leader_identity + input.claim_granted_li())
+                agent2.follower_identity = max(0, agent2.follower_identity + input.claim_granted_fi())
+                # Update network
                 if not model.interaction_network.has_edge(agent1.id, agent2.id):
                     model.interaction_network.add_edge(agent1.id, agent2.id, weight=1)
                 else:
                     model.interaction_network[agent1.id][agent2.id]['weight'] += 1
-        else:
-            if agent1_claims:
-                agent1.leader_identity = max(0, agent1.leader_identity - model.li_change_rate)
-            if agent2_claims:
-                agent2.leader_identity = max(0, agent2.leader_identity - model.li_change_rate)
+            else:
+                # Claim was rejected - use claim_rejected values
+                agent2.leader_identity = max(0, agent2.leader_identity + input.claim_rejected_li())
+                agent2.follower_identity = max(0, agent2.follower_identity + input.claim_rejected_fi())
+        
+        # Update granting agent identities
+        if agent1_grants:
+            # Agent 1 gave grant - use grant_given values
+            agent1.leader_identity = max(0, agent1.leader_identity + input.grant_given_li())
+            agent1.follower_identity = min(100, agent1.follower_identity + input.grant_given_fi())
+        elif agent2_claims:  # Agent 1 withheld grant
+            agent1.leader_identity = max(0, agent1.leader_identity + input.grant_withheld_li())
+            agent1.follower_identity = max(0, agent1.follower_identity + input.grant_withheld_fi())
+            
+        if agent2_grants:
+            # Agent 2 gave grant - use grant_given values
+            agent2.leader_identity = max(0, agent2.leader_identity + input.grant_given_li())
+            agent2.follower_identity = min(100, agent2.follower_identity + input.grant_given_fi())
+        elif agent1_claims:  # Agent 2 withheld grant
+            agent2.leader_identity = max(0, agent2.leader_identity + input.grant_withheld_li())
+            agent2.follower_identity = max(0, agent2.follower_identity + input.grant_withheld_fi())
         
         new_state = current.copy()
         new_state.update({
@@ -1387,17 +2214,23 @@ def server(input, output, session):
     def step_network_plot():
         current = get_current_state()
         if current['model'] is None or not hasattr(current['model'], 'interaction_network'):
-            return plt.figure()
+            # Create empty figure with message
+            fig, ax = plt.subplots(figsize=(10, 10))
+            ax.text(0.5, 0.5, "Initialize simulation to see network",
+                   ha='center', va='center', fontsize=12)
+            ax.set_xticks([])
+            ax.set_yticks([])
+            return fig
         
         m = current['model']
         fig, ax = plt.subplots(figsize=(10, 10))
         
+        # Initialize positions if not already set
         if current['network_pos'] is None:
-            pos = nx.spring_layout(m.interaction_network)
-            current['network_pos'] = pos
+            current['network_pos'] = nx.spring_layout(m.interaction_network)
             model_state.set(current)
-        else:
-            pos = current['network_pos']
+        
+        pos = current['network_pos']
         
         # Draw edges with varying width based on interaction frequency
         edge_weights = nx.get_edge_attributes(m.interaction_network, 'weight')
@@ -1408,31 +2241,28 @@ def server(input, output, session):
                                  width=widths,
                                  alpha=0.3,
                                  edge_color='gray',
-                                 arrowsize=20)  # Make arrows more visible
+                                 arrowsize=20)
         
-        # Draw nodes with fixed size and fixed color scale (0-100)
+        # Draw nodes with fixed size and color scale
         node_colors = [agent.leader_identity for agent in m.agents]
         nodes = nx.draw_networkx_nodes(m.interaction_network, pos, 
                                      node_color=node_colors,
-                                     node_size=2000,  # Fixed size
+                                     node_size=2000,
                                      cmap=plt.cm.viridis,
-                                     vmin=0, vmax=100)  # Fixed color scale
+                                     vmin=0, vmax=100)
         
-        # Enhanced labels showing agent state
-        labels = {}
-        for i, agent in enumerate(m.agents):
-            labels[i] = f"A{i}\n{agent.leader_identity:.0f}"  # Shorter labels with just LI
-        
+        # Add labels
+        labels = {i: f"A{i}\n{agent.leader_identity:.0f}/{agent.follower_identity:.0f}"
+                 for i, agent in enumerate(m.agents)}
         nx.draw_networkx_labels(m.interaction_network, pos, labels, font_size=8)
         
-        # Highlight current interaction pair
+        # Highlight current interaction pair if exists
         if hasattr(m, 'last_interaction'):
             ax.add_patch(Circle(pos[m.last_interaction[0]], 0.2, 
                               fill=False, color='red', linewidth=3))
             ax.add_patch(Circle(pos[m.last_interaction[1]], 0.2, 
                               fill=False, color='blue', linewidth=3))
             
-            # Add interaction labels
             ax.text(pos[m.last_interaction[0]][0], pos[m.last_interaction[0]][1] + 0.25, 
                    "Current", color='red', ha='center')
             ax.text(pos[m.last_interaction[1]][0], pos[m.last_interaction[1]][1] + 0.25, 
@@ -1440,19 +2270,27 @@ def server(input, output, session):
         
         ax.set_title(f"Interaction Network (Step {current['current_step']})")
         plt.colorbar(nodes, label="Leadership Identity (0-100)")
+        ax.set_xticks([])
+        ax.set_yticks([])
         plt.tight_layout()
         return fig
-    
+
     @output
     @render.plot
     def perception_network_plot():
         current = get_current_state()
         if current['model'] is None:
-            return plt.figure()
+            # Create empty figure with message
+            fig, ax = plt.subplots(figsize=(8, 6))
+            ax.text(0.5, 0.5, "Initialize simulation to see perceptions",
+                   ha='center', va='center', fontsize=12)
+            ax.set_xticks([])
+            ax.set_yticks([])
+            return fig
         
         m = current['model']
         entropy_metrics = calculate_entropy_metrics(m)
-        perceptions = entropy_metrics['perception_matrix'].copy()  # Make a copy to modify
+        perceptions = entropy_metrics['perception_matrix'].copy()
         
         # Update diagonal with current leadership identities
         for i, agent in enumerate(m.agents):
@@ -1464,43 +2302,39 @@ def server(input, output, session):
         mask = np.zeros_like(perceptions, dtype=bool)
         np.fill_diagonal(mask, True)
         
-        # Plot off-diagonal elements with new colormap
+        # Plot off-diagonal elements
         im = ax.imshow(np.ma.array(perceptions, mask=mask), 
-                      cmap='YlOrRd', vmin=0, vmax=20)  # Yellow-Orange-Red colormap
+                      cmap='YlOrRd', vmin=0, vmax=20)
         
-        # Plot diagonal elements in light gray
+        # Plot diagonal elements
         diagonal = np.ma.array(perceptions, mask=~mask)
         ax.imshow(diagonal, cmap='Greys', alpha=0.2, vmin=0, vmax=100)
         
-        # Add labels with smaller font
+        # Add labels
         ax.set_xticks(np.arange(len(m.agents)))
         ax.set_yticks(np.arange(len(m.agents)))
         
-        # Create more concise labels
-        row_labels = [f'A{i}' for i in range(len(m.agents))]  # Shorter labels
+        row_labels = [f'A{i}' for i in range(len(m.agents))]
         col_labels = [f'A{i}' for i in range(len(m.agents))]
         
-        ax.set_xticklabels(col_labels, fontsize=6)
-        ax.set_yticklabels(row_labels, fontsize=6)
+        ax.set_xticklabels(col_labels, fontsize=8)
+        ax.set_yticklabels(row_labels, fontsize=8)
         
-        # Rotate x labels for better readability
         plt.setp(ax.get_xticklabels(), rotation=0, ha="center")
         
-        # Add colorbar with better label
         cbar = ax.figure.colorbar(im, ax=ax)
         cbar.ax.set_ylabel("# Successful Claims", rotation=-90, va="bottom", fontsize=8)
         
-        # Add title with smaller font
         ax.set_title("Leadership Perception Network", fontsize=10, pad=10)
         
-        # Add text annotations with smaller font
+        # Add text annotations
         for i in range(len(m.agents)):
             for j in range(len(m.agents)):
                 value = perceptions[i, j]
-                if i == j:  # Diagonal elements (self-identity)
-                    text = f"{value:.0f}"  # Just show the value
+                if i == j:
+                    text = f"{value:.0f}"
                     color = 'gray'
-                else:  # Off-diagonal elements (granted leadership)
+                else:
                     if value > 0:
                         text = f"{value:.0f}"
                         color = 'black' if value < 10 else 'white'
@@ -1509,208 +2343,277 @@ def server(input, output, session):
                         color = 'black'
                 
                 ax.text(j, i, text, ha="center", va="center", color=color,
-                       fontsize=6, fontweight='normal')
+                       fontsize=8, fontweight='normal')
         
         plt.tight_layout()
         return fig
-
+    
     @output
     @render.ui
     def parameter_rows():
         current = get_current_state()
         
-        return ui.div(
-            {"class": "parameter-controls"},
-            ui.h4("Model Configuration"),
+        return ui.tags.div(
+            {"class": "parameter-container"},
             
-            # Core Parameters
-            ui.div(
-                {"class": "parameter-section"},
-                ui.h5("Core Parameters"),
-                ui.input_slider(
-                    "n_agents", 
-                    "Number of Agents",
-                    min=2, max=10, value=2
-                ),
-                ui.input_slider(
-                    "identity_change_rate",
-                    "Identity Change Rate",
-                    min=0.1, max=5.0, value=2.0, step=0.1
-                ),
-                ui.input_checkbox(
-                    "initial_li_equal",
-                    "Initial Leader Identity Equal",
-                    value=True
-                ),
-            ),
-            
-            # ILT Matching Parameters
-            ui.div(
-                {"class": "parameter-section"},
-                ui.h5("ILT Matching Parameters"),
-                ui.input_select(
-                    "ilt_match_algorithm",
-                    "Matching Algorithm",
-                    {
-                        "euclidean": "Euclidean Distance",
-                        "gaussian": "Gaussian Similarity",
-                        "sigmoid": "Sigmoid Function",
-                        "threshold": "Threshold-based"
-                    },
-                    selected="euclidean"
-                ),
-                ui.div(
-                    {"id": "gaussian-params", "class": "algorithm-params"},
-                    ui.input_slider(
-                        "gaussian_sigma",
-                        "Gaussian Sigma",
-                        min=5.0, max=50.0, value=20.0, step=1.0
-                    )
-                ),
-                ui.div(
-                    {"id": "sigmoid-params", "class": "algorithm-params"},
-                    ui.input_slider(
-                        "sigmoid_k",
-                        "Sigmoid Steepness",
-                        min=1.0, max=20.0, value=10.0, step=0.5
-                    )
-                ),
-                ui.div(
-                    {"id": "threshold-params", "class": "algorithm-params"},
-                    ui.input_slider(
-                        "threshold_value",
-                        "Threshold Value",
-                        min=5.0, max=30.0, value=15.0, step=1.0
+            # Basic Setup Section
+            ui.tags.div(
+                {"class": "parameter-card"},
+                ui.tags.h4("Basic Setup", {"class": "card-title"}),
+                ui.tags.p("Essential simulation parameters", {"class": "card-description"}),
+                
+                ui.tags.div(
+                    {"class": "parameter-group"},
+                    # Number of Agents
+                    ui.tags.div(
+                        {"class": "parameter-item"},
+                        ui.tags.label(
+                            "Number of Agents",
+                            ui.tags.span("ⓘ", {"class": "info-icon"}),
+                            ui.tags.div(
+                                "The number of agents that will participate in leadership interactions.",
+                                {"class": "tooltip-text"}
+                            )
+                        ),
+                        ui.input_numeric(
+                            "n_agents",
+                            None,
+                            value=4,
+                            min=2,
+                            max=10
+                        )
+                    ),
+                    
+                    # Identity Change Rate
+                    ui.tags.div(
+                        {"class": "parameter-item"},
+                        ui.tags.label(
+                            "Identity Change Rate",
+                            ui.tags.span("ⓘ", {"class": "info-icon"}),
+                            ui.tags.div(
+                                "How quickly agents' leader and follower identities change after interactions.",
+                                {"class": "tooltip-text"}
+                            )
+                        ),
+                        ui.input_slider(
+                            "identity_change_rate",
+                            None,
+                            min=0.1,
+                            max=5.0,
+                            value=2.0,
+                            step=0.1
+                        )
                     )
                 )
             ),
             
-            # Initial Value Ranges
-            ui.div(
-                {"class": "parameter-section"},
-                ui.h5("Initial Value Ranges"),
-                ui.input_slider(
-                    "characteristics_range",
-                    "Initial Characteristics Range",
-                    min=0, max=100, value=[40, 60]
+            # Initial Conditions Section
+            ui.tags.div(
+                {"class": "parameter-card"},
+                ui.tags.div(
+                    {"class": "card-header-with-toggle"},
+                    ui.tags.h4("Initial Conditions", {"class": "card-title"}),
+                    ui.input_checkbox("show_initial_conditions", "Show Advanced", False)
                 ),
-                ui.input_slider(
-                    "ilt_range",
-                    "Initial ILT Range",
-                    min=0, max=100, value=[40, 60]
-                ),
-                ui.input_numeric(
-                    "initial_identity",
-                    "Initial Identity Value",
-                    value=50, min=0, max=100
+                ui.tags.div(
+                    {"class": "parameter-group"},
+                    # Basic Initial Settings
+                    ui.tags.div(
+                        {"class": "parameter-item"},
+                        ui.tags.label("Initial Leader Identity"),
+                        ui.input_numeric(
+                            "initial_identity",
+                            None,
+                            value=50,
+                            min=0,
+                            max=100
+                        )
+                    ),
+                    ui.tags.div(
+                        {"class": "parameter-item"},
+                        ui.input_checkbox(
+                            "initial_li_equal",
+                            "Start with Equal Identities",
+                            value=True
+                        )
+                    ),
+                    # Advanced Initial Settings (conditionally shown)
+                    ui.output_ui("advanced_initial_conditions")
                 )
             ),
             
-            # Probability Multipliers
-            ui.div(
-                {"class": "parameter-section"},
-                ui.h5("Probability Adjustments"),
-                ui.input_slider(
-                    "claim_multiplier",
-                    "Claim Probability Multiplier",
-                    min=0.1, max=1.0, value=0.7, step=0.05
+            # Interaction Rules Section
+            ui.tags.div(
+                {"class": "parameter-card"},
+                ui.tags.div(
+                    {"class": "card-header-with-toggle"},
+                    ui.tags.h4("Interaction Rules", {"class": "card-title"}),
+                    ui.input_checkbox("show_interaction_rules", "Show Advanced", False)
                 ),
-                ui.input_slider(
-                    "grant_multiplier",
-                    "Grant Probability Multiplier",
-                    min=0.1, max=1.0, value=0.6, step=0.05
+                ui.tags.div(
+                    {"class": "parameter-group"},
+                    # Basic Interaction Settings
+                    ui.tags.div(
+                        {"class": "parameter-item"},
+                        ui.tags.label(
+                            "Claim Threshold",
+                            ui.tags.span("ⓘ", {"class": "info-icon"}),
+                            ui.tags.div(
+                                "Minimum self-confidence needed to claim leadership.",
+                                {"class": "tooltip-text"}
+                            )
+                        ),
+                        ui.input_slider(
+                            "claim_threshold",
+                            None,
+                            min=0.0,
+                            max=1.0,
+                            value=0.6,
+                            step=0.1
+                        )
+                    ),
+                    ui.tags.div(
+                        {"class": "parameter-item"},
+                        ui.tags.label(
+                            "Grant Threshold",
+                            ui.tags.span("ⓘ", {"class": "info-icon"}),
+                            ui.tags.div(
+                                "Minimum leadership match needed to grant leadership.",
+                                {"class": "tooltip-text"}
+                            )
+                        ),
+                        ui.input_slider(
+                            "grant_threshold",
+                            None,
+                            min=0.0,
+                            max=1.0,
+                            value=0.7,
+                            step=0.1
+                        )
+                    ),
+                    # Advanced Interaction Settings (conditionally shown)
+                    ui.output_ui("advanced_interaction_rules")
                 )
             ),
             
-            # Save & Reset Button
-            ui.div(
-                {"class": "parameter-section mt-4"},
-                ui.input_action_button(
-                    "save_and_reset",
-                    "Save Parameters & Reset Simulation",
-                    class_="btn-primary btn-block"
-                )
-            )
+            # Add CSS for parameter organization
+            ui.tags.style("""
+                .parameter-card {
+                    background: white;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                    margin-bottom: 20px;
+                    padding: 20px;
+                }
+                
+                .card-header-with-toggle {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 15px;
+                }
+                
+                .parameter-group {
+                    display: grid;
+                    gap: 15px;
+                }
+                
+                .parameter-item {
+                    background: #f8f9fa;
+                    padding: 15px;
+                    border-radius: 6px;
+                    transition: all 0.2s ease;
+                }
+                
+                .parameter-item:hover {
+                    background: #e9ecef;
+                }
+                
+                .advanced-section {
+                    margin-top: 15px;
+                    padding-top: 15px;
+                    border-top: 1px dashed #dee2e6;
+                }
+                
+                .info-icon {
+                    color: #007bff;
+                    cursor: help;
+                    margin-left: 5px;
+                }
+                
+                .tooltip-text {
+                    display: none;
+                    position: absolute;
+                    background: #2c3e50;
+                    color: white;
+                    padding: 8px 12px;
+                    border-radius: 4px;
+                    font-size: 0.9em;
+                    z-index: 1000;
+                    max-width: 250px;
+                }
+                
+                .info-icon:hover + .tooltip-text {
+                    display: block;
+                }
+            """)
         )
     
     @reactive.Effect
     @reactive.event(input.save_and_reset)
     def handle_save_and_reset():
+        """Handle saving parameters and resetting the simulation."""
         current = get_current_state()
         
-        # Update configuration with new parameter values
-        new_config = {
-            'n_agents': input.n_agents(),
-            'initial_li_equal': input.initial_li_equal(),
-            'li_change_rate': input.identity_change_rate(),
-            'identity_change_rate': input.identity_change_rate(),
-            'ilt_match_algorithm': input.ilt_match_algorithm(),
-            'ilt_match_params': {
-                'sigma': input.gaussian_sigma(),
-                'k': input.sigmoid_k(),
-                'threshold': input.threshold_value()
-            },
-            'characteristics_range': input.characteristics_range(),
-            'ilt_range': input.ilt_range(),
-            'initial_identity': input.initial_identity(),
-            'claim_multiplier': input.claim_multiplier(),
-            'grant_multiplier': input.grant_multiplier()
-        }
-        
-        # Update current state
-        current.update({
-            'config': new_config,
-            'model': None,
-            'current_step': 0,
-            'network_pos': None,
-            'agents': None
-        })
-        
-        model_state.set(current)
-    
-    # Add CSS for parameter controls
-    ui.tags.style("""
-        .parameter-section {
-            background: white;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .parameter-section h5 {
-            color: #007bff;
-            margin-bottom: 15px;
-            padding-bottom: 5px;
-            border-bottom: 2px solid #e9ecef;
-        }
-        
-        .algorithm-params {
-            padding-left: 15px;
-            margin-top: 10px;
-            border-left: 3px solid #e9ecef;
-        }
-        
-        .parameter-controls .form-group {
-            margin-bottom: 15px;
-        }
-        
-        .parameter-controls label {
-            font-weight: 500;
-            color: #495057;
-        }
-        
-        .parameter-controls .form-text {
-            color: #6c757d;
-            font-size: 0.875rem;
-        }
-        
-        .btn-block {
-            width: 100%;
-            padding: 10px;
-            font-weight: 500;
-        }
-    """)
+        try:
+            # Update configuration with new parameter values
+            new_config = {
+                'n_agents': input.n_agents(),
+                'initial_li_equal': input.initial_li_equal(),
+                'identity_change_rate': input.identity_change_rate(),
+                'ilt_match_algorithm': input.ilt_match_algorithm(),
+                'ilt_match_params': {
+                    'sigma': input.gaussian_sigma(),
+                    'k': input.sigmoid_k(),
+                    'threshold': input.threshold_value()
+                },
+                'characteristics_range': input.characteristics_range(),
+                'ilt_range': input.ilt_range(),
+                'initial_identity': input.initial_identity(),
+                'claim_multiplier': input.claim_multiplier(),
+                'grant_multiplier': input.grant_multiplier()
+            }
+            
+            # Validate parameters
+            if new_config['n_agents'] < 2 or new_config['n_agents'] > 10:
+                ui.notification_show("Number of agents must be between 2 and 10", type="error")
+                return
+            
+            # Update current state
+            current.update({
+                'config': new_config,
+                'model': None,
+                'current_step': 0,
+                'network_pos': None,
+                'agents': None
+            })
+            
+            model_state.set(current)
+            
+            # Show success notification
+            ui.notification_show(
+                "Parameters saved successfully! Click 'Start Simulation' to begin.",
+                type="message"
+            )
+            
+            # Update save feedback
+            ui.update_text(
+                "save-feedback",
+                "✓ Parameters saved! Click 'Start Simulation' to begin with new settings."
+            )
+            
+        except Exception as e:
+            ui.notification_show(f"Error saving parameters: {str(e)}", type="error")
 
     # Define metric explanations
     METRIC_EXPLANATIONS = {
@@ -1741,7 +2644,7 @@ def server(input, output, session):
     def validation_metrics_table():
         current = get_current_state()
         if current['model'] is None:
-            return ui.p("Initialize simulation to see validation metrics")
+            return ui.tags.p("Initialize simulation to see validation metrics")
         
         metrics = calculate_entropy_metrics(current['model'])
         validation = check_simulation_validity(current['model'])
@@ -1754,6 +2657,7 @@ def server(input, output, session):
             'system_entropy': 2.0  # Lower is better
         }
         
+        # Create table rows
         rows = []
         for metric, value in metrics.items():
             if metric in ['perception_matrix', 'individual_entropies']:
@@ -1776,19 +2680,19 @@ def server(input, output, session):
             
             # Create metric name with tooltip
             metric_info = METRIC_EXPLANATIONS.get(metric, {})
-            metric_name = ui.div(
+            metric_name = ui.tags.div(
                 {"class": "metric-info"},
                 metric.replace('_', ' ').title(),
-                ui.span("ⓘ", class_="info-icon"),
-                ui.div(
+                ui.tags.span("ⓘ", {"class": "info-icon"}),
+                ui.tags.div(
                     {"class": "tooltip-text"},
-                    ui.p(metric_info.get('definition', ''), class_="metric-definition"),
-                    ui.p(metric_info.get('example', ''), class_="metric-example"),
-                    ui.p(metric_info.get('interpretation', ''), class_="metric-interpretation")
+                    ui.tags.p(metric_info.get('definition', ''), {"class": "metric-definition"}),
+                    ui.tags.p(metric_info.get('example', ''), {"class": "metric-example"}),
+                    ui.tags.p(metric_info.get('interpretation', ''), {"class": "metric-interpretation"})
                 )
             )
             
-            # Create and append table row
+            # Create table row
             row = ui.tags.tr(
                 ui.tags.td(metric_name),
                 ui.tags.td(f"{value:.2f}"),
@@ -1802,7 +2706,7 @@ def server(input, output, session):
             )
             rows.append(row)
         
-        # Create and return table
+        # Create and return complete table
         return ui.tags.table(
             {"class": "table table-striped"},
             ui.tags.thead(
@@ -1813,9 +2717,9 @@ def server(input, output, session):
                     ui.tags.th("Status")
                 )
             ),
-            ui.tags.tbody(rows)
+            ui.tags.tbody(*rows)  # Use unpacking operator to add all rows
         )
-
+    
     # Add handler for base model selection
     @reactive.Effect
     @reactive.event(input.select_base)
@@ -1829,7 +2733,7 @@ def server(input, output, session):
                 'description': 'Original model with basic mechanisms: leadership characteristics, ILTs, claims/grants, and identity development.',
                 'parameters': {
                     'simulation_properties': {
-                        'group_size': 6
+                        'group_size': 4  # Changed default to 4 agents
                     },
                     'agent_properties': {
                         'leader_characteristics': {
@@ -2040,6 +2944,323 @@ def server(input, output, session):
             {"class": "step-logic-container"},
             *sections
         )
+
+    @output
+    @render.ui
+    def advanced_initial_conditions():
+        """Render advanced initial condition parameters when checkbox is checked."""
+        if not input.show_initial_conditions():
+            return None
+            
+        return ui.tags.div(
+            {"class": "advanced-section"},
+            ui.tags.h5("Advanced Initial Settings", {"class": "section-subtitle"}),
+            
+            # Characteristics Range
+            ui.tags.div(
+                {"class": "parameter-item"},
+                ui.tags.label(
+                    "Initial Characteristics Range",
+                    ui.tags.span("ⓘ", {"class": "info-icon"}),
+                    ui.tags.div(
+                        "Range for initial leadership characteristics.",
+                        {"class": "tooltip-text"}
+                    )
+                ),
+                ui.input_slider(
+                    "characteristics_range",
+                    None,
+                    min=0,
+                    max=100,
+                    value=[40, 60]
+                )
+            ),
+            
+            # ILT Range
+            ui.tags.div(
+                {"class": "parameter-item"},
+                ui.tags.label(
+                    "ILT Prototype Range",
+                    ui.tags.span("ⓘ", {"class": "info-icon"}),
+                    ui.tags.div(
+                        "Range for initial Implicit Leadership Theory values.",
+                        {"class": "tooltip-text"}
+                    )
+                ),
+                ui.input_slider(
+                    "ilt_range",
+                    None,
+                    min=0,
+                    max=100,
+                    value=[40, 60]
+                )
+            ),
+            
+            # Initial Follower Identity
+            ui.tags.div(
+                {"class": "parameter-item"},
+                ui.tags.label(
+                    "Initial Follower Identity",
+                    ui.tags.span("ⓘ", {"class": "info-icon"}),
+                    ui.tags.div(
+                        "Starting value for agents' follower identity.",
+                        {"class": "tooltip-text"}
+                    )
+                ),
+                ui.input_numeric(
+                    "initial_follower_identity",
+                    None,
+                    value=50,
+                    min=0,
+                    max=100
+                )
+            )
+        )
+    
+    @output
+    @render.ui
+    def advanced_interaction_rules():
+        """Render advanced interaction rule parameters when checkbox is checked."""
+        if not input.show_interaction_rules():
+            return None
+            
+        return ui.tags.div(
+            {"class": "advanced-section"},
+            ui.tags.h5("Advanced Interaction Settings", {"class": "section-subtitle"}),
+            
+            # ILT Matching Method
+            ui.tags.div(
+                {"class": "parameter-item"},
+                ui.tags.label(
+                    "ILT Matching Method",
+                    ui.tags.span("ⓘ", {"class": "info-icon"}),
+                    ui.tags.div(
+                        "How agents compare others' characteristics to their ideal leader prototype.",
+                        {"class": "tooltip-text"}
+                    )
+                ),
+                ui.input_select(
+                    "ilt_match_algorithm",
+                    None,
+                    {
+                        "euclidean": "Simple Direct Comparison",
+                        "gaussian": "Flexible Matching",
+                        "sigmoid": "Clear Cutoff",
+                        "threshold": "Yes/No Decision"
+                    }
+                )
+            ),
+            
+            # Method-specific parameters
+            ui.tags.div(
+                {"class": "parameter-item"},
+                ui.tags.label(
+                    "Method Parameters",
+                    ui.tags.span("ⓘ", {"class": "info-icon"}),
+                    ui.tags.div(
+                        "Specific parameters for the selected matching method.",
+                        {"class": "tooltip-text"}
+                    )
+                ),
+                ui.input_slider(
+                    "gaussian_sigma",
+                    "Flexibility (Gaussian)",
+                    min=5.0,
+                    max=50.0,
+                    value=20.0,
+                    step=1.0
+                ),
+                ui.input_slider(
+                    "sigmoid_k",
+                    "Decision Sharpness (Sigmoid)",
+                    min=1.0,
+                    max=20.0,
+                    value=10.0,
+                    step=0.5
+                ),
+                ui.input_slider(
+                    "threshold_value",
+                    "Required Similarity (Threshold)",
+                    min=5.0,
+                    max=30.0,
+                    value=15.0,
+                    step=1.0
+                )
+            ),
+            
+            # Identity Change Multipliers
+            ui.tags.div(
+                {"class": "parameter-item"},
+                ui.tags.label(
+                    "Identity Change Multipliers",
+                    ui.tags.span("ⓘ", {"class": "info-icon"}),
+                ui.input_slider(
+                    "claim_multiplier",
+                    "Claim Success Impact",
+                    min=0.1,
+                    max=2.0,
+                    value=0.7,
+                    step=0.1
+                ),
+                ui.input_slider(
+                    "grant_multiplier",
+                    "Grant Impact",
+                    min=0.1,
+                    max=2.0,
+                    value=0.6,
+                    step=0.1
+                )
+            )
+        )
+
+    @output
+    @render.download(filename="leadership_emergence_documentation")
+    def download_docs():
+        """Create and serve the documentation using Quarto."""
+        def create_documentation():
+            import tempfile
+            import os
+            from pathlib import Path
+            import subprocess
+            import shutil
+
+            # Create a temporary directory for Quarto files
+            with tempfile.TemporaryDirectory() as temp_dir:
+                # Create Quarto document
+                qmd_path = Path(temp_dir) / "documentation.qmd"
+                with open(qmd_path, "w") as f:
+                    f.write("""---
+title: "Leadership Emergence Simulation Documentation"
+format:
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: true
+  html:
+    toc: true
+    code-fold: true
+    theme: cosmo
+---
+
+## Introduction
+
+This document provides detailed explanations of the metrics, parameters, and theoretical foundations 
+of the Leadership Emergence Simulation. Understanding these elements will help you make the most of 
+the simulation and interpret its results effectively.
+
+## Simulation Metrics
+
+```{python}
+#| echo: false
+#| warning: false
+import pandas as pd
+
+metrics = {
+    'Hierarchy Clarity': {
+        'Definition': 'Measures how clear and well-defined the leadership hierarchy is',
+        'Example': 'High clarity (>0.6) means clear leaders and followers are emerging',
+        'Interpretation': 'Range 0-1: Higher is better'
+    },
+    'Rank Consensus': {
+        'Definition': 'Agreement among agents about leadership rankings',
+        'Example': 'High consensus (>0.7) means agents agree on who leads',
+        'Interpretation': 'Range 0-1: Higher is better'
+    }
+}
+
+df = pd.DataFrame.from_dict(metrics, orient='index')
+df.style.set_properties(**{'text-align': 'left'})
+```
+
+## Parameters
+
+### Basic Parameters
+
+#### Number of Agents
+The number of agents participating in the simulation. More agents create more complex interaction patterns.
+
+::: {.callout-tip}
+## Recommended Range
+2-10 agents is optimal for observing emergence patterns while maintaining interpretability
+:::
+
+#### Identity Change Rate
+Controls how quickly agents' leader and follower identities change based on interactions.
+
+```{python}
+#| echo: false
+#| label: fig-identity-change
+#| fig-cap: "Effect of Identity Change Rate on Emergence Speed"
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+rates = np.linspace(0.1, 5.0, 100)
+emergence_speed = 1 - np.exp(-rates)
+
+plt.figure(figsize=(8, 4))
+plt.plot(rates, emergence_speed)
+plt.xlabel('Identity Change Rate')
+plt.ylabel('Relative Emergence Speed')
+plt.grid(True, alpha=0.3)
+```
+
+### Advanced Parameters
+
+#### ILT Matching Methods
+
+Different methods for comparing agent characteristics to leadership prototypes:
+
+1. **Euclidean Distance**
+   - Simple direct comparison
+   - $d = \sqrt{\sum(x_i - y_i)^2}$
+
+2. **Gaussian Similarity**
+   - More forgiving of small differences
+   - $s = e^{-\frac{d^2}{2\sigma^2}}$
+
+3. **Sigmoid Function**
+   - Sharp transition between acceptance/rejection
+   - $s = \frac{1}{1 + e^{-k(x-x_0)}}$
+
+4. **Threshold-based**
+   - Binary decision
+   - $s = \begin{cases} 1 & \text{if } d < threshold \\ 0 & \text{otherwise} \end{cases}$
+
+## Theoretical Background
+
+### Social Identity Theory
+How group memberships and collective identity influence leadership emergence.
+
+### Implicit Leadership Theory
+How people's mental models of leadership affect who they accept as leaders.
+
+::: {.callout-note}
+## Key Insight
+ILTs act as cognitive filters that shape both leadership claims and grants.
+:::
+
+### Identity Development
+How leadership and follower identities evolve through social interaction.
+
+### Group Dynamics
+How patterns of influence and hierarchy emerge from individual interactions.
+
+## References
+
+::: {#refs}
+:::
+""")
+
+                # Run Quarto to generate PDF
+                subprocess.run(["quarto", "render", str(qmd_path), "--to", "pdf"], check=True)
+                
+                # Read the generated PDF
+                pdf_path = Path(temp_dir) / "documentation.pdf"
+                with open(pdf_path, "rb") as f:
+                    return f.read()
+
+        return create_documentation()
 
 def _get_trend_class(value, threshold):
     """Helper to get CSS class based on metric value."""

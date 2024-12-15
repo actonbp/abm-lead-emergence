@@ -66,7 +66,8 @@ class Agent:
         # Core attributes - random initial values in moderate range
         self.characteristics = rng.uniform(40, 60)  # Leadership characteristics
         self.ilt = rng.uniform(40, 60)  # Implicit Leadership Theory
-        self.identity = 50  # Start at neutral identity
+        self.leader_identity = 50  # Start at neutral leader identity
+        self.follower_identity = 50  # Start at neutral follower identity
         
         # Last interaction state
         self.last_interaction = {
@@ -76,6 +77,11 @@ class Agent:
             'granted': False,
             'ilt_match': 0
         }
+    
+    def update_identity(self, leader_change=0, follower_change=0):
+        """Update both leader and follower identities."""
+        self.leader_identity = max(0, min(100, self.leader_identity + leader_change))
+        self.follower_identity = max(0, min(100, self.follower_identity + follower_change))
     
     def calculate_match(self, characteristics, ilt):
         """Calculate match between characteristics and ILT using selected algorithm."""
@@ -98,12 +104,8 @@ class Agent:
         elif self.match_algorithm == "threshold":
             # Hard threshold-based matching
             threshold = self.match_params["threshold"]
-            return 1.0 if abs(characteristics - ilt) <= threshold else 0.0
-        
-        else:
-            # Default to euclidean if unknown algorithm
-            diff = abs(characteristics - ilt) / 100
-            return 1 - diff
+            diff = abs(characteristics - ilt)
+            return 1.0 if diff <= threshold else 0.0
     
     def decide_claim(self):
         """Decide whether to claim leadership based on self-perception."""
@@ -111,7 +113,7 @@ class Agent:
         self_match = self.calculate_match(self.characteristics, self.ilt)
         
         # Identity influences claim probability
-        claim_prob = self_match * (self.identity / 100) * 0.7
+        claim_prob = self_match * (self.leader_identity / 100) * 0.7
         
         self.last_interaction['claim_prob'] = claim_prob
         self.last_interaction['claimed'] = self.rng.random() < claim_prob
@@ -123,33 +125,12 @@ class Agent:
         other_match = self.calculate_match(other_agent.characteristics, self.ilt)
         
         # Lower identity and good match needed for granting
-        grant_prob = other_match * (1 - self.identity/100) * 0.6
+        grant_prob = other_match * (1 - self.follower_identity/100) * 0.6
         
         self.last_interaction['ilt_match'] = other_match
         self.last_interaction['grant_prob'] = grant_prob
         self.last_interaction['granted'] = self.rng.random() < grant_prob
         return self.last_interaction['granted']
-    
-    def update_identity(self, granted_leadership, claimed_leadership, change_rate):
-        """Update identity based on interaction outcome.
-        
-        Args:
-            granted_leadership: Whether this agent was granted leadership by the other
-            claimed_leadership: Whether this agent claimed leadership
-            change_rate: Base rate for identity changes
-        """
-        # Successful claim is when both claimed and granted
-        successful_claim = claimed_leadership and granted_leadership
-        
-        if successful_claim:
-            # Successful leadership claim (claimed and granted) strengthens identity
-            self.identity = min(100, self.identity + change_rate)
-        elif claimed_leadership and not granted_leadership:
-            # Failed leadership claim (claimed but not granted) strongly weakens identity
-            self.identity = max(0, self.identity - 2 * change_rate)
-        else:
-            # Not claiming leadership reduces identity by base amount
-            self.identity = max(0, self.identity - change_rate)
     
     def get_state(self):
         """Get current agent state."""
@@ -157,7 +138,8 @@ class Agent:
             'id': self.id,
             'characteristics': self.characteristics,
             'ilt': self.ilt,
-            'identity': self.identity,
+            'leader_identity': self.leader_identity,
+            'follower_identity': self.follower_identity,
             'last_interaction': self.last_interaction.copy()
         }
 
@@ -165,108 +147,145 @@ class Agent:
 class BaseLeadershipModel:
     """Base model for leadership emergence simulation."""
     
-    def __init__(self, config=None):
-        """Initialize the model with given configuration."""
-        self.config = config or {}
-        self.n_agents = config.get('n_agents', 6)
-        self.identity_change_rate = config.get('identity_change_rate', 2.0)
+    def __init__(self, config):
+        """Initialize model with given configuration."""
+        self.config = config
         self.rng = np.random.default_rng()
         
         # Initialize agents
-        self.agents = [Agent(i, self.rng) for i in range(self.n_agents)]
+        self.n_agents = config['n_agents']
+        self.agents = [
+            Agent(i, self.rng, 
+                 match_algorithm=config.get('ilt_match_algorithm', 'euclidean'),
+                 match_params=config.get('ilt_match_params', None))
+            for i in range(self.n_agents)
+        ]
         
         # Initialize interaction network
         self.interaction_network = nx.DiGraph()
         for i in range(self.n_agents):
             self.interaction_network.add_node(i)
+        
+        # Set initial identities
+        if config.get('initial_li_equal', True):
+            initial_li = config.get('initial_identity', 50)
+            initial_fi = config.get('initial_identity', 50)
+            for agent in self.agents:
+                agent.leader_identity = initial_li
+                agent.follower_identity = initial_fi
+        else:
+            for agent in self.agents:
+                agent.leader_identity = self.rng.uniform(30, 70)
+                agent.follower_identity = self.rng.uniform(30, 70)
     
     def _select_interaction_pair(self):
-        """Select two random agents for interaction."""
-        agents = self.rng.choice(self.agents, size=2, replace=False)
-        return agents[0], agents[1]
+        """Select two agents for interaction."""
+        agent_indices = self.rng.choice(self.n_agents, size=2, replace=False)
+        return self.agents[agent_indices[0]], self.agents[agent_indices[1]]
     
     def step(self):
-        """Execute one step of the model."""
+        """Execute one step of the simulation."""
         # Select interaction pair
         agent1, agent2 = self._select_interaction_pair()
         self.last_interaction = (agent1.id, agent2.id)
         
-        # Get claim decisions
-        agent1_claims = agent1.decide_claim()
-        agent2_claims = agent2.decide_claim()
+        # Calculate match between characteristics and ILTs
+        agent1_self_match = agent1.calculate_match(agent1.characteristics, agent1.ilt)
+        agent2_self_match = agent2.calculate_match(agent2.characteristics, agent2.ilt)
         
-        # Get grant decisions if there were claims
+        agent1_other_match = agent1.calculate_match(agent1.characteristics, agent2.ilt)
+        agent2_other_match = agent2.calculate_match(agent2.characteristics, agent1.ilt)
+        
+        # Store match values for visualization
+        self.last_agent1_match = agent1_other_match
+        self.last_agent2_match = agent2_other_match
+        
+        # Probabilistic claiming based on self-match and current identity
+        agent1_claim_prob = agent1_self_match * (agent1.leader_identity / 100) * self.config.get('claim_multiplier', 0.7)
+        agent2_claim_prob = agent2_self_match * (agent2.leader_identity / 100) * self.config.get('claim_multiplier', 0.7)
+        
+        agent1_claims = self.rng.random() < agent1_claim_prob
+        agent2_claims = self.rng.random() < agent2_claim_prob
+        
+        # Store claim information for visualization
+        self.last_agent1_claimed = agent1_claims
+        self.last_agent2_claimed = agent2_claims
+        self.last_agent1_claim_prob = agent1_claim_prob
+        self.last_agent2_claim_prob = agent2_claim_prob
+        
+        # Calculate grant probabilities based on other-match and current identity
+        agent1_grant_prob = 0
+        agent2_grant_prob = 0
+        if agent1_claims:
+            agent2_grant_prob = agent1_other_match * (agent2.follower_identity / 100) * self.config.get('grant_multiplier', 0.6)
+        if agent2_claims:
+            agent1_grant_prob = agent2_other_match * (agent1.follower_identity / 100) * self.config.get('grant_multiplier', 0.6)
+        
+        # Make grant decisions probabilistically
         agent1_grants = False
         agent2_grants = False
         if agent2_claims:
-            agent1_grants = agent1.evaluate_grant(agent2)
+            agent1_grants = self.rng.random() < agent1_grant_prob
         if agent1_claims:
-            agent2_grants = agent2.evaluate_grant(agent1)
+            agent2_grants = self.rng.random() < agent2_grant_prob
         
-        # Update identities and network based on interaction outcome
-        if agent1_claims and agent2_grants:
-            agent1.update_identity(True, True, self.identity_change_rate)
-            agent2.update_identity(False, False, self.identity_change_rate)
-            # Update network - agent2 perceives agent1 as leader
-            if not self.interaction_network.has_edge(agent2.id, agent1.id):
-                self.interaction_network.add_edge(agent2.id, agent1.id, weight=1)
+        # Store grant information for visualization
+        self.last_agent1_granted = agent1_grants
+        self.last_agent2_granted = agent2_grants
+        self.last_agent1_grant_prob = agent1_grant_prob
+        self.last_agent2_grant_prob = agent2_grant_prob
+        
+        # Update model state based on claims and grants
+        grant_given = (agent1_claims and agent2_grants) or (agent2_claims and agent1_grants)
+        self.last_grant_given = grant_given
+        
+        # Update identities based on interaction outcomes
+        identity_change_rate = self.config.get('identity_change_rate', 2.0)
+        
+        if agent1_claims:
+            if agent2_grants:
+                # Claim was granted
+                agent1.update_identity(identity_change_rate, -identity_change_rate)
+                # Update network
+                if not self.interaction_network.has_edge(agent2.id, agent1.id):
+                    self.interaction_network.add_edge(agent2.id, agent1.id, weight=1)
+                else:
+                    self.interaction_network[agent2.id][agent1.id]['weight'] += 1
             else:
-                self.interaction_network[agent2.id][agent1.id]['weight'] += 1
-                
-        if agent2_claims and agent1_grants:
-            agent2.update_identity(True, True, self.identity_change_rate)
-            agent1.update_identity(False, False, self.identity_change_rate)
-            # Update network - agent1 perceives agent2 as leader
-            if not self.interaction_network.has_edge(agent1.id, agent2.id):
-                self.interaction_network.add_edge(agent1.id, agent2.id, weight=1)
+                # Claim was rejected
+                agent1.update_identity(-identity_change_rate, identity_change_rate/2)
+        
+        if agent2_claims:
+            if agent1_grants:
+                # Claim was granted
+                agent2.update_identity(identity_change_rate, -identity_change_rate)
+                # Update network
+                if not self.interaction_network.has_edge(agent1.id, agent2.id):
+                    self.interaction_network.add_edge(agent1.id, agent2.id, weight=1)
+                else:
+                    self.interaction_network[agent1.id][agent2.id]['weight'] += 1
             else:
-                self.interaction_network[agent1.id][agent2.id]['weight'] += 1
+                # Claim was rejected
+                agent2.update_identity(-identity_change_rate, identity_change_rate/2)
         
-        # Store interaction state for UI
-        self.last_interaction_state = {
-            'agent1': agent1.get_state(),
-            'agent2': agent2.get_state(),
-            'grant_given': (agent1_claims and agent2_grants) or (agent2_claims and agent1_grants)
-        }
-        
-        return self.last_interaction_state['grant_given']
-    
-    def run(self, n_steps: int) -> Dict[str, Any]:
-        """Run model for specified number of steps."""
-        history = []
-        for step in range(n_steps):
-            # Execute step and record state
-            self.step()
+        # Update granting agent identities
+        if agent1_grants:
+            # Agent 1 gave grant
+            agent1.update_identity(-identity_change_rate/2, identity_change_rate)
+        elif agent2_claims:  # Agent 1 withheld grant
+            agent1.update_identity(identity_change_rate/4, -identity_change_rate/4)
             
-            # Record state
-            state = {
-                'timestep': step,
-                'agents': [agent.get_state() for agent in self.agents],
-                'network': list(self.interaction_network.edges(data=True)),
-                'last_interaction': self.last_interaction_state
-            }
-            history.append(state)
-            
-        return {
-            'history': history,
-            'final_state': {
-                'agents': [agent.get_state() for agent in self.agents],
-                'network': list(self.interaction_network.edges(data=True))
-            },
-            'parameters': {
-                'n_agents': self.n_agents,
-                'identity_change_rate': self.identity_change_rate
-            }
-        }
+        if agent2_grants:
+            # Agent 2 gave grant
+            agent2.update_identity(-identity_change_rate/2, identity_change_rate)
+        elif agent1_claims:  # Agent 2 withheld grant
+            agent2.update_identity(identity_change_rate/4, -identity_change_rate/4)
     
-    def get_state(self) -> Dict[str, Any]:
-        """Get current model state.
-        
-        Returns:
-            Dict containing current state variables
-        """
+    def get_state(self):
+        """Get current model state."""
         return {
-            'timestep': self.timestep,
-            'leader_identities': self.agents.copy(),
-            'parameters': self.params.model_dump()
+            'agents': [agent.get_state() for agent in self.agents],
+            'network': self.interaction_network.copy(),
+            'last_interaction': getattr(self, 'last_interaction', None),
+            'last_grant_given': getattr(self, 'last_grant_given', None)
         } 
