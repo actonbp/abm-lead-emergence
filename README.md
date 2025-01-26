@@ -4,6 +4,16 @@
 
 This project simulates how leadership emerges in groups through a simple "claim and grant" process: people can claim leadership, and others can choose to grant or deny those claims.
 
+## 📚 Documentation
+
+- [Quick Start Guide](QUICKSTART.md) - Get up and running in 5 minutes
+- [Technical Architecture](ARCHITECTURE.md) - Detailed technical implementation
+- [Analysis Pipeline](PIPELINE.md) - Complete workflow for running simulations
+- [Model Documentation](MODELS.md) - Theoretical perspectives and implementation
+- [Project Structure](docs/PROJECT_STRUCTURE.md) - Codebase organization
+- [Development Roadmap](ROADMAP.md) - Current status and future plans
+- [Contributing Guide](CONTRIBUTING.md) - How to contribute
+
 ## Quick Start
 
 1. Clone this repository
@@ -82,6 +92,8 @@ We use two main file formats:
 
 This project is actively being developed. The Shiny app for visualization is still in progress.
 
+See the [Development Roadmap](ROADMAP.md) for current status and planned features.
+
 ## AI Tool Usage
 
 This project was developed with assistance from AI tools including GPT models and Claude (via Cursor).
@@ -92,4 +104,4 @@ Feel free to open an issue or contact the author directly.
 
 ## License
 
-[Insert License Information]
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
