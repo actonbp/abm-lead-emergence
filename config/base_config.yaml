@@ -1,0 +1,37 @@
+# Base configuration for leadership emergence model
+
+simulation_properties:
+  group_size: 6
+  time_points: 200
+  replication_count: 3
+  data_collection_frequency: "every_timestep"
+
+agent_properties:
+  attributes:
+    dimensions: 1
+    distribution: "uniform"
+  
+  identity_representation:
+    leader_identity:
+      initial_value: 50
+      update_rule: "feedback"
+    follower_identity:
+      initial_value: 50
+      update_rule: "feedback"
+
+interaction_rules:
+  interaction_type: "dyadic_random"
+  claim_grant_sequence: "claim_then_grant"
+  feedback_dynamics: true
+  memory_length: 0
+
+environment:
+  task_inclusion: "none"
+  context_adjustment: false
+  group_identity_strength: 0.0
+  environment_dynamics: false
+
+schemas:
+  type: "ILT"
+  update_mechanism: "static"
+  idiosyncrasy_credits_enabled: false 

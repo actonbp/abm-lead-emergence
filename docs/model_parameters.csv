@@ -1,0 +1,30 @@
+Parameter,Description,Default,Range/Options,Category,Status,Notes
+n_agents,Number of agents in group,6,2-100,Group Structure,Implemented,Core parameter
+initial_li_equal,Equal initial leadership identities,TRUE,TRUE/FALSE,Group Structure,Implemented,Determines starting conditions
+initial_identity,Starting identity value if equal,50,0-100,Group Structure,Implemented,Only used if initial_li_equal is TRUE
+li_change_rate,Rate of leadership identity change,2.0,0.0-5.0,Identity Dynamics,Implemented,Higher values = faster changes
+perception_change_success,Perception increase after successful claim,2.0,0.0-5.0,Identity Dynamics,Implemented,Affects learning rate
+perception_change_reject,Perception decrease after rejected claim,3.0,0.0-5.0,Identity Dynamics,Implemented,Affects learning rate
+perception_change_noclaim,Perception decrease when no claim made,1.0,0.0-5.0,Identity Dynamics,Implemented,Penalty for inaction
+claim_multiplier,Multiplier for claim probability,0.7,0.0-1.0,Interaction,Implemented,Affects claim frequency
+grant_multiplier,Multiplier for grant probability,0.6,0.0-1.0,Interaction,Implemented,Affects grant frequency
+claim_threshold,Minimum score for leadership claims,0.5,0.0-1.0,Interaction,Implemented,Threshold for claiming
+penalize_no_claim,Penalty for not claiming,FALSE,TRUE/FALSE,Interaction,Implemented,Optional mechanism
+schema_weight,Weight given to schema matching,0.2,0.0-1.0,Schema-Identity Balance,Implemented,Higher = more schema influence
+weight_transition_start,When to start schema-identity transition,0.2,0.0-1.0,Schema-Identity Balance,Implemented,Proportion of total time
+weight_transition_end,When to end schema-identity transition,0.8,0.0-1.0,Schema-Identity Balance,Implemented,Proportion of total time
+weight_function,Type of transition function,linear,"linear,sigmoid,quadratic,sqrt",Schema-Identity Balance,Implemented,Affects transition shape
+ilt_match_algorithm,Method for ILT matching,euclidean,"euclidean,gaussian,sigmoid,threshold",ILT Matching,Implemented,How characteristics are compared
+interaction_selection,Method for selecting interactions,random,"random,network,strategic",Interaction Selection,Partial,"Only random implemented, others planned"
+memory_length,Number of past interactions to remember,0,0+,Memory,Implemented,0 = no memory
+track_history,Whether to track interaction history,TRUE,TRUE/FALSE,Memory,Implemented,Required for some metrics
+track_perceptions,Whether to track perception changes,TRUE,TRUE/FALSE,Memory,Implemented,Required for some metrics
+track_identities,Whether to track identity changes,TRUE,TRUE/FALSE,Memory,Implemented,Required for some metrics
+track_network,Whether to form/track network,TRUE,TRUE/FALSE,Memory,Implemented,Required for network metrics
+memory_decay,Whether memory decays over time,FALSE,TRUE/FALSE,Memory,Planned,Not yet implemented
+strategic_behavior,Whether agents plan strategically,FALSE,TRUE/FALSE,Agent Behavior,Planned,Not yet implemented
+multiple_dimensions,Multiple leadership dimensions,FALSE,TRUE/FALSE,Model Structure,Planned,Not yet implemented
+group_processes,Group-level processes,FALSE,TRUE/FALSE,Model Structure,Planned,Requires significant changes
+environmental_influence,Environmental effects,FALSE,TRUE/FALSE,Model Structure,Planned,Requires significant changes
+organizational_constraints,Organizational structure effects,FALSE,TRUE/FALSE,Model Structure,Planned,Requires significant changes
+communication_patterns,Complex communication,FALSE,TRUE/FALSE,Model Structure,Planned,Requires significant changes 

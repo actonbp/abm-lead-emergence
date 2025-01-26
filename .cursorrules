@@ -1,0 +1,148 @@
+# .cursorrules
+# -------------------------------------------------------------------
+# This file configures how Cursor AI should assist in our project
+# for modeling leadership emergence with ABM + ML integration.
+# -------------------------------------------------------------------
+
+projectContext:
+  summary: >
+    We are developing a research project that integrates three theoretical
+    perspectives of leadership emergence—Social Interactionist (SIP),
+    Social Cognitive (SCP), and Social Identity (SID)—into agent-based
+    modeling. We then refine or compare these models using machine-learning
+    (ML) techniques to identify which assumptions best explain stable
+    leadership emergence patterns. The project codebase focuses on:
+    1) Building Python-based ABMs for each perspective,
+    2) Running parameter sweeps to find best-fitting parameter sets,
+    3) Using ML (clustering, dimension reduction, etc.) on simulation data
+       to interpret results,
+    4) Refining or integrating these perspectives to reduce theory proliferation.
+
+codingGuidelines:
+  language: Python
+  style:
+    # Style conventions
+    indent: 4
+    maxLineLength: 100
+    quotes: double
+    namingConventions:
+      # Example: prefer snake_case for variables and functions
+      #           PascalCase for classes
+      variables: snake_case
+      functions: snake_case
+      classes: PascalCase
+    docStrings:
+      # Use Google-style or NumPy-style docstrings
+      style: google
+    imports:
+      # Keep imports organized and group standard, third-party, and local imports
+      order: grouped
+    comments:
+      # Encourage short, descriptive comments explaining logic
+      style: inlineWhenNecessary
+  libraries:
+    # Encourage usage of certain libraries or frameworks
+    abm: mesa  # e.g., MESA for ABM if you prefer that, or custom ABM frameworks
+    dataAnalysis: pandas, numpy
+    machineLearning: scikit-learn
+    plotting: matplotlib, seaborn
+  structure:
+    # Standard directory layout: 
+    #   abm_models/ for ABM code 
+    #   ml_pipeline/ for ML analysis 
+    #   notebooks/ for experimentation 
+    #   ...
+    recommendedLayout:
+      - abm_models/
+      - ml_pipeline/
+      - notebooks/
+      - tests/
+      - docs/
+    # Encourage writing reusable, modular code and referencing docstrings
+
+mlIntegration:
+  # Guidance on how the AI should generate or revise code for the ML side
+  # of this project
+  dataProcessing:
+    # Summaries and feature extraction from ABM output
+    approach: >
+      Use pythonic data pipelines (pandas) to preprocess & transform time-series
+      ABM logs into feature vectors. Be sure to keep track of simulation IDs
+      and parameters for each run.
+  modelingTechniques:
+    # Clustering, Dimensionality Reduction, etc.
+    recommendedApproaches:
+      - "UMAP + HDBSCAN"
+      - "PCA + KMeans"
+      - "Feature importance or ablation studies"
+    pointers: >
+      Always clarify input shapes and parameter references to minimize confusion.
+  resultInterpretation:
+    # Guidance on how to interpret or visualize ML results
+    bestPractices: >
+      Generate relevant plots (e.g., 2D or 3D embeddings, cluster separation),
+      textual summaries, confusion-like matrices if classification is used, etc.
+    docstringEncouragement: >
+      Provide docstrings that indicate how the ML method is integrated with
+      ABM outputs.
+
+abmModeling:
+  # Guidance for how to structure the agent-based models
+  recommendedAgentStructure:
+    - "Agent class with states: leaderIdentity, followerIdentity, ILT, etc."
+    - "Discrete time steps or event-based interaction"
+    - "Claiming/granting logic in step() or advancedStep()"
+  parameterSweeps:
+    # Encourage building out robust param sweeps
+    approach: >
+      Provide a range of toggles for hierarchical vs. shared LSS, ILT distributions,
+      identity strength, etc. Use nested loops or a parameter manager, ensuring
+      clear logging of results (CSV or similar).
+  outcomesOfInterest:
+    # Encourage code for measuring emergent leadership
+    keyMetrics:
+      - "Consensus on leadership perceptions"
+      - "Time to stable structure"
+      - "Distribution of leadership roles"
+    guideline: >
+      Always implement a function to compute 'agreement' or 'variance' of
+      leadership perceptions across agents.
+
+theoreticalReferences:
+  # Encourage references to the relevant leadership emergence concepts
+  # or placeholders for them in the code docstrings
+  pointers: >
+    Where relevant, add docstring mention that certain toggles represent
+    Social Identity influences, or that certain schema updates reflect the
+    Social Cognitive perspective, etc. This helps keep the code aligned with
+    the underlying theory.
+
+dosAndDonts:
+  - do: 
+      - Provide well-structured, Pythonic code that references the .cursorrules guidelines
+      - Include docstrings and brief inline comments explaining how code supports
+        the emergent leadership approach
+      - Encourage modular design (e.g., separate classes for agent logic, environment,
+        data extraction)
+      - Show code usage or usage examples in docstrings or minimal notebooks
+  - dont:
+      - Write extremely long or un-commented code blocks
+      - Hardcode arbitrary values without explanation
+      - Introduce new third-party libraries outside the recommended ones (unless
+        there is a strong reason and docstring to explain)
+
+ciCdAndTesting:
+  testStrategy: >
+    Encourage writing test scripts in a tests/ folder, verifying that each perspective’s
+    ABM runs without errors, and that basic ML pipelines produce correct shapes and
+    data transformations.
+  integrationTests: >
+    Possibly consider a lightweight integration test that runs a small ABM
+    simulation with each perspective’s best-fitting params, then runs the ML
+    pipeline on the results, ensuring no runtime errors and verifying expected
+    shape of outputs.
+
+closingNote: >
+  This .cursorrules file defines the overall guidelines for how the AI in Cursor
+  should generate or revise code. By referencing these instructions, code suggestions
+  will be more consistent with our ABM + ML approach to leadership emergence research.

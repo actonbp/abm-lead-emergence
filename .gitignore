@@ -22,12 +22,8 @@ wheels/
 
 # Virtual Environment
 venv/
-env/
 ENV/
-.env
-.venv
-env.bak/
-venv.bak/
+env/
 
 # IDE
 .idea/
@@ -38,22 +34,17 @@ venv.bak/
 .pydevproject
 .settings/
 
-# Jupyter Notebook
-.ipynb_checkpoints
-*.ipynb
-
-# Data and Results
-data/raw/*
-data/results/*
-data/ml_analysis/*
-!data/raw/.gitkeep
-!data/results/.gitkeep
-!data/ml_analysis/.gitkeep
-
-# Logs
+# Project specific
+outputs/
+!outputs/.gitkeep
+data/
+!data/.gitkeep
+.env
 *.log
-logs/
-logging/
+.coverage
+coverage.xml
+.pytest_cache/
+.hypothesis/
 
 # OS specific
 .DS_Store
@@ -64,38 +55,20 @@ logging/
 ehthumbs.db
 Thumbs.db
 
-# Model files and checkpoints
-*.h5
-*.pkl
-*.model
-checkpoints/
-models/saved/
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
 
-# Environment variables and secrets
-.env
-.env.*
-*.env
-config/secrets.json
-
-# Testing
-.coverage
-htmlcov/
-.pytest_cache/
-.tox/
-nosetests.xml
-coverage.xml
-*.cover
-.hypothesis/
-
-# Documentation
-docs/_build/
-site/
+# macOS
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
 
 # Temporary files
 *.tmp
 *.temp
 *.bak
-*.swp
 *~
 
 # Large media files
@@ -104,4 +77,10 @@ site/
 *.avi
 *.flv
 *.mov
-*.wmv 
+*.wmv
+
+# Documentation build
+docs/_build/
+docs/build/
+docs/source/_build/
+docs/source/build/ 

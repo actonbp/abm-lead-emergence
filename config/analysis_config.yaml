@@ -1,0 +1,38 @@
+# Configuration for ML-driven analysis of leadership emergence
+
+# Simulation parameters
+n_steps: 1000  # Number of steps per simulation
+n_initial_samples: 50  # Initial parameter combinations to try
+n_iterations: 20  # Number of optimization iterations
+batch_size: 5  # Number of new parameter combinations per iteration
+
+# Analysis parameters
+n_clusters: 3  # Number of pattern clusters to identify
+min_cluster_size: 5  # Minimum size for HDBSCAN clusters
+
+# Pattern analysis
+pattern_metrics:
+  - emergence_speed
+  - stability
+  - hierarchy_clarity
+  - role_differentiation
+
+# Theory validation
+theory_weights:
+  pattern_clarity: 0.7  # Weight for pattern clarity in objective function
+  theory_alignment: 0.3  # Weight for theory alignment in objective function
+
+# Visualization
+plots:
+  - parameter_importance
+  - pattern_clusters
+  - theory_comparison
+  - emergence_trajectories
+
+# Output settings
+save_intermediate: true  # Save results after each iteration
+plot_format: png
+dpi: 300
+
+# Random seed for reproducibility
+random_seed: 42 

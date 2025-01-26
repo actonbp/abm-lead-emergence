@@ -1,185 +1,199 @@
-# Leadership Emergence ABM Pipeline
+# Analysis Pipeline
 
-## Core Model Architecture: Claims and Grants
+This document outlines the complete workflow for running simulations and analyzing leadership emergence patterns across different theoretical perspectives.
 
-The model centers on the fundamental social process of leadership claims and grants, with different theoretical perspectives implemented through parameter configurations rather than separate model implementations.
+## Overview
 
-### Base Mechanism
+```mermaid
+graph TD
+    A[Setup Models] --> B[Run Single Perspective]
+    A --> C[Run Multi-Perspective Sweep]
+    B --> D[Basic Analysis]
+    C --> E[Compare to Stylized Facts]
+    E --> F[Select Best Models]
+    F --> G[Context Analysis]
+    G --> H[Cross-Perspective Synthesis]
+```
+
+## 1. Basic Simulation Workflow
+
+### Setup and Run Single Perspective
 ```python
-class LeadershipEmergenceModel:
-    """Core model centered on claim/grant dynamics."""
-    
-    def step(self):
-        # Select interaction pair
-        agent1, agent2 = self.select_interaction()
-        
-        # Core claim/grant mechanism
-        claim = self.evaluate_claim(agent1, agent2)
-        grant = self.evaluate_grant(agent2, agent1, claim)
-        
-        # Update identities and schemas based on interaction
-        self.update_after_interaction(agent1, agent2, claim, grant)
+from src.models.perspectives.interactionist import InteractionistModel
+from src.models.perspectives.cognitive import CognitiveModel
+
+# Create model for specific perspective
+model = InteractionistModel(
+    n_agents=4,
+    claim_multiplier=0.7,
+    grant_multiplier=0.6
+)
+
+# Run simulation
+history = []
+for _ in range(100):
+    state = model.step()
+    history.append(state)  # Store for time series analysis
 ```
 
-## Parameter Space
-
-### Core Parameters
-```yaml
-# Fundamental claim/grant parameters
-interaction:
-  claim_decision_rule: str    # How agents decide to claim
-  grant_decision_rule: str    # How agents decide to grant
-  threshold: float           # Base threshold for decisions
-
-# Identity parameters
-identity:
-  leader_identity:
-    initial_value: float     # Starting leadership identity
-    update_rule: str        # How identity changes
-  follower_identity:
-    initial_value: float
-    update_rule: str
-
-# Schema parameters
-schemas:
-  type: str                 # ILT, group prototype, etc.
-  update_mechanism: str     # How schemas evolve
-  social_identity_influence: float  # Group-level effects
+### Using Command Line
+```bash
+# Run a single perspective simulation
+python scripts/run_simulation.py \
+    --perspective interactionist \
+    --n-agents 4 \
+    --n-steps 100 \
+    --output-dir outputs/single_run
 ```
 
-## Theoretical Perspectives Through Parameters
+## 2. Multi-Perspective Parameter Sweep
 
-### 1. Social-Interactionist (SIP)
-Uses stable ILTs and hierarchical/shared structures:
-```yaml
-sip_config:
-  # Core mechanism
-  interaction:
-    claim_decision_rule: "ilt_threshold"
-    grant_decision_rule: "single_leader"  # or "multiple_leaders"
-  
-  # Supporting parameters
-  schemas:
-    type: "ILT"
-    update_mechanism: "static"
-    social_identity_influence: 0.0  # Hierarchical
-    # or 0.3 for shared leadership
+### Basic Multi-Perspective Sweep
+```bash
+# Run parameter sweep across perspectives
+python scripts/parameter_sweep.py \
+    --perspectives interactionist cognitive identity \
+    --n-agents 4 6 8 \
+    --claim-multiplier 0.5 0.7 0.9 \
+    --grant-multiplier 0.4 0.6 0.8 \
+    --n-steps 100 \
+    --n-replications 5
 ```
 
-### 2. Social-Cognitive (SCP)
-Emphasizes dynamic identities and learning:
-```yaml
-scp_config:
-  # Core mechanism
-  interaction:
-    claim_decision_rule: "identity_based"
-    grant_decision_rule: "competence_based"
-  
-  # Supporting parameters
-  identity:
-    leader_identity:
-      update_rule: "dynamic_feedback"
-    follower_identity:
-      update_rule: "dynamic_feedback"
-  schemas:
-    update_mechanism: "observational"
+### With Context
+```bash
+# Run with crisis context
+python scripts/parameter_sweep.py \
+    --perspectives interactionist cognitive \
+    --context crisis \
+    --context-params intensity=0.7 \
+    --n-agents 4 6 8
 ```
 
-### 3. Social-Identity (SI)
-Focuses on group prototypes and collective influence:
-```yaml
-si_config:
-  # Core mechanism
-  interaction:
-    claim_decision_rule: "prototype_match"
-    grant_decision_rule: "group_aligned"
-  
-  # Supporting parameters
-  schemas:
-    type: "group_proto"
-    social_identity_influence: 0.7
-    update_mechanism: "collective"
-```
+## 3. Stylized Facts Analysis
 
-## Parameter Effects on Core Mechanisms
-
-### Claim Evaluation
+### Define Stylized Facts
 ```python
-def evaluate_claim(self, agent, target):
-    """Evaluate claim probability using configured parameters."""
-    base_probability = agent.leader_identity
-    
-    if self.config.schemas.type == "ILT":
-        # SIP: ILT-based claims
-        return base_probability * self.ilt_match_score(agent, target)
-    elif self.config.schemas.type == "group_proto":
-        # SI: Prototype-based claims
-        return base_probability * self.prototype_match_score(agent)
-    else:
-        # SCP: Identity-based claims
-        return base_probability * self.competence_score(agent)
+stylized_facts = {
+    "time_to_first_leader": {
+        "target": 20,
+        "weight": 1.0
+    },
+    "num_leaders": {
+        "target": 1,
+        "weight": 0.8
+    },
+    "leadership_concentration": {
+        "target": 0.7,
+        "weight": 0.6
+    }
+}
 ```
 
-### Grant Evaluation
-```python
-def evaluate_grant(self, agent, claimant, claim):
-    """Evaluate grant probability using configured parameters."""
-    base_probability = agent.follower_identity
-    
-    if self.config.schemas.update_mechanism == "observational":
-        # SCP: Include observed performance
-        return base_probability * self.observed_competence(claimant)
-    elif self.config.schemas.social_identity_influence > 0:
-        # SI: Include group influence
-        return base_probability * self.group_alignment(claimant)
-    else:
-        # SIP: ILT-based granting
-        return base_probability * self.ilt_match_score(agent, claimant)
+### Compare to Stylized Facts
+```bash
+# Analyze fit to stylized facts
+python scripts/analyze_stylized_facts.py \
+    --results-dir outputs/parameter_sweep \
+    --stylized-facts stylized_facts.json \
+    --output-dir outputs/analysis/stylized_facts
 ```
 
-## Theory Integration
+## 4. Best Model Selection
 
-### Hybrid Configurations
-```yaml
-hybrid_config:
-  # Core mechanism remains unchanged
-  interaction:
-    claim_decision_rule: "weighted_combination"
-    grant_decision_rule: "multi_factor"
-  
-  # Blend theoretical parameters
-  schemas:
-    type: "hybrid"
-    components:
-      ilt: 
-        weight: 0.6  # SIP influence
-      group_proto:
-        weight: 0.4  # SI influence
-    update_mechanism: "dynamic"  # SCP influence
+### Select Best Parameters
+```bash
+# Find best parameter sets per perspective
+python scripts/select_best_models.py \
+    --analysis-dir outputs/analysis/stylized_facts \
+    --output-dir outputs/best_models \
+    --top-n 3  # Store top 3 parameter sets per perspective
 ```
 
-## Best Practices
+## 5. Context Analysis
 
-### 1. Parameter Selection
-- Start with claim/grant rules
-- Add minimal theoretical adjustments
-- Document parameter interactions
-
-### 2. Theory Testing
-- Compare theories using same base mechanism
-- Vary only necessary parameters
-- Track emergence patterns
-
-### 3. Documentation
-```yaml
-parameter_doc:
-  name: "grant_decision_rule"
-  core_mechanism: "Determines how agents evaluate leadership grants"
-  theoretical_variants:
-    sip: "single_leader - Hierarchical structure"
-    scp: "competence_based - Learning from performance"
-    si: "group_aligned - Prototype matching"
+### Run Best Models in Different Contexts
+```bash
+# Test best models in crisis context
+python scripts/run_context_analysis.py \
+    --best-models outputs/best_models \
+    --contexts crisis resource_scarcity \
+    --n-replications 10
 ```
 
-[Previous sections about pipeline structure remain unchanged...]
+## 6. Cross-Perspective Synthesis
+
+### Compare Perspectives
+```bash
+# Generate comparative analysis
+python scripts/compare_perspectives.py \
+    --best-models outputs/best_models \
+    --context-results outputs/context_analysis \
+    --output-dir outputs/synthesis
+```
+
+## 7. Output Structure
+
+```
+outputs/
+├── parameter_sweep/
+│   ├── results_TIMESTAMP.json    # Raw simulation data with perspective tags
+│   └── summary_TIMESTAMP.csv     # Statistical summary
+├── analysis/
+│   ├── stylized_facts/          # Comparison to stylized facts
+│   │   ├── distances.csv        # Distance metrics
+│   │   └── rankings.csv         # Parameter set rankings
+│   └── figures/                 # Generated plots
+├── best_models/
+│   ├── interactionist/          # Best parameters per perspective
+│   ├── cognitive/
+│   └── identity/
+├── context_analysis/            # Results of context testing
+│   ├── crisis/
+│   └── resource_scarcity/
+└── synthesis/                   # Cross-perspective analysis
+    ├── comparative_metrics.csv
+    ├── context_effects.csv
+    └── figures/
+```
+
+## 8. Key Metrics
+
+### Leadership Emergence (Stylized Facts)
+- Time to first leader (score > 75)
+- Number of leaders at end
+- Leadership score distribution
+- Leadership concentration (Gini coefficient)
+
+### Interaction Dynamics
+- Claim frequency
+- Grant success rate
+- Leadership stability
+- Time series patterns
+
+### Context Effects
+- Change in emergence speed
+- Stability under perturbation
+- Adaptation patterns
+
+## 9. Best Practices
+
+### Data Management
+- Tag all results with perspective and context
+- Store complete parameter sets
+- Save time series data for key metrics
+- Use consistent naming conventions
+
+### Analysis
+- Run multiple replications
+- Check for convergence
+- Validate against stylized facts
+- Document parameter choices
+- Compare across perspectives
+
+### Development
+- Write tests for each perspective
+- Document theoretical basis
+- Update pipeline documentation
+- Version control results
  

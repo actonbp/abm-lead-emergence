@@ -1,240 +1,221 @@
 """
 Base model class for leadership emergence simulations.
+Provides core claim-grant logic without perspective-specific features.
 """
 
-import numpy as np
-import networkx as nx
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Dict, List, Tuple, Any, Optional
+import numpy as np
 from pydantic import BaseModel, Field
-import yaml
 
 
 class ModelParameters(BaseModel):
-    """Parameter validation schema for leadership models."""
+    """Core parameter validation schema."""
     
-    # Agent Properties
+    # Core Parameters
     n_agents: int = Field(ge=2, le=100, description="Number of agents")
-    initial_li_equal: bool = Field(
-        description="Whether agents start with equal leadership identities"
+    claim_threshold: float = Field(
+        default=0.5,
+        gt=0.0, le=1.0,
+        description="Base threshold for leadership claims"
     )
-    li_change_rate: float = Field(
-        gt=0.0, le=5.0,
-        description="Rate of leadership identity change"
+    grant_threshold: float = Field(
+        default=0.4,
+        gt=0.0, le=1.0,
+        description="Base threshold for granting leadership"
     )
     
-    # Optional parameters with defaults
-    interaction_radius: Optional[float] = Field(
-        default=1.0,
-        ge=0.0, le=1.0,
-        description="Radius for agent interactions"
+    # Interaction Parameters
+    claim_multiplier: float = Field(
+        default=0.7,
+        gt=0.0, le=1.0,
+        description="Multiplier for claim probability"
     )
-    memory_length: Optional[int] = Field(
-        default=0,
-        ge=0,
-        description="Number of past interactions to remember"
+    grant_multiplier: float = Field(
+        default=0.6,
+        gt=0.0, le=1.0,
+        description="Multiplier for grant probability"
+    )
+    
+    # Update Parameters
+    success_boost: float = Field(
+        default=5.0,
+        gt=0.0, le=10.0,
+        description="How much leadership score increases on successful claim"
+    )
+    failure_penalty: float = Field(
+        default=3.0,
+        gt=0.0, le=10.0,
+        description="How much leadership score decreases on failed claim"
+    )
+    grant_penalty: float = Field(
+        default=2.0,
+        gt=0.0, le=10.0,
+        description="How much leadership score decreases when granting"
     )
 
 
 @dataclass
 class Agent:
-    """An agent in the leadership emergence model."""
+    """Base agent with minimal leadership mechanics."""
     id: int
-    leader_identity: float = 50.0    # Initial LI (can be uniform or varied)
-    follower_identity: float = 50.0  # Initial FI (usually uniform)
-    characteristics: float = None     # Leadership characteristics
-    ilt: float = None                # Implicit Leadership Theory
+    rng: np.random.Generator
+    params: ModelParameters
+    
+    # Core attributes
+    lead_score: float = 50.0  # Basic leadership measure
     
     def __post_init__(self):
-        """Initialize agent's history tracking."""
-        self.perceived_leadership = {}  # How others view this agent
-        self.interaction_count = 0
-        self.claims_history = []
-        self.grants_history = []
-        self.leader_identity_history = [self.leader_identity]
-        self.follower_identity_history = [self.follower_identity]
+        """Initialize agent's state tracking."""
+        self.history = {
+            'lead_score': [self.lead_score],
+            'claims': [],
+            'grants': []
+        }
+        
+        self.last_interaction = {
+            'claim_prob': 0,
+            'grant_prob': 0,
+            'claimed': False,
+            'granted': False,
+            'other_id': None,  # Track who we interacted with
+            'role': None       # 'claimer' or 'granter'
+        }
     
-    def update_history(self):
-        """Update history after identity changes."""
-        self.leader_identity_history.append(self.leader_identity)
-        self.follower_identity_history.append(self.follower_identity)
+    def decide_claim(self, other: 'Agent') -> bool:
+        """Basic claim decision logic."""
+        claim_prob = self.lead_score / 100 * self.params.claim_multiplier
+        will_claim = self.rng.random() < claim_prob
+        
+        # Update interaction state
+        self.last_interaction.update({
+            'claim_prob': claim_prob,
+            'claimed': will_claim,
+            'other_id': other.id,
+            'role': 'claimer'
+        })
+        
+        self.history['claims'].append(will_claim)
+        
+        return will_claim
+    
+    def decide_grant(self, claimer: 'Agent') -> bool:
+        """Basic grant decision logic."""
+        # Lower leadership score = more likely to grant
+        grant_prob = (1 - self.lead_score / 100) * self.params.grant_multiplier
+        will_grant = self.rng.random() < grant_prob
+        
+        # Update interaction state
+        self.last_interaction.update({
+            'grant_prob': grant_prob,
+            'granted': will_grant,
+            'other_id': claimer.id,
+            'role': 'granter'
+        })
+        
+        self.history['grants'].append(will_grant)
+        
+        return will_grant
+    
+    def update_score(self, delta: float):
+        """Update leadership score within bounds."""
+        self.lead_score = max(0, min(100, self.lead_score + delta))
+        self.history['lead_score'].append(self.lead_score)
+    
+    def get_state(self) -> Dict:
+        """Get current agent state."""
+        return {
+            'id': self.id,
+            'lead_score': self.lead_score,
+            'last_interaction': self.last_interaction.copy()
+        }
 
 
 class BaseLeadershipModel:
-    """Base class for all leadership emergence models."""
+    """Base class with core claim-grant mechanics."""
     
     def __init__(
         self,
-        config: Dict[str, Any] = None,
-        config_path: Optional[str] = None,
+        params: Dict[str, Any] = None,
         random_seed: Optional[int] = None
     ):
-        """Initialize model with configuration.
-        
-        Args:
-            config: Dictionary of model parameters
-            config_path: Path to YAML/JSON configuration file
-            random_seed: Random seed for reproducibility
-        """
-        # Load and validate configuration
-        if config_path:
-            with open(config_path) as f:
-                if config_path.endswith('.yaml'):
-                    config = yaml.safe_load(f)
-                else:
-                    config = json.load(f)
-        
-        if config is None:
-            config = {
-                'n_agents': 4,
-                'initial_li_equal': True,
-                'li_change_rate': 2.0
-            }
-            
-        self.params = ModelParameters(**config)
-        
-        # Initialize random state
+        """Initialize model with parameters."""
+        self.params = ModelParameters(**(params or {}))
         self.rng = np.random.default_rng(random_seed)
-        
-        # Initialize model state
         self.time = 0
-        self.li_change_rate = self.params.li_change_rate
         
-        # Initialize network for tracking interactions
-        self.interaction_network = nx.DiGraph()
-        
-        # Track outcomes over time
-        self.history = {
-            'leader_identities': [],
-            'follower_identities': [],
-            'centralization': [],
-            'density': [],
-            'interaction_patterns': []
-        }
-        
-        # Initialize agents with base attributes
+        # Initialize agents
         self.agents = [
-            Agent(
-                id=i,
-                leader_identity=50.0 if self.params.initial_li_equal 
-                else self.rng.uniform(60, 80),
-                characteristics=self.rng.uniform(40, 60),  # Random initial characteristics
-                ilt=self.rng.uniform(40, 60)  # Random initial ILT
-            )
+            Agent(i, self.rng, self.params)
             for i in range(self.params.n_agents)
         ]
         
-        # Add nodes to interaction network
-        for i in range(self.params.n_agents):
-            self.interaction_network.add_node(i)
+        # Track model history
+        self.history = []
     
-    def step(self) -> Dict:
-        """Execute one step of the model."""
+    def step(self) -> Dict[str, Any]:
+        """Execute one simulation step."""
         # Select interaction pair
-        agent1, agent2 = self._select_interaction_pair()
+        pair = self._select_interaction_pair()
         
-        # Process interaction
-        claiming, granting = self._process_interaction(agent1, agent2)
+        # Process claim-grant interaction
+        interaction = self._process_interaction(pair)
         
-        # Update based on interaction
-        self._update_identities(agent1, agent2, claiming, granting)
-        self._update_network(agent1, agent2, claiming, granting)
+        # Update states based on interaction
+        self._update_states(pair, interaction)
         
-        # Update histories for all agents
-        for agent in self.agents:
-            agent.update_history()
-        
-        # Track outcomes
-        self._track_outcomes()
-        
+        # Increment time
         self.time += 1
-        return self._get_current_state()
-    
-    def run(self, n_steps: int) -> Dict[str, Any]:
-        """Run model for specified number of steps.
         
-        Args:
-            n_steps: Number of timesteps to run
-            
-        Returns:
-            Dict containing simulation history
-        """
+        # Track state
+        state = self.get_state()
+        self.history.append(state)
+        
+        return state
+    
+    def run(self, n_steps: int) -> List[Dict[str, Any]]:
+        """Run simulation for specified number of steps."""
+        history = []
         for _ in range(n_steps):
             state = self.step()
-            self.history.append(state)
-            
-        return {
-            'history': self.history,
-            'parameters': self.params.model_dump()
-        }
+            history.append(state)
+        return history
     
     def _select_interaction_pair(self) -> Tuple[Agent, Agent]:
-        """Base method for selecting interaction pairs (random)."""
-        agents = self.rng.choice(self.agents, size=2, replace=False)
-        return agents[0], agents[1]
+        """Select two agents for interaction."""
+        pair = self.rng.choice(self.agents, size=2, replace=False)
+        return tuple(pair)
     
-    def _process_interaction(self, agent1: Agent, agent2: Agent) -> Tuple[bool, bool]:
-        """Base method for processing interactions (identity-based)."""
-        claim_prob = agent1.leader_identity / 100
-        grant_prob = agent2.follower_identity / 100
+    def _process_interaction(self, pair: Tuple[Agent, Agent]) -> Dict:
+        """Process claim-grant interaction between agents."""
+        claimer, granter = pair
         
-        claiming = self.rng.random() < claim_prob
-        granting = self.rng.random() < grant_prob
+        # Get claim and grant decisions
+        claimed = claimer.decide_claim(granter)
+        granted = granter.decide_grant(claimer) if claimed else False
         
-        return claiming, granting
+        return {
+            'claimed': claimed,
+            'granted': granted,
+            'claimer_id': claimer.id,
+            'granter_id': granter.id
+        }
     
-    def _update_identities(self, agent1: Agent, agent2: Agent, claiming: bool, granting: bool):
-        """Base method for updating identities."""
-        if claiming and granting:
-            agent1.leader_identity = min(100, agent1.leader_identity + self.params.li_change_rate)
-            agent2.follower_identity = min(100, agent2.follower_identity + self.params.li_change_rate)
-        elif claiming and not granting:
-            agent1.leader_identity = max(0, agent1.leader_identity - self.params.li_change_rate)
-        elif granting and not claiming:
-            agent2.follower_identity = max(0, agent2.follower_identity - self.params.li_change_rate)
-    
-    def _update_network(self, agent1: Agent, agent2: Agent, claiming: bool, granting: bool):
-        """Base method for updating network."""
-        weight = 0.1  # Base interaction weight
-        if claiming:
-            weight += 0.1
-        if granting:
-            weight += 0.1
-            
-        if self.interaction_network.has_edge(agent1.id, agent2.id):
-            self.interaction_network[agent1.id][agent2.id]['weight'] += weight
-        else:
-            self.interaction_network.add_edge(agent1.id, agent2.id, weight=weight)
-    
-    def _track_outcomes(self):
-        """Track various outcomes over time."""
-        self.history['leader_identities'].append(
-            [agent.leader_identity for agent in self.agents]
-        )
-        self.history['follower_identities'].append(
-            [agent.follower_identity for agent in self.agents]
-        )
+    def _update_states(self, pair: Tuple[Agent, Agent], interaction: Dict):
+        """Update agent states based on interaction."""
+        claimer, granter = pair
         
-        centralization = self._calculate_centralization()
-        density = nx.density(self.interaction_network)
-        
-        self.history['centralization'].append(centralization)
-        self.history['density'].append(density)
+        if interaction['claimed'] and interaction['granted']:
+            # Successful leadership claim
+            claimer.update_score(self.params.success_boost)
+            granter.update_score(-self.params.grant_penalty)
+        elif interaction['claimed'] and not interaction['granted']:
+            # Failed leadership claim
+            claimer.update_score(-self.params.failure_penalty)
     
-    def _calculate_centralization(self) -> float:
-        """Calculate leadership centralization using network metrics."""
-        try:
-            centrality = nx.degree_centrality(self.interaction_network)
-            return np.var(list(centrality.values()))
-        except:
-            return 0.0
-    
-    def _get_current_state(self) -> Dict:
-        """Return current state of the model."""
+    def get_state(self) -> Dict[str, Any]:
+        """Get current model state."""
         return {
             'time': self.time,
-            'leader_identities': [agent.leader_identity for agent in self.agents],
-            'follower_identities': [agent.follower_identity for agent in self.agents],
-            'centralization': self.history['centralization'][-1] if self.history['centralization'] else 0.0,
-            'density': self.history['density'][-1] if self.history['density'] else 0.0
+            'agents': [agent.get_state() for agent in self.agents]
         }

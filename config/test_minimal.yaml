@@ -1,0 +1,25 @@
+simulation_properties:
+  time_points: 100
+
+# Core Parameters
+n_agents: 10
+initial_li_equal: true
+initial_identity: 50.0
+li_change_rate: 1.0
+claim_threshold: 0.5
+penalize_no_claim: true  # Changed to true - not claiming will decrease leader identity
+
+# Perception Change Parameters
+perception_change_success: 2.0
+perception_change_reject: 3.0
+perception_change_noclaim: 1.0
+
+# ILT Matching Parameters
+ilt_match_algorithm: "sigmoid"
+ilt_match_params:
+  k: 0.15
+  midpoint: 20
+
+# Remove multipliers since we're using direct match scores
+# claim_multiplier: 0.5
+# grant_multiplier: 0.4 

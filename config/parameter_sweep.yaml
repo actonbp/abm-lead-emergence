@@ -1,0 +1,67 @@
+# Parameter sweep configuration for leadership emergence analysis
+
+# ML Pipeline settings
+ml_pipeline:
+  n_initial_samples: 50  # Number of initial Latin Hypercube samples
+  n_iterations: 30       # Number of Bayesian optimization iterations
+  batch_size: 5         # Number of parallel evaluations per iteration
+  n_clusters: 3         # Number of clusters for pattern analysis
+
+# Simulation settings
+simulation:
+  n_steps: 100          # Steps per simulation
+  n_replications: 10    # Number of replications per parameter set
+
+# Parameter space to explore
+parameter_space:
+  # Discrete parameters
+  n_agents:
+    type: discrete
+    values: [4, 6, 8]
+  initial_li_equal:
+    type: discrete
+    values: [true, false]
+  weight_function:
+    type: discrete
+    values: ['linear', 'sigmoid', 'quadratic', 'sqrt']
+    
+  # Continuous parameters
+  li_change_rate:
+    type: continuous
+    range: [0.01, 0.2]
+  schema_weight:
+    type: continuous
+    range: [0.1, 0.5]  # Final schema weight
+  weight_transition_start:
+    type: continuous
+    range: [0.1, 0.4]  # When to start transition
+  weight_transition_end:
+    type: continuous
+    range: [0.6, 0.9]  # When to end transition
+  claim_threshold:
+    type: continuous
+    range: [0.3, 0.7]
+  grant_threshold:
+    type: continuous
+    range: [0.3, 0.7]
+  perception_change_success:
+    type: continuous
+    range: [0.05, 0.2]
+  perception_change_reject:
+    type: continuous
+    range: [0.05, 0.2]
+
+# Leadership emergence metrics to optimize
+emergence_metrics:
+  # Weights for optimization objective
+  weights:
+    kendall_w: 0.3            # Agreement on rankings
+    krippendorff_alpha: 0.3   # Inter-rater reliability
+    normalized_entropy: -0.2   # Diversity of leadership (-ve weight as we want lower entropy)
+    top_leader_agreement: 0.2  # Agreement on top leader
+
+# Output settings
+output:
+  save_results: true
+  generate_plots: true
+  output_dir: "outputs/parameter_sweep" 

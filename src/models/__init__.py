@@ -1,17 +1,5 @@
-"""
-Leadership emergence model package.
-"""
+"""Models for leadership emergence simulation."""
 
-from src.models.base_model import BaseLeadershipModel, Agent, ModelParameters
-from src.models.schema_model import SchemaModel
-from src.models.network_model import NetworkModel
-from src.models.schema_network_model import SchemaNetworkModel
+from src.models.base_model import BaseLeadershipModel
 
-__all__ = [
-    'BaseLeadershipModel',
-    'Agent',
-    'ModelParameters',
-    'SchemaModel',
-    'NetworkModel',
-    'SchemaNetworkModel'
-] 
+__all__ = ['BaseLeadershipModel'] 

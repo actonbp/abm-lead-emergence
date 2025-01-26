@@ -1,133 +1,95 @@
-# Leadership Emergence in Teams: Machine Learning Analysis of Agent-Based Models
+# Leadership Emergence Simulation (Work in Progress)
 
-This repository explores leadership emergence in teams using agent-based modeling (ABM) and machine learning techniques. We aim to identify key conditions and mechanisms that lead to stable leadership patterns across different theoretical scenarios.
+**Author**: Bryan Acton
+
+This project simulates how leadership emerges in groups through a simple "claim and grant" process: people can claim leadership, and others can choose to grant or deny those claims.
+
+## Quick Start
+
+1. Clone this repository
+2. Create a virtual environment: `python -m venv venv`
+3. Activate it: 
+   - Windows: `venv\Scripts\activate`
+   - Mac/Linux: `source venv/bin/activate`
+4. Install requirements: `pip install -r requirements.txt`
+
+## File Formats Explained
+
+We use two main file formats:
+
+1. **YAML Files** (`.yaml`): For human-readable settings
+   - Found in: `config/*.yaml`
+   - Used for: Setting up simulations
+   - Example:
+   ```yaml
+   # This controls how many agents are in the simulation
+   n_agents: 4
+   
+   # This affects how often agents try to claim leadership
+   claim_rate: 0.5
+   ```
+
+2. **JSON Files** (`.json`): For storing results
+   - Found in: `outputs/*.json`
+   - Used for: Saving simulation data
+   - Example:
+   ```json
+   {
+     "time_step": 1,
+     "leader_score": 0.75
+   }
+   ```
 
 ## Project Structure
 
-```
-├── src/
-│   ├── models/                    # Core model implementations
-│   │   ├── base_model.py         # Base leadership emergence model
-│   │   ├── schema_model.py       # Schema-based extensions
-│   │   ├── memory_model.py       # Models with memory effects
-│   │   └── structural_model.py   # Models with structural preferences
-│   │
-│   ├── simulation/               # Simulation management
-│   │   ├── runner.py            # Simulation execution engine
-│   │   ├── parameter_space.py   # Parameter space definition
-│   │   └── data_collector.py    # Data collection utilities
-│   │
-│   ├── features/                 # Feature extraction
-│   │   ├── time_series.py       # Time series feature extraction
-│   │   ├── network.py           # Network-based features
-│   │   └── stability.py         # Stability metrics
-│   │
-│   ├── analysis/                 # Analysis tools
-│   │   ├── dimensionality.py    # Dimensionality reduction
-│   │   ├── clustering.py        # Clustering analysis
-│   │   └── importance.py        # Feature importance analysis
-│   │
-│   ├── visualization/            # Visualization tools
-│   │   ├── network_viz.py       # Network visualizations
-│   │   ├── time_series_viz.py   # Time series plots
-│   │   └── pattern_viz.py       # Pattern visualization
-│   │
-│   └── app/                      # Interactive applications
-│       ├── simulation_app.py     # Simulation interface
-│       └── analysis_app.py       # Analysis dashboard
-│
-├── notebooks/                    # Analysis notebooks
-│   ├── model_exploration/       # Model behavior exploration
-│   ├── feature_analysis/        # Feature extraction analysis
-│   └── pattern_analysis/        # Pattern discovery analysis
-│
-├── data/                        # Data storage
-│   ├── raw/                     # Raw simulation outputs
-│   ├── processed/               # Processed features
-│   └── results/                 # Analysis results
-│
-├── tests/                       # Test suite
-│   ├── model_tests/            # Model unit tests
-│   ├── simulation_tests/       # Simulation tests
-│   └── analysis_tests/         # Analysis pipeline tests
-│
-└── docs/                        # Documentation
-    ├── models/                  # Model documentation
-    ├── features/               # Feature documentation
-    └── analysis/               # Analysis documentation
-```
+- `src/`: Main code
+  - `models/`: The simulation models
+  - `simulation/`: Running simulations
+  - `analysis/`: Analyzing results
+  - `app/`: Interactive visualization (work in progress)
 
-## Core Components
+- `scripts/`: Ready-to-use analysis tools
+  - `run_simulation.py`: Run a basic simulation
+  - `parameter_sweep.py`: Try different settings
+  - `analyze_results.py`: Look at the results
 
-### 1. Models
-- Base leadership emergence model with pairwise interactions
-- Extensions for different theoretical assumptions:
-  - Schema-based decision making
-  - Memory effects and learning
-  - Structural preferences
-  - Network effects
+- `config/`: Settings files (in YAML)
+  - `base.yaml`: Basic settings
+  - `variants/`: Different experiment settings
 
-### 2. Simulation Framework
-- Parameter space exploration
-- Batch simulation execution
-- Data collection and storage
-- Progress tracking and monitoring
+- `data/`: Where data is stored
+  - `raw/`: Original simulation outputs
+  - `processed/`: Analyzed results
 
-### 3. Feature Extraction
-- Time series features
-- Network metrics
-- Stability measures
-- Pattern indicators
+## Running Experiments
 
-### 4. Analysis Pipeline
-- Dimensionality reduction (PCA, UMAP)
-- Clustering (k-means, HDBSCAN)
-- Feature importance analysis
-- Pattern discovery
+1. Basic simulation:
+   ```bash
+   python scripts/run_simulation.py
+   ```
 
-### 5. Visualization Tools
-- Interactive network visualization
-- Time series plotting
-- Pattern visualization
-- Analysis dashboards
+2. Try different parameters:
+   ```bash
+   python scripts/parameter_sweep.py
+   ```
 
-## Getting Started
+3. Look at results:
+   ```bash
+   python scripts/analyze_results.py
+   ```
 
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/leadership-emergence-ml.git
-cd leadership-emergence-ml
-```
+## Development Status
 
-2. Create and activate virtual environment:
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
+This project is actively being developed. The Shiny app for visualization is still in progress.
 
-3. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
+## AI Tool Usage
 
-4. Run tests:
-```bash
-python -m pytest tests/
-```
+This project was developed with assistance from AI tools including GPT models and Claude (via Cursor).
 
-5. Start the simulation app:
-```bash
-python src/app/simulation_app.py
-```
+## Questions or Issues?
 
-## Usage Examples
-
-See the `notebooks/` directory for example analyses and the `docs/` directory for detailed documentation.
-
-## Contributing
-
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+Feel free to open an issue or contact the author directly.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+[Insert License Information]

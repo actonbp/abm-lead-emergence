@@ -1,3 +1,46 @@
+# Base configuration for leadership emergence simulation
+# All parameters are documented and have sensible defaults
+
+simulation:
+  # Core simulation parameters
+  n_agents: 4        # Number of agents in the simulation
+  claim_rate: 0.5    # Base rate at which agents attempt to claim leadership
+  n_steps: 100       # Number of simulation steps to run
+
+parameters:
+  # Leadership dynamics parameters
+  success_boost: 2.0   # How much leadership score increases on successful claim
+  failure_penalty: 1.0 # How much leadership score decreases on failed claim
+  grant_rate: 0.6     # Base rate at which agents grant leadership claims
+
+  # Optional context parameters
+  context_enabled: false  # Whether to use a special context (e.g., crisis)
+  context_intensity: 0.0  # How strongly the context affects behavior (0-1)
+
+# Logging and output settings
+output:
+  save_frequency: 10     # Save results every N steps
+  log_interactions: true # Whether to log individual interactions
+
+# Advanced settings (used by specific perspectives)
+perspectives:
+  social_interactionist:
+    enabled: true
+    schema_type: "group_proto"
+    update_mechanism: "dynamic"
+    context_sensitive: true
+    
+  cognitive:
+    enabled: false
+    schema_type: "ILT"
+    update_mechanism: "observational"
+    memory_length: 10
+    
+  identity:
+    enabled: false
+    initial_identity: 50
+    update_rule: "feedback"
+
 # Base configuration for leadership emergence model
 # All variants inherit from this base configuration
 

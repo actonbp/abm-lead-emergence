@@ -601,76 +601,90 @@ def _map_config_to_model_params(config):
     }
 
 def calculate_entropy_metrics(model):
-    """Calculate entropy-based metrics for hierarchy emergence."""
+    """Calculate entropy-based metrics for hierarchy emergence with improved robustness."""
     n_agents = len(model.agents)
     
-    # Calculate entropy based on leader identity distribution
+    # Get leader identity values
     li_values = np.array([agent.leader_identity for agent in model.agents])
     
-    # Normalize leader identities to probabilities for entropy calculation
-    if np.sum(li_values) > 0:  # Only normalize if there are non-zero values
+    # 1. IMPROVED HIERARCHY CLARITY
+    # Consider both the spread of values and their distribution
+    li_range = np.max(li_values) - np.min(li_values)
+    li_std = np.std(li_values)
+    
+    # Calculate normalized metrics
+    range_component = li_range / 100.0  # Normalize by max possible range
+    std_component = li_std / (100.0 / np.sqrt(12))  # Normalize by max possible std dev
+    
+    # Calculate entropy component (weighted less now)
+    if np.sum(li_values) > 0:
         li_probs = li_values / np.sum(li_values)
         system_entropy = -np.sum(li_probs * np.log2(li_probs + 1e-10))
+        max_entropy = -np.log2(1/n_agents)
+        entropy_component = 1 - (system_entropy / max_entropy) if max_entropy > 0 else 0
     else:
-        system_entropy = 0
+        entropy_component = 0
     
-    # Calculate leadership perception matrix based on actual model mechanics
-    if hasattr(model, 'interaction_network'):
-        # Initialize perceptions matrix
-        perceptions = np.zeros((n_agents, n_agents))
-        
-        # Only consider direct grant interactions
-        for i, j in model.interaction_network.edges():
-            # Only count successful grants (weight indicates successful claims)
-            edge_data = model.interaction_network[i][j]
-            if edge_data.get('weight', 0) > 0:
-                # j granted i's claim, so j perceives i as leader
-                perceptions[j, i] = edge_data['weight']
+    # Combine components with weights
+    hierarchy_clarity = (0.4 * range_component + 
+                        0.4 * std_component + 
+                        0.2 * entropy_component)
+    
+    # 2. IMPROVED RANK CONSENSUS
+    # Use Kendall's W for multiple rankers
+    rankings = []
+    for i in range(n_agents):
+        # Each agent ranks all agents (including themselves) based on leader identity
+        agent_ranking = np.argsort(-li_values)  # Higher LI = higher rank
+        rankings.append(agent_ranking)
+    
+    rankings = np.array(rankings)
+    
+    # Calculate mean ranking for each agent
+    mean_ranks = np.mean(rankings, axis=0)
+    
+    # Calculate sum of squared deviations
+    S = np.sum((rankings - mean_ranks) ** 2)
+    
+    # Calculate maximum possible S
+    max_S = (n_agents ** 2 * (n_agents ** 2 - 1)) / 12
+    
+    # Calculate Kendall's W
+    if max_S > 0:
+        rank_consensus = S / max_S
     else:
-        perceptions = np.zeros((n_agents, n_agents))
+        rank_consensus = 0
     
-    # Calculate hierarchy metrics
-    max_entropy = -np.log2(1/n_agents)
-    hierarchy_clarity = 1 - (system_entropy / max_entropy) if max_entropy > 0 else 0
-    
-    # Calculate rank consensus based on leader identity rankings
-    li_rankings = np.argsort(-li_values)  # Higher LI = higher rank
-    rank_correlations = []
-    
-    # Only calculate correlations if there's enough variation in the values
-    if len(set(li_values)) > 1:  # Check if there are at least 2 different values
-        for i in range(n_agents):
-            for j in range(i+1, n_agents):
-                # Only calculate if both agents have different values
-                if li_values[i] != li_values[j]:
-                    try:
-                        # Calculate correlation between their rankings of all agents
-                        agent_i_ranks = np.argsort([-li_values[i], -li_values[j]])
-                        agent_j_ranks = np.argsort([-li_values[j], -li_values[i]])
-                        if not np.array_equal(agent_i_ranks, agent_j_ranks):  # Only if rankings differ
-                            corr = stats.spearmanr(agent_i_ranks, agent_j_ranks)[0]
-                            if not np.isnan(corr):
-                                rank_correlations.append(corr)
-                    except:
-                        continue
-    
-    rank_consensus = np.mean(rank_correlations) if rank_correlations else 0
-    
-    # Calculate structural stability from interaction network
+    # 3. Calculate structural stability from interaction network
     if hasattr(model, 'interaction_network'):
         degrees = [d for n, d in model.interaction_network.degree()]
-        mean_degree = np.mean(degrees)
+        mean_degree = np.mean(degrees) if degrees else 0
         structural_stability = 1.0 - (np.std(degrees) / mean_degree if mean_degree > 0 else 0.0)
     else:
         structural_stability = 0.0
+    
+    # 4. System Entropy (kept for backwards compatibility but improved)
+    # Now considers both the distribution and the magnitude of differences
+    if np.sum(li_values) > 0:
+        # Calculate normalized differences between consecutive ranked agents
+        sorted_li = np.sort(li_values)
+        diffs = np.diff(sorted_li)
+        normalized_diffs = diffs / np.max(diffs) if np.max(diffs) > 0 else np.zeros_like(diffs)
+        
+        # Calculate entropy considering the gaps between ranks
+        gap_entropy = -np.sum(normalized_diffs * np.log2(normalized_diffs + 1e-10)) / len(normalized_diffs)
+        
+        # Normalize to 0-5 range (lower is better)
+        system_entropy = gap_entropy * (5.0 / np.log2(n_agents))
+    else:
+        system_entropy = 5.0  # Maximum entropy when all values are 0
     
     return {
         'system_entropy': system_entropy,
         'hierarchy_clarity': hierarchy_clarity,
         'rank_consensus': rank_consensus,
-        'individual_entropies': [0] * n_agents,  # No longer using individual entropies
         'structural_stability': structural_stability,
-        'perception_matrix': perceptions
+        'perception_matrix': np.zeros((n_agents, n_agents))  # Kept for compatibility
     }
 
 def check_simulation_validity(model):
@@ -742,8 +756,7 @@ def server(input, output, session):
     MODEL_CLASSES = {
         'base_derue': BaseLeadershipModel,
         'sip_hierarchical': SchemaModel,
-        'scp_dynamic': NetworkModel,
-        'si_prototype': SchemaNetworkModel
+        'scp_dynamic': NetworkModel
     }
     
     # Initialize reactive values
@@ -786,13 +799,13 @@ def server(input, output, session):
                     ui.div(
                         {"class": "model-card"},
                         ui.card(
-                            ui.card_header("Base DeRue Model"),
+                            ui.card_header("Social Interactionist/Base Model"),
                             ui.card_body(
                                 ui.h4("Core Leadership Emergence"),
                                 ui.p(
-                                    "Original model with basic mechanisms: "
+                                    "Foundational social interactionist model with key mechanisms: "
                                     "leadership characteristics, ILTs, claims/grants, "
-                                    "and identity development through interactions."
+                                    "and identity development through social interactions."
                                 ),
                                 ui.div(
                                     ui.input_action_button(
@@ -838,26 +851,6 @@ def server(input, output, session):
                                     ui.input_action_button(
                                         "select_scp",
                                         "Select SCP Model",
-                                        class_="btn-primary btn-block"
-                                    )
-                                )
-                            )
-                        )
-                    )
-                ),
-                ui.column(
-                    3,
-                    ui.div(
-                        {"class": "model-card"},
-                        ui.card(
-                            ui.card_header("SI Prototype"),
-                            ui.card_body(
-                                ui.h4("Social Identity Theory"),
-                                ui.p(variant_configs["si_prototype"]["description"]),
-                                ui.div(
-                                    ui.input_action_button(
-                                        "select_si",
-                                        "Select SI Model",
                                         class_="btn-primary btn-block"
                                     )
                                 )
@@ -969,18 +962,20 @@ def server(input, output, session):
                                                             ui.output_ui("parameter_rows")
                                                         )
                                                     )
+                                                ),
+                                                ui.div(
+                                                    {"class": "mt-4"},
+                                                    ui.input_action_button(
+                                                        "save_model_params",
+                                                        "Save Model Parameters",
+                                                        class_="btn-primary"
+                                                    ),
+                                                    ui.input_action_button(
+                                                        "save_model_and_reset",
+                                                        "Save & Reset Simulation",
+                                                        class_="btn-warning ml-2"
+                                                    )
                                                 )
-                                            )
-                                        )
-                                    )
-                                ),
-                                ui.row(
-                                    ui.column(
-                                        12,
-                                        ui.card(
-                                            ui.card_header("Validation Metrics"),
-                                            ui.card_body(
-                                                ui.output_ui("validation_metrics_table")
                                             )
                                         )
                                     )
@@ -1602,21 +1597,6 @@ def server(input, output, session):
         model_state.set(current)
         page_state.set('simulation')
 
-    @reactive.Effect
-    @reactive.event(input.select_si)
-    def select_si_model():
-        current = get_current_state()
-        current.update({
-            'selected_variant': 'si_prototype',
-            'config': variant_configs['si_prototype'],
-            'model': None,
-            'current_step': 0,
-            'network_pos': None,
-            'agents': None,
-        })
-        model_state.set(current)
-        page_state.set('simulation')
-
     @output
     @render.ui
     def control_buttons():
@@ -1674,22 +1654,47 @@ def server(input, output, session):
 
     @reactive.Effect
     @reactive.event(input.reset_sim)
-    def reset_simulation():
-        # Keep the current model variant but reset the simulation
-        current = get_current_state()
-        variant = current.get('selected_variant')
-        config = current.get('config')
-        
-        current.update({
-            'model': None,
-            'current_step': 0,
-            'network_pos': None,
-            'agents': None,
-            'selected_variant': variant,  # Preserve the selected variant
-            'config': config,  # Preserve the configuration
-        })
-        model_state.set(current)
-    
+    def handle_reset_simulation():
+        """Reset the simulation using current parameters."""
+        try:
+            current = get_current_state()
+            config = current.get('config')
+            
+            if config is None:
+                ui.notification_show("No configuration available. Please save parameters first.", type="error")
+                return
+            
+            # Create new model instance with current config
+            model = BaseLeadershipModel(config)
+            
+            # Initialize interaction network
+            model.interaction_network = nx.DiGraph()
+            for i in range(config['n_agents']):
+                model.interaction_network.add_node(i)
+            
+            # Clear all visualizations and reset state
+            current.update({
+                'model': model,
+                'current_step': 0,
+                'network_pos': None,
+                'agents': model.agents,
+                'last_interaction': None  # Clear last interaction
+            })
+            
+            # Clear any stored interaction data
+            if hasattr(model, 'last_interaction'):
+                del model.last_interaction
+            if hasattr(model, 'last_agent1_claimed'):
+                del model.last_agent1_claimed
+            if hasattr(model, 'last_agent2_claimed'):
+                del model.last_agent2_claimed
+            
+            model_state.set(current)
+            ui.notification_show("Simulation reset successfully!", type="message")
+            
+        except Exception as e:
+            ui.notification_show(f"Error resetting simulation: {str(e)}", type="error")
+
     @reactive.Effect
     @reactive.event(input.init_sim)
     def initialize_model():
@@ -2005,7 +2010,18 @@ def server(input, output, session):
     def interaction_details():
         current = get_current_state()
         if current['model'] is None:
-            return ui.p("Initialize simulation to see interactions")
+            return ui.div(
+                {"class": "interaction-step"},
+                ui.h4({"class": "step-header"}, "👥 Initial State"),
+                ui.p(
+                    "The simulation is ready to begin. Click 'Start Simulation' to initialize the agents.",
+                    ui.br(),
+                    ui.span(
+                        "Agents will be created with random initial characteristics and identities.",
+                        class_="detail-text"
+                    )
+                )
+            )
         
         m = current['model']
         if not hasattr(m, 'last_interaction'):
@@ -2213,11 +2229,12 @@ def server(input, output, session):
     @render.plot
     def step_network_plot():
         current = get_current_state()
-        if current['model'] is None or not hasattr(current['model'], 'interaction_network'):
-            # Create empty figure with message
+        if current['model'] is None:
+            # Create initial state visualization
             fig, ax = plt.subplots(figsize=(10, 10))
-            ax.text(0.5, 0.5, "Initialize simulation to see network",
+            ax.text(0.5, 0.5, "Click 'Start Simulation' to begin",
                    ha='center', va='center', fontsize=12)
+            ax.set_title("Agent Interaction Network")
             ax.set_xticks([])
             ax.set_yticks([])
             return fig
@@ -2560,14 +2577,26 @@ def server(input, output, session):
         )
     
     @reactive.Effect
-    @reactive.event(input.save_and_reset)
-    def handle_save_and_reset():
-        """Handle saving parameters and resetting the simulation."""
-        current = get_current_state()
-        
+    @reactive.event(input.save_model_and_reset)
+    def handle_save_model_and_reset():
+        """Save model parameters and reset simulation."""
         try:
-            # Update configuration with new parameter values
-            new_config = {
+            handle_save_model_params()
+            handle_reset_simulation()
+        except Exception as e:
+            ui.notification_show(f"Error saving and resetting: {str(e)}", type="error")
+
+    @reactive.Effect
+    @reactive.event(input.save_model_params)
+    def handle_save_model_params():
+        """Handle saving model parameters without resetting."""
+        try:
+            current = get_current_state()
+            if current.get('config') is None:
+                current['config'] = {}
+            
+            # Update model parameters in config
+            current['config'].update({
                 'n_agents': input.n_agents(),
                 'initial_li_equal': input.initial_li_equal(),
                 'identity_change_rate': input.identity_change_rate(),
@@ -2576,44 +2605,61 @@ def server(input, output, session):
                     'sigma': input.gaussian_sigma(),
                     'k': input.sigmoid_k(),
                     'threshold': input.threshold_value()
-                },
-                'characteristics_range': input.characteristics_range(),
-                'ilt_range': input.ilt_range(),
-                'initial_identity': input.initial_identity(),
-                'claim_multiplier': input.claim_multiplier(),
-                'grant_multiplier': input.grant_multiplier()
-            }
-            
-            # Validate parameters
-            if new_config['n_agents'] < 2 or new_config['n_agents'] > 10:
-                ui.notification_show("Number of agents must be between 2 and 10", type="error")
-                return
-            
-            # Update current state
-            current.update({
-                'config': new_config,
-                'model': None,
-                'current_step': 0,
-                'network_pos': None,
-                'agents': None
+                }
             })
             
             model_state.set(current)
-            
-            # Show success notification
-            ui.notification_show(
-                "Parameters saved successfully! Click 'Start Simulation' to begin.",
-                type="message"
-            )
-            
-            # Update save feedback
-            ui.update_text(
-                "save-feedback",
-                "✓ Parameters saved! Click 'Start Simulation' to begin with new settings."
-            )
+            ui.notification_show("Model parameters saved successfully!", type="message")
             
         except Exception as e:
-            ui.notification_show(f"Error saving parameters: {str(e)}", type="error")
+            ui.notification_show(f"Error saving model parameters: {str(e)}", type="error")
+
+    @reactive.Effect
+    @reactive.event(input.save_identity_params)
+    def handle_save_identity_params():
+        """Handle saving identity parameters without resetting."""
+        try:
+            current = get_current_state()
+            if current.get('config') is None:
+                current['config'] = {}
+            
+            # Update identity parameters in config
+            current['config'].update({
+                'identity_rules': {
+                    'claim_granted': {
+                        'leader_identity': input.claim_granted_li(),
+                        'follower_identity': input.claim_granted_fi()
+                    },
+                    'claim_rejected': {
+                        'leader_identity': input.claim_rejected_li(),
+                        'follower_identity': input.claim_rejected_fi()
+                    },
+                    'grant_given': {
+                        'leader_identity': input.grant_given_li(),
+                        'follower_identity': input.grant_given_fi()
+                    },
+                    'grant_withheld': {
+                        'leader_identity': input.grant_withheld_li(),
+                        'follower_identity': input.grant_withheld_fi()
+                    }
+                }
+            })
+            
+            model_state.set(current)
+            ui.notification_show("Identity parameters saved successfully!", type="message")
+            
+        except Exception as e:
+            ui.notification_show(f"Error saving identity parameters: {str(e)}", type="error")
+
+    @reactive.Effect
+    @reactive.event(input.save_identity_and_reset)
+    def handle_save_identity_and_reset():
+        """Save identity parameters and reset simulation."""
+        try:
+            handle_save_identity_params()
+            handle_reset_simulation()
+        except Exception as e:
+            ui.notification_show(f"Error saving and resetting: {str(e)}", type="error")
 
     # Define metric explanations
     METRIC_EXPLANATIONS = {
@@ -2728,9 +2774,9 @@ def server(input, output, session):
         current.update({
             'selected_variant': 'base_derue',
             'config': {
-                'model_name': 'Base DeRue Model',
-                'theoretical_basis': 'Core Leadership Emergence Mechanisms',
-                'description': 'Original model with basic mechanisms: leadership characteristics, ILTs, claims/grants, and identity development.',
+                'model_name': 'Base Social Interactionist Model',
+                'theoretical_basis': 'Social Interactionist Leadership Emergence',
+                'description': 'Social interactionist model with core mechanisms: leadership characteristics, ILTs, claims/grants, and identity development through social interactions.',
                 'parameters': {
                     'simulation_properties': {
                         'group_size': 4  # Changed default to 4 agents
@@ -2994,26 +3040,6 @@ def server(input, output, session):
                     max=100,
                     value=[40, 60]
                 )
-            ),
-            
-            # Initial Follower Identity
-            ui.tags.div(
-                {"class": "parameter-item"},
-                ui.tags.label(
-                    "Initial Follower Identity",
-                    ui.tags.span("ⓘ", {"class": "info-icon"}),
-                    ui.tags.div(
-                        "Starting value for agents' follower identity.",
-                        {"class": "tooltip-text"}
-                    )
-                ),
-                ui.input_numeric(
-                    "initial_follower_identity",
-                    None,
-                    value=50,
-                    min=0,
-                    max=100
-                )
             )
         )
     
@@ -3085,30 +3111,6 @@ def server(input, output, session):
                     max=30.0,
                     value=15.0,
                     step=1.0
-                )
-            ),
-            
-            # Identity Change Multipliers
-            ui.tags.div(
-                {"class": "parameter-item"},
-                ui.tags.label(
-                    "Identity Change Multipliers",
-                    ui.tags.span("ⓘ", {"class": "info-icon"}),
-                ui.input_slider(
-                    "claim_multiplier",
-                    "Claim Success Impact",
-                    min=0.1,
-                    max=2.0,
-                    value=0.7,
-                    step=0.1
-                ),
-                ui.input_slider(
-                    "grant_multiplier",
-                    "Grant Impact",
-                    min=0.1,
-                    max=2.0,
-                    value=0.6,
-                    step=0.1
                 )
             )
         )

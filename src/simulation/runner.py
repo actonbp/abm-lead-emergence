@@ -1,269 +1,202 @@
 """
-Simulation execution engine for running batches of leadership emergence models.
+Enhanced simulation runner for leadership emergence models.
+Supports different theoretical perspectives and optional contexts.
 """
 
-import numpy as np
-import pandas as pd
-from typing import Dict, List, Type, Any, Optional
-from pathlib import Path
-from datetime import datetime
-from concurrent.futures import ProcessPoolExecutor
-import json
+from typing import Dict, Any, Optional, Type
 import logging
-import multiprocessing
-import os
-from dataclasses import dataclass
+from datetime import datetime
+from pathlib import Path
 
-from src.models.base_model import BaseLeadershipModel
+from ..models.base_model import BaseLeadershipModel
+from .contexts.base import Context
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-class NumpyEncoder(json.JSONEncoder):
-    """Custom JSON encoder for NumPy arrays and model objects."""
-    def default(self, obj):
-        if isinstance(obj, np.ndarray):
-            return obj.tolist()
-        if isinstance(obj, (np.integer, np.floating)):
-            return obj.item()
-        if isinstance(obj, Path):
-            return str(obj)
-        if hasattr(obj, '__dict__'):
-            # For model objects, just save their state
-            return {
-                'class': obj.__class__.__name__,
-                'state': {
-                    k: v for k, v in obj.__dict__.items()
-                    if not k.startswith('_')
-                }
-            }
-        return super().default(obj)
-
-
-@dataclass
-class SimulationConfig:
-    """Configuration for a single simulation run."""
-    model_params: Dict[str, Any]
-    n_steps: int
-    random_seed: Optional[int] = None
-
-    def __post_init__(self):
-        """Validate configuration parameters."""
-        if self.n_steps <= 0:
-            raise ValueError("n_steps must be positive")
-
-
-class BatchRunner:
-    """Manages batch execution of leadership emergence simulations."""
+class SimulationRunner:
+    """Runs leadership emergence simulations with different perspectives and contexts."""
     
     def __init__(
         self,
         model_class: Type[BaseLeadershipModel],
-        output_dir: Path,
-        n_jobs: int = -1
+        context: Optional[Context] = None,
+        output_dir: Optional[str] = None
     ):
-        """Initialize batch runner.
+        """Initialize runner with model class and optional context.
         
         Args:
-            model_class: Class of the model to run
-            output_dir: Directory for output files
-            n_jobs: Number of parallel jobs (-1 for all cores)
+            model_class: The perspective-specific model class to use
+            context: Optional context to modify model behavior
+            output_dir: Directory to save results (if None, don't save)
         """
         self.model_class = model_class
-        self.output_dir = Path(output_dir)
+        self.context = context
+        self.output_dir = Path(output_dir) if output_dir else None
         
-        # Set number of jobs
-        if n_jobs < 0:
-            self.n_jobs = multiprocessing.cpu_count()
-        else:
-            self.n_jobs = min(n_jobs, multiprocessing.cpu_count())
-        
-        # Create output directories
-        self._setup_directories()
+        if self.output_dir:
+            self.output_dir.mkdir(parents=True, exist_ok=True)
     
-    def _setup_directories(self):
-        """Create necessary output directories."""
-        dirs = ['raw', 'processed', 'logs']
-        for dir_name in dirs:
-            dir_path = self.output_dir / dir_name
-            dir_path.mkdir(parents=True, exist_ok=True)
-            logger.debug(f"Created directory: {dir_path}")
-    
-    def run_single_simulation(
+    def run_single(
         self,
-        config: SimulationConfig,
-        run_id: str,
-        batch_dir: Path
-    ) -> str:
-        """Run a single simulation with given configuration.
+        params: Dict[str, Any],
+        n_steps: int,
+        random_seed: Optional[int] = None
+    ) -> Dict[str, Any]:
+        """Run a single simulation with given parameters.
         
         Args:
-            config: Simulation configuration
-            run_id: Unique identifier for this run
-            batch_dir: Directory for batch results
+            params: Model parameters
+            n_steps: Number of steps to run
+            random_seed: Optional random seed for reproducibility
             
         Returns:
-            Path to result file
+            Dictionary containing simulation results
         """
-        try:
-            # Initialize model
-            model = self.model_class(
-                config=config.model_params,
-                random_seed=config.random_seed
-            )
-            
-            # Run simulation
-            history = []
-            for timestep in range(config.n_steps):
-                state = model.step()
-                state['timestep'] = timestep
-                history.append(state)
-            
-            # Get final state
-            final_state = history[-1]
-            
-            # Extract network state
-            network_state = {
-                'nodes': list(model.interaction_network.nodes()),
-                'edges': [(u, v, d) for u, v, d in model.interaction_network.edges(data=True)]
-            }
-            
-            # Prepare results
-            results = {
-                'parameters': config.model_params,
-                'history': history,
-                'final_state': final_state,
-                'leader_identities': final_state['leader_identities'],
-                'follower_identities': final_state.get('follower_identities', [0.0] * len(final_state['leader_identities'])),
-                'schemas': final_state.get('schemas', [0.0] * len(final_state['leader_identities'])),
-                'model_state': {
-                    'class': model.__class__.__name__,
-                    'time': model.time,
-                    'n_agents': len(model.agents),
-                    'interaction_network': network_state,
-                    'agent_states': [
-                        {
-                            'id': agent.id,
-                            'leader_identity': agent.leader_identity,
-                            'follower_identity': agent.follower_identity,
-                            'characteristics': agent.characteristics,
-                            'ilt': agent.ilt,
-                            'leader_identity_history': agent.leader_identity_history,
-                            'follower_identity_history': agent.follower_identity_history
-                        }
-                        for agent in model.agents
-                    ]
-                },
-                'metadata': {
-                    'run_id': run_id,
-                    'timestamp': datetime.now().isoformat(),
-                    'model_class': self.model_class.__name__,
-                    'n_steps': config.n_steps,
-                    'random_seed': config.random_seed
-                }
-            }
-            
-            # Save results
-            result_file = batch_dir / f"{run_id}.json"
-            with open(result_file, 'w') as f:
-                json.dump(results, f, indent=2, cls=NumpyEncoder)
-            
-            return str(result_file)
-            
-        except Exception as e:
-            logger.error(f"Error in run {run_id}: {str(e)}")
-            raise
-    
-    def run_batch(
-        self,
-        configs: List[SimulationConfig],
-        batch_id: str
-    ) -> List[str]:
-        """Run a batch of simulations with different configurations.
+        logger.info(f"Starting simulation for {n_steps} steps")
+        logger.info(f"Model class: {self.model_class.__name__}")
+        if self.context:
+            logger.info(f"Context: {self.context.__class__.__name__}")
         
-        Args:
-            configs: List of simulation configurations
-            batch_id: Unique identifier for this batch
-            
-        Returns:
-            List of paths to result files
-        """
-        # Create batch directory
-        batch_dir = self.output_dir / f"batch_{batch_id}"
-        batch_dir.mkdir(parents=True, exist_ok=True)
+        # Initialize model with perspective-specific class
+        model = self.model_class(params=params, random_seed=random_seed)
         
-        # Save batch metadata
-        metadata = {
-            'timestamp': datetime.now().isoformat(),
+        # Run simulation
+        history = []
+        for step in range(n_steps):
+            if step % 10 == 0:
+                logger.info(f"Step {step}/{n_steps}")
+            
+            # Get current state
+            state = model.step()
+            
+            # Apply context modifications if present
+            if self.context:
+                state['context'] = self.context.get_state()
+            
+            history.append(state)
+        
+        # Prepare results
+        results = {
             'model_class': self.model_class.__name__,
-            'n_configurations': len(configs),
-            'n_jobs': self.n_jobs,
-            'configurations': [
-                {
-                    'model_params': config.model_params,
-                    'n_steps': config.n_steps,
-                    'random_seed': config.random_seed
-                }
-                for config in configs
-            ]
+            'context_class': self.context.__class__.__name__ if self.context else None,
+            'parameters': params,
+            'n_steps': n_steps,
+            'random_seed': random_seed,
+            'history': history,
+            'final_state': model.get_state(),
+            'metadata': {
+                'timestamp': datetime.now().isoformat()
+            }
         }
         
-        with open(batch_dir / 'metadata.json', 'w') as f:
-            json.dump(metadata, f, indent=2, cls=NumpyEncoder)
+        # Save results if output directory specified
+        if self.output_dir:
+            self._save_results(results)
         
-        # Run simulations in parallel
-        result_files = []
+        logger.info("Simulation complete")
+        return results
+    
+    def run_parameter_sweep(
+        self,
+        param_grid: Dict[str, list],
+        n_steps: int,
+        n_replications: int = 1,
+        random_seed: Optional[int] = None
+    ) -> Dict[str, Any]:
+        """Run multiple simulations sweeping over parameter combinations.
         
-        logger.info(f"Running {len(configs)} simulations with {self.n_jobs} workers")
-        
-        with ProcessPoolExecutor(max_workers=self.n_jobs) as executor:
-            futures = []
-            for i, config in enumerate(configs):
-                run_id = f"{batch_id}_run_{i:04d}"
-                future = executor.submit(
-                    self.run_single_simulation,
-                    config,
-                    run_id,
-                    batch_dir
-                )
-                futures.append((run_id, future))
+        Args:
+            param_grid: Dictionary mapping parameter names to lists of values
+            n_steps: Number of steps per simulation
+            n_replications: Number of replications per parameter combination
+            random_seed: Optional random seed for reproducibility
             
-            # Process results as they complete
-            for i, (run_id, future) in enumerate(futures):
-                try:
-                    result_file = future.result()
-                    result_files.append(result_file)
-                    logger.info(f"Completed run {run_id} ({i+1}/{len(configs)})")
-                except Exception as e:
-                    logger.error(f"Failed run {run_id}: {str(e)}")
+        Returns:
+            Dictionary containing results for all simulations
+        """
+        logger.info(f"Starting parameter sweep")
+        logger.info(f"Parameter grid: {param_grid}")
+        logger.info(f"Replications per combination: {n_replications}")
         
-        return result_files
-
-
-def create_parameter_grid(
-    param_ranges: Dict[str, List[Any]]
-) -> List[Dict[str, Any]]:
-    """Create grid of parameter combinations.
-    
-    Args:
-        param_ranges: Dict mapping parameter names to lists of values
+        # Generate parameter combinations
+        param_combinations = self._generate_param_combinations(param_grid)
         
-    Returns:
-        List of parameter combinations
-    """
-    # Get parameter names and values
-    param_names = list(param_ranges.keys())
-    param_values = list(param_ranges.values())
-    
-    # Generate combinations
-    combinations = []
-    for values in np.ndindex(*[len(v) for v in param_values]):
-        combination = {
-            name: param_values[i][values[i]]
-            for i, name in enumerate(param_names)
+        # Run simulations for each combination
+        all_results = []
+        for params in param_combinations:
+            logger.info(f"Running combination: {params}")
+            
+            # Run replications
+            for rep in range(n_replications):
+                rep_seed = random_seed + rep if random_seed else None
+                results = self.run_single(
+                    params=params,
+                    n_steps=n_steps,
+                    random_seed=rep_seed
+                )
+                results['replication'] = rep
+                all_results.append(results)
+        
+        # Prepare sweep results
+        sweep_results = {
+            'param_grid': param_grid,
+            'n_steps': n_steps,
+            'n_replications': n_replications,
+            'base_random_seed': random_seed,
+            'results': all_results,
+            'metadata': {
+                'timestamp': datetime.now().isoformat(),
+                'model_class': self.model_class.__name__,
+                'context_class': self.context.__class__.__name__ if self.context else None
+            }
         }
-        combinations.append(combination)
+        
+        # Save sweep results if output directory specified
+        if self.output_dir:
+            self._save_sweep_results(sweep_results)
+        
+        logger.info("Parameter sweep complete")
+        return sweep_results
     
-    return combinations 
+    def _generate_param_combinations(self, param_grid: Dict[str, list]) -> list:
+        """Generate all combinations of parameters from grid."""
+        import itertools
+        
+        # Get parameter names and values
+        param_names = list(param_grid.keys())
+        param_values = list(param_grid.values())
+        
+        # Generate all combinations
+        combinations = []
+        for values in itertools.product(*param_values):
+            combination = dict(zip(param_names, values))
+            combinations.append(combination)
+        
+        return combinations
+    
+    def _save_results(self, results: Dict[str, Any]):
+        """Save single simulation results."""
+        import json
+        
+        # Create filename with timestamp
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"sim_{results['model_class']}_{timestamp}.json"
+        
+        # Save to file
+        with open(self.output_dir / filename, 'w') as f:
+            json.dump(results, f, indent=2)
+    
+    def _save_sweep_results(self, results: Dict[str, Any]):
+        """Save parameter sweep results."""
+        import json
+        
+        # Create filename with timestamp
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"sweep_{results['metadata']['model_class']}_{timestamp}.json"
+        
+        # Save to file
+        with open(self.output_dir / filename, 'w') as f:
+            json.dump(results, f, indent=2) 

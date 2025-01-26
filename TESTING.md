@@ -1,171 +1,234 @@
 # Testing Documentation
 
-This document describes the testing setup, procedures, and guidelines for the leadership emergence simulation project.
+## Overview
+
+This document outlines the testing strategy for the leadership emergence simulation project, focusing on the base model, contexts, and parameter sweeps.
 
 ## Test Structure
 
-The project uses several types of tests:
+### 1. Model Tests
+- Base leadership model behavior
+- Context modifications
+- Parameter validation
+- State management
 
-1. **Unit Tests**: Test individual components in isolation
-   - Model behavior
-   - Feature extraction
-   - Data processing
+### 2. Integration Tests
+- End-to-end simulations
+- Parameter sweeps
+- Context integration
+- Result collection
 
-2. **Integration Tests**: Test component interactions
-   - End-to-end workflows
-   - Error handling
-   - Interruption recovery
-   - Parameter space coverage
-   - Reproducibility
-
-3. **Performance Tests**: Test system scalability
-   - Large simulations
-   - Parallel processing
-   - Memory usage
+### 3. Analysis Tests
+- Metrics calculation
+- Pattern detection
+- Result validation
 
 ## Running Tests
 
-### Basic Test Run
+### Basic Commands
 ```bash
 # Run all tests
 pytest
 
-# Run with coverage report
+# Run with coverage
 pytest --cov=src --cov-report=html
 
-# Run specific test file
-pytest tests/test_integration.py
-
-# Run tests matching a pattern
-pytest -k "test_end_to_end"
+# Run specific components
+pytest tests/test_base_model.py
+pytest tests/test_contexts.py
+pytest tests/test_parameter_sweep.py
 ```
-
-### Test Coverage
-Coverage reports are generated in HTML format in the `htmlcov` directory. Open `htmlcov/index.html` to view:
-- Line coverage
-- Branch coverage
-- Uncovered lines
-- Coverage trends
-
-### Continuous Integration
-Tests run automatically on GitHub Actions:
-- On every push to main
-- On pull requests
-- Tests run on Python 3.8, 3.9, and 3.10
-- Coverage reports uploaded to Codecov
 
 ## Test Categories
 
-### Unit Tests
-- `test_base_model.py`: Tests base model functionality
-- `test_schema_model.py`: Tests schema-based model implementation
-- `test_feature_extraction.py`: Tests feature extraction methods
-
-### Integration Tests
-- `test_integration.py`: Tests complete system workflows
-  - End-to-end simulation and analysis
-  - Error handling
-  - Interruption recovery
-  - Parameter space coverage
-  - Result reproducibility
-
-### Performance Tests (TODO)
-- Large-scale simulations
-- Memory profiling
-- Execution time benchmarks
-
-## Writing Tests
-
-### Guidelines
-1. Each test should have a clear purpose
-2. Use descriptive test names
-3. Include docstrings explaining test scenarios
-4. Use appropriate fixtures for setup/teardown
-5. Test both success and failure cases
-6. Test edge cases and boundary conditions
-
-### Example Test Structure
+### 1. Base Model Tests (`tests/test_base_model.py`)
 ```python
-def test_something():
-    """
-    Test description explaining:
-    - What is being tested
-    - Expected behavior
-    - Any special conditions
-    """
-    # Setup
-    ...
-    
-    # Execute
-    ...
-    
-    # Assert
-    ...
+def test_claim_probability():
+    """Test claim probability calculation."""
+    model = BaseLeadershipModel(n_agents=4)
+    prob = model.calculate_claim_probability(agent_id=0)
+    assert 0 <= prob <= 1
+
+def test_grant_probability():
+    """Test grant probability calculation."""
+    model = BaseLeadershipModel(n_agents=4)
+    prob = model.calculate_grant_probability(granter_id=1, claimer_id=0)
+    assert 0 <= prob <= 1
+
+def test_score_updates():
+    """Test leadership score updates."""
+    model = BaseLeadershipModel(n_agents=4)
+    initial_score = model.agents[0].lead_score
+    model.update_scores(claimer_id=0, granter_id=1, success=True)
+    assert model.agents[0].lead_score > initial_score
 ```
 
-### Using Fixtures
+### 2. Context Tests (`tests/test_contexts.py`)
+```python
+def test_crisis_context():
+    """Test crisis context modifications."""
+    context = CrisisContext(intensity=0.7)
+    base_prob = 0.5
+    modified_prob = context.modify_claim_probability(base_prob, agent_id=0)
+    assert modified_prob > base_prob
+
+def test_context_integration():
+    """Test context integration with model."""
+    model = BaseLeadershipModel(n_agents=4)
+    context = CrisisContext(intensity=0.7)
+    model.set_context(context)
+    # Run simulation and check effects
+```
+
+### 3. Parameter Sweep Tests (`tests/test_parameter_sweep.py`)
+```python
+def test_parameter_combinations():
+    """Test parameter combination generation."""
+    param_grid = {
+        "n_agents": [4, 6],
+        "claim_multiplier": [0.5, 0.7]
+    }
+    combinations = generate_param_combinations(param_grid)
+    assert len(combinations) == 4
+
+def test_metrics_calculation():
+    """Test leadership emergence metrics."""
+    history = run_simulation(steps=100)
+    metrics = calculate_metrics(history)
+    assert "time_to_first_leader" in metrics
+    assert "num_leaders" in metrics
+```
+
+## Test Fixtures
+
+### 1. Model Fixtures
 ```python
 @pytest.fixture
-def test_data():
-    """Create test data."""
-    return ...
+def base_model():
+    """Create base model for testing."""
+    return BaseLeadershipModel(
+        n_agents=4,
+        claim_multiplier=0.7,
+        grant_multiplier=0.6
+    )
 
-def test_with_fixture(test_data):
-    """Use fixture in test."""
-    assert ...
+@pytest.fixture
+def crisis_context():
+    """Create crisis context for testing."""
+    return CrisisContext(
+        intensity=0.7,
+        claim_boost=1.5,
+        grant_boost=1.3
+    )
+```
+
+### 2. Simulation Fixtures
+```python
+@pytest.fixture
+def simulation_history():
+    """Generate simulation history for testing."""
+    model = base_model()
+    return model.run(steps=100)
+
+@pytest.fixture
+def parameter_sweep_results():
+    """Generate parameter sweep results for testing."""
+    return run_parameter_sweep(
+        n_steps=50,
+        n_replications=3
+    )
 ```
 
 ## Test Coverage Goals
 
+### Critical Components (100% Coverage)
+1. Base Model
+   - Claim/grant calculations
+   - Score updates
+   - State management
+
+2. Contexts
+   - Probability modifications
+   - State update modifications
+   - Parameter validation
+
+3. Parameter Sweep
+   - Parameter combination generation
+   - Result collection
+   - Metrics calculation
+
+### General Coverage Goals
 - Line coverage: >90%
 - Branch coverage: >85%
-- Critical components: 100%
+- Documentation coverage: 100%
 
-### Critical Components
-- Model state management
-- Parameter validation
-- Data persistence
-- Feature extraction
-- Error handling
+## Writing New Tests
 
-## Adding New Tests
+### Guidelines
+1. Test core functionality first
+2. Include edge cases
+3. Validate parameter ranges
+4. Check state consistency
+5. Verify metric calculations
 
-When adding new features:
-1. Write tests before implementation (TDD)
-2. Cover both normal and error cases
-3. Include performance considerations
-4. Update documentation
+### Example Test Structure
+```python
+def test_feature():
+    """
+    Test description:
+    1. What is being tested
+    2. Expected behavior
+    3. Edge cases considered
+    """
+    # Setup
+    model = setup_test_model()
+    
+    # Execute
+    result = model.some_feature()
+    
+    # Assert
+    assert_expected_behavior(result)
+```
 
-## Debugging Failed Tests
+## Debugging Tests
 
-1. Use `-v` flag for verbose output
-2. Use `-s` flag to see print statements
-3. Use `pytest.set_trace()` for debugging
-4. Check coverage reports for gaps
+### Common Issues
+1. Random seed inconsistency
+2. Parameter validation errors
+3. State tracking issues
+4. Metric calculation errors
 
-## Performance Testing
-
-### Tools
-- cProfile for profiling
-- memory_profiler for memory usage
-- pytest-benchmark for benchmarking
-
-### Running Performance Tests
+### Debugging Tools
 ```bash
-# Run with profiling
-python -m cProfile -o profile.stats tests/test_performance.py
+# Verbose output
+pytest -v
 
-# Run with memory profiling
-python -m memory_profiler tests/test_performance.py
+# Print statements
+pytest -s
 
-# Run benchmarks
-pytest --benchmark-only
+# Debug on error
+pytest --pdb
+
+# Show coverage
+pytest --cov=src --cov-report=term-missing
 ```
 
 ## Future Improvements
 
-1. Add property-based testing
-2. Expand performance test suite
-3. Add mutation testing
-4. Improve test documentation
-5. Add visual test result reporting 
+### 1. Test Extensions
+- Property-based testing
+- Mutation testing
+- Performance benchmarks
+- Visual test reports
+
+### 2. Coverage Improvements
+- Additional edge cases
+- Error scenarios
+- Parameter combinations
+- Context interactions
+
+### 3. Documentation
+- Test case descriptions
+- Coverage reports
+- Debugging guides
+- Best practices 

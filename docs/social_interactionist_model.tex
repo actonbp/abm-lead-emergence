@@ -1,0 +1,234 @@
+% Social Interactionist Base Model Documentation
+\documentclass[12pt]{article}
+
+% Packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{float}
+
+% Title Information
+\title{Social Interactionist Base Model\\
+\large A Framework for Understanding Leadership Emergence}
+\author{ABM Lead Emergence Project}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This document provides a comprehensive overview of the Social Interactionist Base Model for leadership emergence. The model simulates how leadership hierarchies emerge through dyadic interactions between agents, incorporating key mechanisms such as leadership claims, grants, and identity development. The model is grounded in social interactionist theory and demonstrates how micro-level interactions lead to macro-level leadership structures.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}
+The Social Interactionist Base Model represents leadership emergence as a dynamic process driven by social interactions. Unlike traditional approaches that view leadership as a static trait, this model emphasizes the role of ongoing social processes in shaping leadership structures. The model integrates three key theoretical perspectives:
+
+\begin{itemize}
+    \item Social interactionism and the negotiation of leadership through claims and grants
+    \item Identity theory and the development of leader/follower self-views
+    \item Implicit Leadership Theory (ILT) and its role in leadership recognition
+\end{itemize}
+
+\section{Model Components}
+
+\subsection{Agents}
+Each agent in the model represents an individual with the following attributes:
+
+\begin{itemize}
+    \item \textbf{Leader Identity (LI)}: Represents how strongly the agent views themselves as a leader (0-100)
+    \item \textbf{Follower Identity (FI)}: Represents how strongly the agent views themselves as a follower (0-100)
+    \item \textbf{Leadership Characteristics}: Observable traits that others evaluate against their ILTs
+    \item \textbf{Implicit Leadership Theory (ILT)}: The agent's mental model of ideal leadership
+\end{itemize}
+
+\subsection{Interaction Mechanisms}
+The model operates through dyadic interactions with the following key mechanisms:
+
+\begin{enumerate}
+    \item \textbf{Leadership Claims}
+    \begin{itemize}
+        \item Probability based on agent's leader identity and self-confidence
+        \item Influenced by match between own characteristics and ILT
+    \end{itemize}
+    
+    \item \textbf{Leadership Grants}
+    \begin{itemize}
+        \item Probability based on match between claimant's characteristics and granter's ILT
+        \item Influenced by granter's follower identity
+    \end{itemize}
+    
+    \item \textbf{Identity Updates}
+    \begin{itemize}
+        \item Successful claims strengthen leader identity
+        \item Successful grants strengthen follower identity
+        \item Failed claims/grants weaken respective identities
+    \end{itemize}
+\end{enumerate}
+
+\section{Mathematical Framework}
+
+\subsection{Claim Probability}
+The probability of an agent making a leadership claim is given by:
+
+\begin{equation}
+P(\text{claim}) = \sigma(\alpha \cdot \text{LI} + \beta \cdot \text{self\_match} - \theta)
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $\sigma$ is the logistic function
+    \item $\text{LI}$ is the agent's leader identity
+    \item $\text{self\_match}$ is the match between own characteristics and ILT
+    \item $\alpha, \beta$ are weight parameters
+    \item $\theta$ is the claim threshold
+\end{itemize}
+
+\subsection{Grant Probability}
+The probability of granting leadership is:
+
+\begin{equation}
+P(\text{grant}) = \sigma(\gamma \cdot \text{ILT\_match} + \delta \cdot \text{FI} - \phi)
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $\text{ILT\_match}$ is the match between claimant and granter's ILT
+    \item $\text{FI}$ is the granter's follower identity
+    \item $\gamma, \delta$ are weight parameters
+    \item $\phi$ is the grant threshold
+\end{itemize}
+
+\subsection{Identity Updates}
+Identity updates follow these rules:
+
+\begin{align*}
+\Delta \text{LI}_{\text{claim}} &= \begin{cases}
+    +\eta_L & \text{if claim granted}\\
+    -\eta_L & \text{if claim rejected}
+\end{cases}\\
+\Delta \text{FI}_{\text{grant}} &= \begin{cases}
+    +\eta_F & \text{if grant given}\\
+    -\eta_F & \text{if grant withheld}
+\end{cases}
+\end{align*}
+
+where $\eta_L, \eta_F$ are learning rates for leader and follower identities.
+
+\section{Emergence Mechanisms}
+
+\subsection{Hierarchy Formation}
+Leadership hierarchies emerge through:
+\begin{itemize}
+    \item Accumulation of successful claims and grants
+    \item Reinforcement of leader and follower identities
+    \item Development of consistent interaction patterns
+\end{itemize}
+
+\subsection{Structural Stability}
+The model measures structural stability through:
+\begin{itemize}
+    \item \textbf{Hierarchy Clarity}: How clearly defined the leadership structure is
+    \item \textbf{Rank Consensus}: Agreement among agents about leadership positions
+    \item \textbf{Interaction Patterns}: Consistency of leadership relationships
+\end{itemize}
+
+\section{Model Parameters}
+
+\subsection{Core Parameters}
+\begin{table}[H]
+\centering
+\begin{tabular}{lll}
+\toprule
+Parameter & Range & Description \\
+\midrule
+Number of Agents & 2-10 & Size of the interaction group \\
+Identity Change Rate & 0.1-5.0 & Speed of identity updates \\
+Claim Threshold & 0.0-1.0 & Minimum confidence for claims \\
+Grant Threshold & 0.0-1.0 & Minimum match for grants \\
+\bottomrule
+\end{tabular}
+\caption{Core model parameters and their ranges}
+\end{table}
+
+\subsection{Advanced Parameters}
+\begin{itemize}
+    \item \textbf{ILT Matching Method}: Algorithm for comparing characteristics
+    \begin{itemize}
+        \item Euclidean Distance
+        \item Gaussian Similarity
+        \item Sigmoid Function
+        \item Threshold-based
+    \end{itemize}
+    \item \textbf{Initial Conditions}: Starting values for identities and characteristics
+    \item \textbf{Memory Length}: How many past interactions influence decisions
+\end{itemize}
+
+\section{Validation Metrics}
+
+\subsection{Quantitative Metrics}
+\begin{itemize}
+    \item \textbf{Hierarchy Clarity} (0-1): Measures distinctness of leadership roles
+    \item \textbf{Rank Consensus} (0-1): Agreement on leadership hierarchy
+    \item \textbf{Structural Stability} (0-1): Consistency of interaction patterns
+    \item \textbf{System Entropy} (0+): Overall organization of leadership structure
+\end{itemize}
+
+\subsection{Validation Thresholds}
+\begin{itemize}
+    \item Hierarchy Clarity > 0.5
+    \item Rank Consensus > 0.6
+    \item Structural Stability > 0.7
+    \item System Entropy < 2.0
+\end{itemize}
+
+\section{Applications}
+
+\subsection{Research Applications}
+The model can be used to:
+\begin{itemize}
+    \item Test theories of leadership emergence
+    \item Explore conditions for effective hierarchy formation
+    \item Study the impact of individual differences on group structure
+    \item Investigate the role of social processes in leadership
+\end{itemize}
+
+\subsection{Practical Applications}
+The model provides insights for:
+\begin{itemize}
+    \item Organizational design
+    \item Team composition
+    \item Leadership development programs
+    \item Group dynamics interventions
+\end{itemize}
+
+\section{Future Directions}
+
+\subsection{Model Extensions}
+Potential areas for model development:
+\begin{itemize}
+    \item Multiple leadership dimensions
+    \item Complex network structures
+    \item Environmental influences
+    \item Group-level processes
+\end{itemize}
+
+\subsection{Research Opportunities}
+Future research could explore:
+\begin{itemize}
+    \item Cross-cultural variations in leadership emergence
+    \item Impact of organizational context
+    \item Role of power and status dynamics
+    \item Temporal patterns in hierarchy formation
+\end{itemize}
+
+\section{Conclusion}
+The Social Interactionist Base Model provides a powerful framework for understanding leadership emergence as a dynamic, social process. By incorporating key mechanisms of social interaction, identity development, and leadership recognition, the model generates insights into how informal leadership hierarchies develop and stabilize over time.
+
+\end{document} 
