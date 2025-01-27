@@ -32,27 +32,21 @@ env/
 *.swo
 .project
 .pydevproject
-.settings/
+.settings
 
 # Project specific
-outputs/
-!outputs/.gitkeep
-data/
-!data/.gitkeep
+outputs/raw/
+outputs/processed/
+outputs/parameter_sweep/*.png
 .env
 *.log
 .coverage
-coverage.xml
+htmlcov/
 .pytest_cache/
-.hypothesis/
+.ruff_cache/
 
 # OS specific
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
 Thumbs.db
 
 # Jupyter Notebook

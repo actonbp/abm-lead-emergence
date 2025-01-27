@@ -228,3 +228,68 @@ To propose a new perspective:
 2. Provide theoretical background
 3. Outline key parameters
 4. Suggest implementation approach 
+
+# Model Documentation
+
+## Base Model (v1.0)
+The base model implements pure ILT-based claim-grant mechanics to serve as a control/baseline. 
+
+### Key Features
+- Pure matching between characteristics and Implicit Leadership Theories (ILTs)
+- Identity updates that don't affect decisions
+- Continuous schema space with normal distributions
+
+### Implementation
+- Location: `src/models/base_model.py`
+- Results: `results/base_model_results.md`
+- Visualizations: `outputs/parameter_sweep/`
+
+### Key Findings
+1. Identity Development
+   - Leader identities show significant variance (2.409)
+   - Follower identities show moderate variance (0.402)
+   - Clear differentiation between leader and follower roles emerges
+
+2. Leadership Structure
+   - Weak but stable hierarchy (strength = 0.012)
+   - Consistent rankings but fluctuating perceptions
+   - High agreement between agents on leadership perceptions
+
+3. Optimal Parameters
+   - Group Size: 5 agents
+   - Schema: 2D continuous space
+   - Distribution Std: 0.169
+   - Match Threshold: 0.570
+   - Success Boost: 6.992
+   - Failure Penalty: 2.299
+
+### Limitations
+- Hierarchy strength remains relatively weak
+- Leadership perceptions show high fluctuation
+- Identity development alone may be insufficient for strong leadership emergence
+
+## Theoretical Perspectives (In Development)
+
+### 1. Social Interactionist Model
+Status: 🔄 In Progress
+- Identity feedback into decisions
+- Dynamic leader/follower role development
+- Location: `src/models/social_interactionist.py`
+
+### 2. Social Cognitive Model
+Status: 📅 Planned
+- Schema adaptation from observation
+- Group-level learning about leadership
+- Location: `src/models/social_cognitive.py`
+
+### 3. Social Identity Model
+Status: 📅 Planned
+- Collective leadership prototype
+- Group identity influence
+- Location: `src/models/social_identity.py`
+
+## Parameter Reference
+See [`docs/parameter_reference.md`](docs/parameter_reference.md) for comprehensive documentation of all model parameters.
+
+## Validation
+See [`validation/criteria.py`](validation/criteria.py) for model validation criteria and tests. 

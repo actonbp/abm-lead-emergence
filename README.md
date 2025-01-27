@@ -1,107 +1,59 @@
-# Leadership Emergence Simulation (Work in Progress)
+# Leadership Emergence Simulation
 
-**Author**: Bryan Acton
+A simple agent-based model exploring how leadership naturally emerges in groups through a "claim and grant" process.
 
-This project simulates how leadership emerges in groups through a simple "claim and grant" process: people can claim leadership, and others can choose to grant or deny those claims.
+## 🚀 Quick Start
+
+```bash
+# Clone and enter the repository
+git clone https://github.com/bacton/abm-lead-emergence.git
+cd abm-lead-emergence
+
+# Set up environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+
+# Run a basic simulation
+python scripts/run_simulation.py
+```
+
+## 📊 Latest Results
+
+The base model (v1.0) shows how leadership emerges through simple interactions:
+- Leaders and followers naturally differentiate over time
+- Stable (but weak) hierarchies form
+- Optimal parameters identified for strongest emergence
+
+[See full results here](results/base_model_results.md)
+
+## 📁 Project Structure
+
+```
+src/           # Core model code
+├── models/      # Different model implementations
+├── simulation/  # Running simulations
+└── analysis/    # Analyzing results
+
+scripts/       # Ready-to-use analysis tools
+├── run_simulation.py     # Run a basic simulation
+└── analyze_results.py    # Look at the results
+
+config/        # Model settings (YAML files)
+results/       # Analysis and findings
+outputs/       # Generated visualizations
+```
 
 ## 📚 Documentation
 
-- [Quick Start Guide](QUICKSTART.md) - Get up and running in 5 minutes
-- [Technical Architecture](ARCHITECTURE.md) - Detailed technical implementation
-- [Analysis Pipeline](PIPELINE.md) - Complete workflow for running simulations
-- [Model Documentation](MODELS.md) - Theoretical perspectives and implementation
-- [Project Structure](docs/PROJECT_STRUCTURE.md) - Codebase organization
-- [Development Roadmap](ROADMAP.md) - Current status and future plans
-- [Contributing Guide](CONTRIBUTING.md) - How to contribute
+- [Quick Start Guide](QUICKSTART.md) - Get started in 5 minutes
+- [Model Documentation](MODELS.md) - How the model works
+- [Development Status](ROADMAP.md) - Current progress and plans
 
-## Quick Start
+## 🤝 Contributing
 
-1. Clone this repository
-2. Create a virtual environment: `python -m venv venv`
-3. Activate it: 
-   - Windows: `venv\Scripts\activate`
-   - Mac/Linux: `source venv/bin/activate`
-4. Install requirements: `pip install -r requirements.txt`
+Contributions welcome! See [Contributing Guide](CONTRIBUTING.md) for guidelines.
 
-## File Formats Explained
+## 📝 License
 
-We use two main file formats:
-
-1. **YAML Files** (`.yaml`): For human-readable settings
-   - Found in: `config/*.yaml`
-   - Used for: Setting up simulations
-   - Example:
-   ```yaml
-   # This controls how many agents are in the simulation
-   n_agents: 4
-   
-   # This affects how often agents try to claim leadership
-   claim_rate: 0.5
-   ```
-
-2. **JSON Files** (`.json`): For storing results
-   - Found in: `outputs/*.json`
-   - Used for: Saving simulation data
-   - Example:
-   ```json
-   {
-     "time_step": 1,
-     "leader_score": 0.75
-   }
-   ```
-
-## Project Structure
-
-- `src/`: Main code
-  - `models/`: The simulation models
-  - `simulation/`: Running simulations
-  - `analysis/`: Analyzing results
-  - `app/`: Interactive visualization (work in progress)
-
-- `scripts/`: Ready-to-use analysis tools
-  - `run_simulation.py`: Run a basic simulation
-  - `parameter_sweep.py`: Try different settings
-  - `analyze_results.py`: Look at the results
-
-- `config/`: Settings files (in YAML)
-  - `base.yaml`: Basic settings
-  - `variants/`: Different experiment settings
-
-- `data/`: Where data is stored
-  - `raw/`: Original simulation outputs
-  - `processed/`: Analyzed results
-
-## Running Experiments
-
-1. Basic simulation:
-   ```bash
-   python scripts/run_simulation.py
-   ```
-
-2. Try different parameters:
-   ```bash
-   python scripts/parameter_sweep.py
-   ```
-
-3. Look at results:
-   ```bash
-   python scripts/analyze_results.py
-   ```
-
-## Development Status
-
-This project is actively being developed. The Shiny app for visualization is still in progress.
-
-See the [Development Roadmap](ROADMAP.md) for current status and planned features.
-
-## AI Tool Usage
-
-This project was developed with assistance from AI tools including GPT models and Claude (via Cursor).
-
-## Questions or Issues?
-
-Feel free to open an issue or contact the author directly.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT License - see [LICENSE](LICENSE)

@@ -1,27 +1,50 @@
 # Quick Start Guide
 
-This guide will help you get started with the Leadership Emergence ABM framework. For a complete technical overview, see [ARCHITECTURE.md](ARCHITECTURE.md).
+## Setup (5 minutes)
 
-## 1. Basic Setup (5 minutes)
-```bash
-# Clone and setup environment
-git clone https://github.com/bacton/abm-lead-emergence.git
-cd abm-lead-emergence
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -r requirements.txt
-```
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/bacton/abm-lead-emergence.git
+   cd abm-lead-emergence
+   ```
 
-## 2. Run Your First Simulation (2 minutes)
-```python
-from src.models.perspectives.interactionist import InteractionistModel
+2. **Create a virtual environment**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
 
-# Create and run a basic simulation
-model = InteractionistModel(n_agents=4)
-for _ in range(100):
-    state = model.step()
-print(f"Number of leaders: {state['metrics']['num_leaders']}")
-```
+## Running Your First Simulation (2 minutes)
+
+1. **Run a basic simulation**
+   ```bash
+   python scripts/run_simulation.py
+   ```
+
+2. **View the results**
+   - Check `outputs/` for visualizations
+   - See `results/base_model_results.md` for analysis
+
+## Trying Different Parameters (3 minutes)
+
+1. **Edit settings in `config/base.yaml`**
+   ```yaml
+   n_agents: 5              # Number of agents
+   success_boost: 6.992     # How much success helps
+   failure_penalty: 2.299   # How much failure hurts
+   ```
+
+2. **Run with new settings**
+   ```bash
+   python scripts/run_simulation.py --config config/base.yaml
+   ```
+
+## Next Steps
+
+- Read [Model Documentation](MODELS.md) to understand how it works
+- Check [Development Status](ROADMAP.md) to see what's next
+- Try the [Analysis Pipeline](PIPELINE.md) for deeper insights
 
 ## 3. Run Parameter Sweep (10 minutes)
 ```bash
@@ -32,50 +55,6 @@ python scripts/parameter_sweep.py \
     --n-steps 100 \
     --n-replications 3
 ```
-
-## Next Steps
-
-### If you want to...
-
-1. **Understand the Code Structure**
-   → Check [ARCHITECTURE.md](ARCHITECTURE.md)
-
-2. **Run Complete Analysis**
-   → Follow [PIPELINE.md](PIPELINE.md)
-
-3. **Learn About Models**
-   → Read [MODELS.md](MODELS.md)
-
-4. **See Development Status**
-   → View [ROADMAP.md](ROADMAP.md)
-
-### Common Tasks
-
-1. **Add a New Perspective**
-   ```python
-   # src/models/perspectives/your_perspective.py
-   class YourPerspectiveModel(BaseLeadershipModel):
-       def _process_claims_and_grants(self, interactions):
-           # Your perspective-specific logic here
-           pass
-   ```
-
-2. **Add a New Context**
-   ```python
-   # src/simulation/contexts/your_context.py
-   class YourContext(Context):
-       def modify_claim_probability(self, base_prob: float) -> float:
-           # Your context-specific modification here
-           return modified_prob
-   ```
-
-3. **Analyze Results**
-   ```python
-   # Load and analyze results
-   import pandas as pd
-   results = pd.read_csv('outputs/parameter_sweep/summary_latest.csv')
-   best_models = select_best_models(results)
-   ```
 
 ## Common Issues
 
