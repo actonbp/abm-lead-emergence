@@ -1,8 +1,8 @@
 # Leadership Emergence Simulation
 
-> ⚠️ **Work in Progress Notice**: This repository is currently under active development. Many models and code components referenced in the documentation are still being implemented or refined. Additional theoretical perspectives and optimization features will be added soon. Please check back for updates or follow the repository for notifications.
+> ⚠️ **Work in Progress Notice**: This repository explores how different theoretical mechanisms can explain leadership emergence in groups. The base model provides core interaction mechanics, while three distinct perspectives implement different emergence mechanisms. We're adding contextual factors to show how each mechanism may be more effective in different situations.
 
-An agent-based model exploring how leadership naturally emerges in groups through a "claim and grant" process, with multiple theoretical perspectives and Bayesian parameter optimization.
+An agent-based model exploring how leadership naturally emerges in groups through a "claim and grant" process, comparing different theoretical mechanisms across contexts.
 
 ## 🚀 Quick Start
 
@@ -16,156 +16,143 @@ python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 
-# Run Bayesian optimization for model parameters
-python scripts/optimize.py --model base
-python scripts/optimize.py --model interactionist
+# Run parameter optimization for each model
+python scripts/run_parameter_sweep.py --model base
+python scripts/run_parameter_sweep.py --model interactionist
+python scripts/run_parameter_sweep.py --model cognitive
+python scripts/run_parameter_sweep.py --model identity
 
-# Run comparison with optimized parameters
+# Compare models with optimized parameters
 python scripts/compare_perspectives.py
-
-# Visualize results
-python scripts/visualize.py
 ```
 
-## 🔬 Framework Overview
+## 📊 Model Structure
 
-```
-                        OPTIMIZED MODEL FRAMEWORK
-                        ========================
+### Foundation Models
+1. **Base Model**: Core interaction mechanics
+   - Basic claim-grant process
+   - Schema-based decisions
+   - Does not produce emergence alone
+   - Foundation for other perspectives
 
-┌─────────────────────────────────────────────────────────────┐
-│                 Bayesian Parameter Search                    │
-│ ┌─────────────┐    ┌─────────────┐    ┌─────────────┐      │
-│ │   Define    │ ─► │   Search    │ ─► │  Optimal    │      │
-│ │Search Space │    │  Process    │    │ Parameters   │      │
-│ └─────────────┘    └─────────────┘    └─────────────┘      │
-└───────────────────────────┬─────────────────────────────────┘
-                           ▼
-┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
-│   Model Layer   │     │   Simulation    │     │    Analysis     │
-│  (Optimized)    │     │    Engine       │     │     Layer       │
-│ ┌─────────────┐ │     │                 │     │                 │
-│ │ Base Model  │ │     │    Runs the     │     │  Processes &    │
-│ └─────────────┘ │     │   simulation    │     │   Analyzes      │
-│ ┌─────────────┐ │ ──► │   over time     │ ──► │    Results      │
-│ │Interactionist│ │     │                 │     │                 │
-│ └─────────────┘ │     │  Updates state   │     │ - ICC Metrics   │
-│ ┌─────────────┐ │     │  & interactions  │     │ - Comparisons   │
-│ │ Null Model  │ │     │                 │     │ - Visualization │
-│ └─────────────┘ │     │                 │     │                 │
-└─────────────────┘     └─────────────────┘     └─────────────────┘
-```
-
-### Framework Components
-
-1. **Bayesian Optimization**
-   - Efficient parameter search
-   - Performance-based optimization
-   - Reproducible parameter selection
-
-2. **Model Layer**
-   - Base Model (Claims & Grants)
-   - Social Interactionist Model
-   - Null Model (Control)
-
-3. **Simulation Engine**
-   - Time-step based evolution
-   - Agent interactions
-   - State management
-
-4. **Analysis Layer**
-   - ICC metrics calculation
-   - Model comparisons
-   - Result visualization
-
-## 📊 Model Perspectives
-
-The project implements multiple theoretical perspectives on leadership emergence:
-
-1. **Base Model**: Pure schema matching
-   - Leaders and followers emerge through schema matching
-   - Simple claim and grant mechanics
-   - No identity effects
-
-2. **Social Interactionist**: Schema -> Identity transition
-   - Starts with schema matching
-   - Transitions to identity-based decisions
-   - Models how repeated interactions shape identity
-
-3. **Null Model**: Random interaction control
-   - Baseline comparison
-   - Random leadership claims/grants
+2. **Null Model**: Random baseline
+   - Random claim/grant decisions
    - No underlying mechanism
+   - Control condition
 
-4. **Future Extensions**:
-   - Cognitive: Learning and adaptation
-   - Identity: Group prototypes and social identity
-   - Context: Crisis and environmental effects
+### Emergence Perspectives
+Each perspective builds on the base model, adding a distinct mechanism for leadership emergence:
+
+1. **Social Interactionist**: Identity Development
+   - Two-stage process:
+     1. Schema-based interactions
+     2. Identity-based decisions
+   - Shows how repeated interactions create stable identities
+   - Emergence through role crystallization
+
+2. **Cognitive**: Learning & Adaptation
+   - ILT adaptation through observation
+   - Recent interaction tracking
+   - Social learning from successful leaders
+   - Emergence through prototype convergence
+
+3. **Identity**: Group Prototypes (In Progress)
+   - Collective identity influence
+   - Shared leadership prototypes
+   - Group-level processes
+   - Emergence through prototype alignment
+
+### Contextual Differentiation (Planned)
+Adding task/situation contexts to show when each mechanism is most effective:
+- Crisis vs. Routine Tasks
+- Creative vs. Structured Work
+- Short-term vs. Long-term Groups
+
+## 🔬 Framework Components
+
+```
+                     MODEL FRAMEWORK
+                     ===============
+
+┌─────────────────────────────────────────────────────┐
+│                Parameter Optimization                │
+│  - Optimal parameters for each perspective          │
+│  - Context-specific optimization                    │
+└──────────────────────┬──────────────────────────────┘
+                       ▼
+┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐
+│  Base Models    │  │   Emergence     │  │    Analysis     │
+│                 │  │  Perspectives   │  │                 │
+│ - Core Process  │  │ - Interactionist│  │ - Comparisons  │
+│ - Null Model    │◄─┤ - Cognitive     ├─►│ - Contexts     │
+│                 │  │ - Identity      │  │ - Effectiveness │
+└─────────────────┘  └─────────────────┘  └─────────────────┘
+```
 
 ## 📁 Project Structure
 
 ```
 src/
 ├── models/           # Model Implementations
-│   ├── base_model.py   # Base schema matching
-│   ├── null_model.py   # Random interaction control
-│   └── perspectives/   # Different theoretical views
-│       ├── interactionist.py  # Schema -> Identity
-│       ├── cognitive.py       # Learning (future)
-│       └── identity.py        # Group identity (future)
+│   ├── base_model.py   # Core mechanics (no emergence)
+│   ├── null_model.py   # Random baseline
+│   └── perspectives/   # Emergence mechanisms
+│       ├── interactionist.py  # Identity development
+│       ├── cognitive.py       # Learning/adaptation
+│       └── identity.py        # Group prototypes
 ├── simulation/      # Simulation infrastructure
 ├── analysis/       # Analysis tools
 └── utils/          # Shared utilities
 
 scripts/            # Execution Scripts
-├── optimize.py       # Bayesian parameter optimization
-├── compare_perspectives.py  # Model comparison
-└── visualize.py      # Result visualization
+├── run_parameter_sweep.py    # Parameter optimization
+├── compare_perspectives.py   # Mechanism comparison
+└── visualize/               # Analysis visualization
+    ├── base_model.py         # Base dynamics
+    ├── interactionist.py     # Identity emergence
+    └── cognitive.py          # Learning patterns
 
 config/             # Configuration Files
-├── parameters/       # Model parameters
-└── optimization/    # Search space definitions
-
-outputs/            # Results
-├── plots/           # Generated visualizations
-├── optimization/    # Optimization results
-└── data/           # Simulation data
+├── parameters.yaml           # Default parameters
+└── parameter_sweep.yaml      # Optimization settings
 ```
 
 ## 🔄 Analysis Pipeline
 
 1. **Parameter Optimization**
    ```bash
-   # Find optimal parameters using Bayesian search
-   python scripts/optimize.py --model base
-   python scripts/optimize.py --model interactionist
+   # Find optimal parameters for each mechanism
+   python scripts/run_parameter_sweep.py --model base
+   python scripts/run_parameter_sweep.py --model interactionist
+   python scripts/run_parameter_sweep.py --model cognitive
    ```
 
 2. **Model Comparison**
    ```bash
-   # Compare models with optimized parameters
+   # Compare emergence mechanisms
    python scripts/compare_perspectives.py
    ```
 
-3. **Visualization**
+3. **Individual Analysis**
    ```bash
-   # Generate detailed visualizations
-   python scripts/visualize.py --models base interactionist null
+   # Analyze specific mechanisms
+   python scripts/visualize/interactionist.py
+   python scripts/visualize/cognitive.py
    ```
 
 ## 📚 Documentation
 
-- [Model Documentation](docs/MODELS.md) - Theoretical perspectives
-- [Development Status](docs/ROADMAP.md) - Current progress and plans
-- [Optimization Guide](docs/OPTIMIZATION.md) - Parameter search details
+- [Parameter Reference](docs/parameter_reference.md) - Parameter documentation
+- [Project Overview](docs/PROJECT_OVERVIEW.md) - Detailed description
+- [Model Documentation](docs/MODELS.md) - Theoretical background
 
 ## 🤝 Contributing
 
-Contributions welcome! See [Contributing Guide](CONTRIBUTING.md) for guidelines.
+See [Contributing Guide](CONTRIBUTING.md) for guidelines.
 
 ## 📚 Citation
 
-If you use this code or framework in your research, please cite:
+If you use this code in your research, please cite:
 
 ```bibtex
 @misc{acton2024leadership,
@@ -176,9 +163,6 @@ If you use this code or framework in your research, please cite:
   url = {https://github.com/bacton/abm-lead-emergence}
 }
 ```
-
-Or in text:
-> Acton, B. (2024). Leadership Emergence Simulation: An Agent-Based Modeling Framework. GitHub. https://github.com/bacton/abm-lead-emergence
 
 ## 📝 License
 

@@ -1,184 +1,364 @@
 """
-Social Interactionist perspective on leadership emergence.
-Focuses on how leadership emerges through social interactions and shared schemas.
+Social interactionist model that transitions from schema to identity-based decisions.
 """
 
-from dataclasses import dataclass, field
-from typing import Dict, Any
+from typing import Dict, Any, Literal
 import numpy as np
+from dataclasses import dataclass, field
 
 from ..base_model import BaseLeadershipModel, Agent, ModelParameters
-from pydantic import Field
-
-
-class InteractionistParameters(ModelParameters):
-    """Parameters specific to the Social Interactionist perspective."""
-    
-    # Schema Parameters
-    schema_weight: float = Field(
-        default=0.7,
-        gt=0.0, le=1.0,
-        description="Weight given to schema-based decisions"
-    )
-    identity_weight: float = Field(
-        default=0.3,
-        gt=0.0, le=1.0,
-        description="Weight given to identity-based decisions"
-    )
-    
-    # Perception Parameters
-    perception_change_success: float = Field(
-        default=2.0,
-        gt=0.0, le=5.0,
-        description="How much perception increases after successful claim"
-    )
-    perception_change_reject: float = Field(
-        default=3.0,
-        gt=0.0, le=5.0,
-        description="How much perception decreases after rejected claim"
-    )
+from pydantic import Field, BaseModel
 
 
 @dataclass
-class InteractionistAgent(Agent):
-    """Agent with social interactionist-specific features."""
+class InteractionistParameters(ModelParameters):
+    """Parameters for the Social Interactionist model."""
+    # Stage transition parameters
+    dyadic_interactions_before_switch: int = 10  # Number of dyadic interactions before switching to Stage 2
     
-    # Additional attributes
-    characteristics: float = field(init=False)  # Leadership characteristics
-    schema: float = field(init=False)  # Leadership schema/prototype
-    perceptions: Dict[int, float] = field(default_factory=dict)  # Perceptions of others
+    # Identity update parameters
+    identity_update_rate: float = 0.2  # How quickly identities change
+    perception_update_rate: float = 0.2  # How quickly perceptions change
+    
+    # Penalties and boosts
+    claim_success_boost: float = 5.0  # Boost to leader identity on successful claim
+    grant_success_boost: float = 5.0  # Boost to follower identity on successful grant
+    rejection_penalty: float = 3.0  # Penalty for rejected claims
+    passivity_penalty: float = 1.0  # Penalty for not claiming when should
     
     def __post_init__(self):
-        """Initialize social interactionist-specific state."""
+        """Convert parameters to appropriate types after initialization."""
         super().__post_init__()
         
-        # Initialize random characteristics and schema
-        self.characteristics = self.rng.uniform(20, 80)
-        self.schema = self.rng.uniform(20, 80)
+        # Convert parameters
+        self.dyadic_interactions_before_switch = int(self.dyadic_interactions_before_switch)
+        self.identity_update_rate = float(self.identity_update_rate)
+        self.perception_update_rate = float(self.perception_update_rate)
+        self.claim_success_boost = float(self.claim_success_boost)
+        self.grant_success_boost = float(self.grant_success_boost)
+        self.rejection_penalty = float(self.rejection_penalty)
+        self.passivity_penalty = float(self.passivity_penalty)
         
-        # Track perceptions
-        self.perceptions = {}  # id -> perception score
+        self.validate_parameters()
     
-    def calculate_schema_match(self, other: 'InteractionistAgent') -> float:
-        """Calculate how well other agent matches leadership schema."""
-        diff = abs(other.characteristics - self.schema)
-        k = 0.15  # Controls steepness
-        midpoint = 20  # Point of steepest change
+    def validate_parameters(self):
+        """Validate model parameters."""
+        if not 5 <= self.dyadic_interactions_before_switch <= 20:
+            raise ValueError("dyadic_interactions_before_switch must be between 5 and 20")
         
-        return 1 / (1 + np.exp(k * (diff - midpoint)))
+        if not 0.1 <= self.identity_update_rate <= 0.8:
+            raise ValueError("identity_update_rate must be between 0.1 and 0.8")
+            
+        if not 0.1 <= self.perception_update_rate <= 0.8:
+            raise ValueError("perception_update_rate must be between 0.1 and 0.8")
+            
+        if not 3.0 <= self.claim_success_boost <= 15.0:
+            raise ValueError("claim_success_boost must be between 3.0 and 15.0")
+            
+        if not 3.0 <= self.grant_success_boost <= 15.0:
+            raise ValueError("grant_success_boost must be between 3.0 and 15.0")
+            
+        if not 1.0 <= self.rejection_penalty <= 10.0:
+            raise ValueError("rejection_penalty must be between 1.0 and 10.0")
+            
+        if not 0.5 <= self.passivity_penalty <= 5.0:
+            raise ValueError("passivity_penalty must be between 0.5 and 5.0")
+
+
+class InteractionistAgent(Agent):
+    """Agent that transitions from schema to identity-based decisions."""
     
-    def decide_claim(self, other: 'InteractionistAgent') -> bool:
-        """Decide whether to claim leadership based on schema and identity."""
-        # Get schema-based score
-        schema_score = self.calculate_schema_match(self)
+    def __init__(self, id, rng, params):
+        """Initialize agent with characteristics and ILT schema."""
+        # Initialize base agent but we'll override the characteristics and ILT
+        super().__init__(id, rng, params)
         
-        # Get identity-based score
-        identity_score = self.lead_score / 100
+        # Generate ILT in range 42-90 for each dimension
+        self.ilt_schema = np.array([
+            rng.uniform(42, 90) for _ in range(params.schema_dimensions)
+        ])
         
-        # Combine scores using weights
-        claim_prob = (
-            self.params.schema_weight * schema_score +
-            self.params.identity_weight * identity_score
-        ) * self.params.claim_multiplier
+        # Generate characteristics in range 10-90 for each dimension
+        self.characteristic = np.array([
+            rng.uniform(10, 90) for _ in range(params.schema_dimensions)
+        ])
         
-        will_claim = self.rng.random() < claim_prob
+        # Calculate initial leader identity based on ILT-characteristic match
+        ilt_char_diff = np.mean(np.abs(self.ilt_schema - self.characteristic))
+        base_leader_identity = rng.uniform(60, 80)  # Random base in 60-80 range
+        self.leader_identity = np.clip(base_leader_identity - ilt_char_diff, 0, 100)
         
-        # Update interaction state
-        self.last_interaction.update({
-            'claim_prob': claim_prob,
-            'claimed': will_claim,
-            'schema_score': schema_score,
-            'identity_score': identity_score
-        })
+        # Start follower identity at 50
+        self.follower_identity = 50.0
         
-        self.history['claims'].append(will_claim)
+        # Initialize all perceptions at exactly 50 (neutral)
+        self.leadership_perceptions = {}
+        for i in range(params.n_agents):
+            if i != id:  # Don't perceive self
+                self.leadership_perceptions[i] = 50.0
         
-        return will_claim
+        # Last interaction state
+        self.last_interaction = {
+            'match_score': 0,
+            'claimed': False,
+            'granted': False
+        }
     
-    def decide_grant(self, claimer: 'InteractionistAgent') -> bool:
-        """Decide whether to grant leadership based on schema and perceptions."""
-        # Get schema-based score
-        schema_score = self.calculate_schema_match(claimer)
+    def decide_claim(self, match_score: float, step: int) -> bool:
+        """Decide whether to make leadership claim based on schema match and identity."""
+        # Calculate identity-based probability
+        identity_prob = self.leader_identity / 100.0
         
-        # Get perception-based score
-        perception_score = self.perceptions.get(claimer.id, 50) / 100
+        if step < self.params.dyadic_interactions_before_switch:
+            # Use only schema matching before switch
+            claim_probability = match_score * self.params.base_claim_probability
+        else:
+            # In Stage 2, blend schema and identity
+            schema_weight = 0.2  # Keep 20% schema influence
+            identity_weight = 0.8  # 80% identity influence
+            
+            claim_probability = (
+                schema_weight * match_score * self.params.base_claim_probability +
+                identity_weight * identity_prob
+            )
         
-        # Combine scores using weights
-        grant_prob = (
-            self.params.schema_weight * schema_score +
-            self.params.identity_weight * perception_score
-        ) * self.params.grant_multiplier
+        # Add small noise
+        noise = self.rng.normal(0, 0.05)
+        claim_probability = np.clip(claim_probability + noise, 0, 1)
         
-        will_grant = self.rng.random() < grant_prob
+        # Store last interaction state
+        self.last_interaction['match_score'] = match_score
+        self.last_interaction['claimed'] = self.rng.random() < claim_probability
         
-        # Update interaction state
-        self.last_interaction.update({
-            'grant_prob': grant_prob,
-            'granted': will_grant,
-            'schema_score': schema_score,
-            'perception_score': perception_score
-        })
-        
-        self.history['grants'].append(will_grant)
-        
-        return will_grant
+        return self.last_interaction['claimed']
     
+    def decide_grant(self, match_score: float, step: int) -> bool:
+        """Decide whether to grant leadership claim based on schema match and identity."""
+        # Calculate identity-based probability
+        identity_prob = self.follower_identity / 100.0
+        
+        if step < self.params.dyadic_interactions_before_switch:
+            # Use only schema matching before switch
+            grant_probability = match_score
+        else:
+            # In Stage 2, blend schema and identity
+            schema_weight = 0.2  # Keep 20% schema influence
+            identity_weight = 0.8  # 80% identity influence
+            
+            grant_probability = (
+                schema_weight * match_score +
+                identity_weight * identity_prob
+            )
+        
+        # Only grant if above threshold
+        if grant_probability <= self.params.match_threshold:
+            grant_probability = 0
+            
+        # Add small noise
+        noise = self.rng.normal(0, 0.05)
+        grant_probability = np.clip(grant_probability + noise, 0, 1)
+        
+        # Store last interaction state
+        self.last_interaction['granted'] = self.rng.random() < grant_probability
+        
+        return self.last_interaction['granted']
+
     def update_perception(self, other_id: int, change: float):
-        """Update perception of another agent."""
-        if other_id not in self.perceptions:
-            self.perceptions[other_id] = 50.0  # Start neutral
+        """Update leadership perception of another agent."""
+        if str(other_id) not in self.leadership_perceptions:
+            self.leadership_perceptions[str(other_id)] = 50.0
         
-        current = self.perceptions[other_id]
-        self.perceptions[other_id] = max(0, min(100, current + change))
-    
-    def get_state(self) -> Dict:
-        """Get current agent state including social interactionist features."""
-        state = super().get_state()
-        state.update({
-            'characteristics': self.characteristics,
-            'schema': self.schema,
-            'perceptions': self.perceptions.copy()
-        })
-        return state
+        # Scale change based on current perception to avoid ceiling/floor effects
+        current = self.leadership_perceptions[str(other_id)]
+        if change > 0:
+            # Diminishing returns as perception gets higher
+            scale = (100 - current) / 50
+        else:
+            # Diminishing returns as perception gets lower
+            scale = current / 50
+        
+        adjusted_change = change * scale
+        new_perception = np.clip(current + adjusted_change, 0, 100)
+        self.leadership_perceptions[str(other_id)] = new_perception
 
 
 class InteractionistModel(BaseLeadershipModel):
-    """Leadership emergence model from social interactionist perspective."""
+    """Social interactionist model with schema-to-identity transition."""
     
-    def __init__(self, params: Dict[str, Any] = None, random_seed: int = None):
+    def __init__(self, params: Dict[str, Any] = None):
         """Initialize with social interactionist parameters."""
-        # Convert to perspective-specific parameters
-        self.params = InteractionistParameters(**(params or {}))
-        self.rng = np.random.default_rng(random_seed)
+        if isinstance(params, dict):
+            self.params = InteractionistParameters(**params)
+        else:
+            self.params = params if params else InteractionistParameters()
+        
+        # Initialize random number generator
+        self.rng = np.random.default_rng(self.params.random_seed)
         self.time = 0
         
-        # Initialize agents with perspective-specific class
+        # Initialize agents
         self.agents = [
             InteractionistAgent(i, self.rng, self.params)
             for i in range(self.params.n_agents)
         ]
         
-        # Track model history
+        # Track model state
         self.history = []
     
-    def _update_states(self, pair: tuple[Agent, Agent], interaction: Dict):
-        """Update agent states with social interactionist logic."""
-        claimer, granter = pair
+    def step(self):
+        """Execute one step of the model following the two-stage process."""
+        # Select interaction pair using base model's selection
+        agent1, agent2 = self.select_interaction_pair()
         
-        if interaction['claimed'] and interaction['granted']:
-            # Successful leadership claim
-            claimer.update_score(2.0)
-            granter.update_score(-1.0)
-            # Update granter's perception of claimer
-            granter.update_perception(
-                claimer.id,
-                self.params.perception_change_success
-            )
-        elif interaction['claimed'] and not interaction['granted']:
-            # Failed leadership claim
-            claimer.update_score(-1.0)
-            # Update granter's perception of claimer negatively
-            granter.update_perception(
-                claimer.id,
-                -self.params.perception_change_reject
-            )
+        # Calculate match scores
+        match_score_1 = agent1.calculate_ilt_match(agent2.characteristic)
+        match_score_2 = agent2.calculate_ilt_match(agent1.characteristic)
+        
+        # Track interactions
+        recent_interactions = []
+        
+        # Stage 1: Initial Interaction Based on Leadership Schemas
+        if self.time < self.params.dyadic_interactions_before_switch:
+            # Decisions based purely on schema matching
+            agent1_claims = match_score_1 > self.params.match_threshold and self.rng.random() < self.params.base_claim_probability
+            agent2_claims = match_score_2 > self.params.match_threshold and self.rng.random() < self.params.base_claim_probability
+            
+            if agent1_claims:
+                granted = match_score_1 > self.params.match_threshold
+                if granted:
+                    # Update identities based on successful claim
+                    agent1.leader_identity = min(100, agent1.leader_identity + self.params.claim_success_boost)
+                    agent2.follower_identity = min(100, agent2.follower_identity + self.params.grant_success_boost)
+                    # Update perceptions
+                    agent2.update_perception(agent1.id, self.params.claim_success_boost)
+                else:
+                    # Penalty for rejected claim
+                    agent1.leader_identity = max(0, agent1.leader_identity - self.params.rejection_penalty)
+                    agent2.update_perception(agent1.id, -self.params.rejection_penalty)
+                
+                recent_interactions.append({
+                    'claimer': agent1.id,
+                    'target': agent2.id,
+                    'success': granted,
+                    'match_score': match_score_1
+                })
+            
+            if agent2_claims:
+                granted = match_score_2 > self.params.match_threshold
+                if granted:
+                    # Update identities based on successful claim
+                    agent2.leader_identity = min(100, agent2.leader_identity + self.params.claim_success_boost)
+                    agent1.follower_identity = min(100, agent1.follower_identity + self.params.grant_success_boost)
+                    # Update perceptions
+                    agent1.update_perception(agent2.id, self.params.claim_success_boost)
+                else:
+                    # Penalty for rejected claim
+                    agent2.leader_identity = max(0, agent2.leader_identity - self.params.rejection_penalty)
+                    agent1.update_perception(agent2.id, -self.params.rejection_penalty)
+                
+                recent_interactions.append({
+                    'claimer': agent2.id,
+                    'target': agent1.id,
+                    'success': granted,
+                    'match_score': match_score_2
+                })
+        
+        # Stage 2: Contextualized Identity Based Interaction
+        else:
+            # Decisions based on identities and schemas
+            agent1_claims = agent1.decide_claim(match_score_1, self.time)
+            agent2_claims = agent2.decide_claim(match_score_2, self.time)
+            
+            if agent1_claims:
+                granted = agent2.decide_grant(match_score_1, self.time)
+                if granted:
+                    # Update identities and perceptions
+                    identity_boost = self.params.claim_success_boost * self.params.identity_update_rate
+                    perception_boost = self.params.claim_success_boost * self.params.perception_update_rate
+                    
+                    # Success reinforces both identities
+                    agent1.leader_identity = min(100, agent1.leader_identity + identity_boost)
+                    agent2.follower_identity = min(100, agent2.follower_identity + identity_boost)
+                    
+                    # All agents update their perceptions
+                    for observer in self.agents:
+                        if observer.id != agent1.id:
+                            observer.update_perception(agent1.id, perception_boost)
+                else:
+                    # Penalty for rejected claim
+                    identity_penalty = self.params.rejection_penalty * self.params.identity_update_rate
+                    perception_penalty = self.params.rejection_penalty * self.params.perception_update_rate
+                    
+                    # Failed claim affects both identities
+                    agent1.leader_identity = max(0, agent1.leader_identity - identity_penalty)
+                    agent1.follower_identity = min(100, agent1.follower_identity + identity_penalty * 0.5)
+                    
+                    # All agents update their perceptions
+                    for observer in self.agents:
+                        if observer.id != agent1.id:
+                            observer.update_perception(agent1.id, -perception_penalty)
+                
+                recent_interactions.append({
+                    'claimer': agent1.id,
+                    'target': agent2.id,
+                    'success': granted,
+                    'match_score': match_score_1
+                })
+            
+            if agent2_claims:
+                granted = agent1.decide_grant(match_score_2, self.time)
+                if granted:
+                    # Update identities and perceptions
+                    identity_boost = self.params.claim_success_boost * self.params.identity_update_rate
+                    perception_boost = self.params.claim_success_boost * self.params.perception_update_rate
+                    
+                    # Success reinforces both identities
+                    agent2.leader_identity = min(100, agent2.leader_identity + identity_boost)
+                    agent1.follower_identity = min(100, agent1.follower_identity + identity_boost)
+                    
+                    # All agents update their perceptions
+                    for observer in self.agents:
+                        if observer.id != agent2.id:
+                            observer.update_perception(agent2.id, perception_boost)
+                else:
+                    # Penalty for rejected claim
+                    identity_penalty = self.params.rejection_penalty * self.params.identity_update_rate
+                    perception_penalty = self.params.rejection_penalty * self.params.perception_update_rate
+                    
+                    # Failed claim affects both identities
+                    agent2.leader_identity = max(0, agent2.leader_identity - identity_penalty)
+                    agent2.follower_identity = min(100, agent2.follower_identity + identity_penalty * 0.5)
+                    
+                    # All agents update their perceptions
+                    for observer in self.agents:
+                        if observer.id != agent2.id:
+                            observer.update_perception(agent2.id, -perception_penalty)
+                
+                recent_interactions.append({
+                    'claimer': agent2.id,
+                    'target': agent1.id,
+                    'success': granted,
+                    'match_score': match_score_2
+                })
+        
+        self.time += 1
+        state = self.get_state()
+        state['recent_interactions'] = recent_interactions
+        return state
+    
+    def get_state(self):
+        """Get current model state."""
+        return {
+            'time': self.time,
+            'agents': [agent.get_state() for agent in self.agents],
+            'recent_interactions': []  # Initialize empty list for recent interactions
+        }
+    
+    def get_metrics(self) -> Dict:
+        """Get model metrics."""
+        metrics = super().get_metrics()  # Get base metrics
+        metrics.update({
+            'stage': 2 if self.time >= self.params.dyadic_interactions_before_switch else 1,
+            'using_identities': self.time >= self.params.dyadic_interactions_before_switch
+        })
+        return metrics

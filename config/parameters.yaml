@@ -1,0 +1,51 @@
+# Parameter configuration for leadership emergence models
+
+simulation:
+  n_steps: [100, 200]  # Time steps to simulate
+  n_replications: 5    # Replications per parameter set
+
+structure:
+  n_agents: [4, 6, 8]           # Number of agents
+  interaction_size: 2           # Agents per interaction
+  schema_dimensions: [1, 2, 3]  # Dimensionality of schemas
+  schema_type: ["continuous"]   # Schema value type
+
+matching:
+  algorithm: ["average", "minimum", "weighted"]  # How to combine dimensions
+  dimension_weights: ["uniform", "primary"]      # How to weight dimensions
+  threshold: [0.3, 0.7]                         # Match threshold
+
+interaction_rules:
+  grant_first: [false]              # Grant before claim
+  allow_mutual_claims: [true]       # Both can claim
+  allow_self_loops: [false]         # Self-interaction
+  simultaneous_roles: [true]        # Leader and follower simultaneously
+
+distributions:
+  type: ["uniform", "normal"]       # Distribution type
+  mean: [0.5]                       # Distribution center
+  std: [0.2]                        # Distribution spread
+
+updates:
+  success_boost: [5.0, 7.0, 9.0]    # Identity increase on success
+  failure_penalty: [2.0, 3.0]       # Identity decrease on failure
+  identity_inertia: [0.1, 0.3]      # Resistance to change
+
+base_probabilities:
+  claim: [0.3, 0.5, 0.7]           # Base claim probability
+
+# Stylized facts to optimize for
+stylized_facts:
+  emergence:
+    min_time: 10                    # Earliest acceptable emergence
+    max_time: 30                    # Latest acceptable emergence
+    min_convergence: 0.7            # Minimum agreement level
+    max_variance: 0.3               # Maximum perception variance
+
+  stability:
+    min_leader_stability: 0.6       # Minimum leadership stability
+    max_role_switches: 3            # Maximum role changes per agent
+
+  structure:
+    min_hierarchy_strength: 0.4     # Minimum hierarchical differentiation
+    max_leaders_ratio: 0.3          # Maximum proportion of leaders 
