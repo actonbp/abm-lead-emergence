@@ -1,0 +1,8 @@
+{
+  "n_agents": 6,
+  "schema_dimensions": 2,
+  "match_algorithm": "minimum",
+  "match_threshold": 0.41212908051837566,
+  "success_boost": 7.942616627914123,
+  "failure_penalty": 5.63886581757017
+}

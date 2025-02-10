@@ -395,6 +395,13 @@ class BaseLeadershipModel:
         # Track model state
         self.time = 0
         self.history = []
+        
+        # Initialize task
+        self.task = None
+    
+    def set_task(self, task):
+        """Set the task for this model."""
+        self.task = task
     
     def select_interaction_pair(self) -> Tuple[Agent, Agent]:
         """Select two agents for interaction."""
@@ -407,7 +414,7 @@ class BaseLeadershipModel:
     
     def step(self):
         """Execute one step of the model."""
-        # Select interaction pair using base model's selection
+        # Select interaction pair
         agent1, agent2 = self.select_interaction_pair()
         
         # Calculate match scores
@@ -417,65 +424,62 @@ class BaseLeadershipModel:
         # Track interactions
         recent_interactions = []
         
-        # Decisions based purely on schema matching
-        agent1_claims = agent1.decide_claim(match_score_1)
-        agent2_claims = agent2.decide_claim(match_score_2)
-        
-        if agent1_claims:
-            granted = agent2.decide_grant(match_score_1)
-            if granted:
-                # Update identities based on successful claim
-                agent1.leader_identity = min(100, agent1.leader_identity + self.params.success_boost)
-                agent2.follower_identity = min(100, agent2.follower_identity + self.params.success_boost)
-                # Update perceptions
-                agent2.update_perception(agent1.id, self.params.success_boost)
-            else:
-                # Penalty for rejected claim
-                agent1.leader_identity = max(0, agent1.leader_identity - self.params.failure_penalty)
-                agent2.update_perception(agent1.id, -self.params.failure_penalty)
+        # Make leadership claims through task if available
+        if self.task is not None:
+            # Agent 1 claims
+            if match_score_1 > 0.3 and self.rng.random() < self.params.base_claim_probability:
+                result = self.task.share_info(
+                    from_agent=agent1.id,
+                    to_agent=agent2.id,
+                    granted=match_score_1 > 0.3
+                )
+                recent_interactions.append({
+                    'claimer': agent1.id,
+                    'target': agent2.id,
+                    'success': result['success'],
+                    'quality': result.get('quality', 0.0),
+                    'cost': result.get('cost', 0.0),
+                    'time': result.get('time', 0.0),
+                    'shared_info': result.get('shared_info', None),
+                    'moves_closer': result.get('moves_closer', False)
+                })
             
-            recent_interactions.append({
-                'claimer': agent1.id,
-                'target': agent2.id,
-                'success': granted,
-                'match_score': match_score_1
-            })
-        
-        if agent2_claims and (not agent1_claims or self.params.allow_mutual_claims):
-            granted = agent1.decide_grant(match_score_2)
-            if granted:
-                # Update identities based on successful claim
-                agent2.leader_identity = min(100, agent2.leader_identity + self.params.success_boost)
-                agent1.follower_identity = min(100, agent1.follower_identity + self.params.success_boost)
-                # Update perceptions
-                agent1.update_perception(agent2.id, self.params.success_boost)
-            else:
-                # Penalty for rejected claim
-                agent2.leader_identity = max(0, agent2.leader_identity - self.params.failure_penalty)
-                agent1.update_perception(agent2.id, -self.params.failure_penalty)
-            
-            recent_interactions.append({
-                'claimer': agent2.id,
-                'target': agent1.id,
-                'success': granted,
-                'match_score': match_score_2
-            })
+            # Agent 2 claims if allowed
+            if match_score_2 > 0.3 and self.rng.random() < self.params.base_claim_probability:
+                if not recent_interactions or self.params.allow_mutual_claims:
+                    result = self.task.share_info(
+                        from_agent=agent2.id,
+                        to_agent=agent1.id,
+                        granted=match_score_2 > 0.3
+                    )
+                    recent_interactions.append({
+                        'claimer': agent2.id,
+                        'target': agent1.id,
+                        'success': result['success'],
+                        'quality': result.get('quality', 0.0),
+                        'cost': result.get('cost', 0.0),
+                        'time': result.get('time', 0.0),
+                        'shared_info': result.get('shared_info', None),
+                        'moves_closer': result.get('moves_closer', False)
+                    })
         
         # Increment time
         self.time += 1
         
         # Return current state
-        return {
-            'agents': [agent.get_state() for agent in self.agents],
-            'recent_interactions': recent_interactions
-        }
+        state = self.get_state()
+        state['recent_interactions'] = recent_interactions
+        return state
     
     def get_state(self) -> Dict:
         """Get current model state."""
-        return {
-            'agents': [agent.get_state() for agent in self.agents],
-            'time': self.time
+        state = {
+            'time': self.time,
+            'agents': [agent.get_state() for agent in self.agents]
         }
+        if self.task is not None:
+            state['task'] = self.task.evaluate_current_solution()
+        return state
     
     def get_metrics(self) -> Dict:
         """Get model metrics."""
@@ -492,8 +496,14 @@ class BaseLeadershipModel:
         perception_agreement = np.mean([np.corrcoef(match_matrix[i], match_matrix[j])[0,1] 
                                      for i in range(n) for j in range(i+1,n)])
         
-        return {
+        metrics = {
             'hierarchy_strength': hierarchy_strength,
             'perception_agreement': perception_agreement,
             'convergence_score': perception_agreement  # Use agreement as convergence score
-        } 
+        }
+        
+        # Add task metrics if available
+        if self.task is not None:
+            metrics['task_performance'] = self.task.evaluate_current_solution()
+        
+        return metrics 

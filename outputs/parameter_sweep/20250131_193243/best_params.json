@@ -1,0 +1,12 @@
+{
+  "n_agents": 7,
+  "schema_dimensions": 3,
+  "match_algorithm": "minimum",
+  "match_threshold": 0.6332772901132606,
+  "success_boost": 3.374426425252596,
+  "failure_penalty": 4.160828209151912,
+  "ilt_learning_rate": 0.13306567858361215,
+  "observation_weight": 1.7313775391372386,
+  "memory_decay": 0.01869365866728278,
+  "max_memory": 6
+}

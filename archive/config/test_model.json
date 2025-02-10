@@ -1,7 +1,0 @@
-{
-    "n_agents": 10,
-    "initial_li_equal": false,
-    "li_change_rate": 1.0,
-    "interaction_radius": 0.8,
-    "memory_length": 5
-} 

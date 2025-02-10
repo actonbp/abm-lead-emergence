@@ -1,0 +1,12 @@
+{
+  "n_agents": 10,
+  "schema_dimensions": 3,
+  "match_algorithm": "minimum",
+  "match_threshold": 0.5631708503746151,
+  "success_boost": 3.9329103540044326,
+  "failure_penalty": 2.003003800770747,
+  "rejection_penalty": 7.315921188023849,
+  "passivity_penalty": 2.0633647359504845,
+  "switch_step": 32,
+  "identity_transition_steps": 6
+}

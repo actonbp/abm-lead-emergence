@@ -9,56 +9,87 @@ ml_pipeline:
 
 # Simulation settings
 simulation:
-  n_steps: 100          # Steps per simulation
-  n_replications: 10    # Number of replications per parameter set
+  n_steps: 150          # Enough time to see both quick emergence and stabilization
+  n_replications: 20    # Multiple replications to ensure robust patterns
 
 # Parameter space to explore
 parameter_space:
   # Discrete parameters
   n_agents:
     type: discrete
-    values: [4, 6, 8]
+    values: [6, 8, 10]  # Typical small group sizes
   initial_li_equal:
     type: discrete
-    values: [true, false]
+    values: [true]      # Start equal, let differentiation emerge
   weight_function:
     type: discrete
-    values: ['linear', 'sigmoid', 'quadratic', 'sqrt']
+    values: ['sigmoid', 'linear']  # Allow for different transition patterns
     
   # Continuous parameters
   li_change_rate:
     type: continuous
-    range: [0.01, 0.2]
+    range: [0.1, 0.3]    # Faster initial changes possible
   schema_weight:
     type: continuous
-    range: [0.1, 0.5]  # Final schema weight
+    range: [0.2, 0.8]    # Wider range to allow varied influence
   weight_transition_start:
     type: continuous
-    range: [0.1, 0.4]  # When to start transition
+    range: [0.1, 0.3]    # Earlier transition possible
   weight_transition_end:
     type: continuous
-    range: [0.6, 0.9]  # When to end transition
+    range: [0.5, 0.9]    # Extended range for stabilization
   claim_threshold:
     type: continuous
-    range: [0.3, 0.7]
+    range: [0.3, 0.7]    # Wider range to allow conflicts
   grant_threshold:
     type: continuous
-    range: [0.3, 0.7]
+    range: [0.3, 0.7]    # Wider range to allow conflicts
   perception_change_success:
     type: continuous
-    range: [0.05, 0.2]
+    range: [0.1, 0.3]    # Stronger learning possible
   perception_change_reject:
     type: continuous
-    range: [0.05, 0.2]
+    range: [0.05, 0.2]   # Moderate rejection impact
 
 # Leadership emergence metrics to optimize
 emergence_metrics:
-  # Weights for optimization objective
+  # Metric calculations
+  metrics:
+    early_differentiation:
+      type: "variance_increase"
+      time_window: [0, 30]     # Look at first 20% of steps
+      threshold: 0.2           # Minimum required variance
+      
+    agreement_trend:
+      type: "kendall_w_slope"
+      min_slope: 0.1          # Minimum positive trend
+      smoothing_window: 10     # Rolling average window
+      
+    multi_leader_possibility:
+      type: "top_agents_count"
+      threshold: 0.7          # Leadership score threshold
+      min_duration: 10        # Minimum duration of multiple leaders
+      
+    claim_grant_alignment:
+      type: "correlation_trend"
+      time_windows: [[0,50], [51,100], [101,150]]  # Compare early, mid, late
+      min_increase: 0.15      # Minimum correlation increase
+      
+    role_stabilization:
+      type: "rank_stability"
+      early_window: [0, 30]   # Quick emergence period
+      late_window: [100, 150] # Stabilization period
+      
+  # Weights for combined objective
   weights:
-    kendall_w: 0.3            # Agreement on rankings
-    krippendorff_alpha: 0.3   # Inter-rater reliability
-    normalized_entropy: -0.2   # Diversity of leadership (-ve weight as we want lower entropy)
-    top_leader_agreement: 0.2  # Agreement on top leader
+    quick_emergence: 0.15    
+    increasing_agreement: 0.40         # Increased from 0.25 to 0.40
+    multileader_conflicts: 0.15 
+    claim_grant_alignment: 0.15    
+    role_stabilization: 0.15      
+
+  # Combination method
+  objective_combination: "weighted_harmonic_mean"  # Ensures all criteria must be satisfied
 
 # Output settings
 output:
